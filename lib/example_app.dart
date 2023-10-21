@@ -18,6 +18,7 @@ class ExampleApp extends StatefulWidget {
 
 class _ExampleAppState extends State<ExampleApp> {
   UserProfile? _user;
+  String? _idToken;
 
   late Auth0 auth0;
   late Auth0Web auth0Web;
@@ -33,6 +34,7 @@ class _ExampleAppState extends State<ExampleApp> {
     if (kIsWeb) {
       auth0Web.onLoad().then((final credentials) => setState(() {
             _user = credentials?.user;
+            _idToken = credentials?.idToken;
           }));
     }
   }
@@ -43,12 +45,13 @@ class _ExampleAppState extends State<ExampleApp> {
         return auth0Web.loginWithRedirect(redirectUrl: 'http://localhost:3000');
       }
 
-      var credentials = await auth0
+      Credentials credentials = await auth0
           .webAuthentication(scheme: dotenv.env['AUTH0_CUSTOM_SCHEME'])
           .login();
 
       setState(() {
         _user = credentials.user;
+        _idToken = credentials.idToken;
       });
     } catch (e) {
       print(e);
@@ -86,8 +89,8 @@ class _ExampleAppState extends State<ExampleApp> {
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
           Expanded(
               child: Row(children: [
-            _user != null
-                ? Expanded(child: UserWidget(user: _user))
+            _user != null && _idToken != null
+                ? Expanded(child: UserWidget(user: _user!, idToken: _idToken!,))
                 : const Expanded(child: HeroWidget())
           ])),
           _user != null
