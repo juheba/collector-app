@@ -23,7 +23,7 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace "com.example.custom_oauth0_client_app"
+    namespace "de.juheba.collector"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 

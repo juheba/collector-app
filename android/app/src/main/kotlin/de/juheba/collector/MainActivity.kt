@@ -1,4 +1,4 @@
-package com.example.custom_oauth0_client_app
+package de.juheba.collector
 
 import io.flutter.embedding.android.FlutterActivity
 
