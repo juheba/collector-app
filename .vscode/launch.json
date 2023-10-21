@@ -5,25 +5,26 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "[Chrome] custom_oauth0_client_app",
+      "name": "[Chrome] collector",
       "request": "launch",
       "type": "dart",
       "args": ["--web-port=3000", "--web-renderer=html"],
       "deviceId": "chrome",
     },
     {
-      "name": "custom_oauth0_client_app",
+      "name": "[Samsung] collector",
       "request": "launch",
-      "type": "dart"
+      "type": "dart",
+      "deviceId": "SM G973F",
     },
     {
-      "name": "custom_oauth0_client_app (profile mode)",
+      "name": "collector (profile mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "profile"
     },
     {
-      "name": "custom_oauth0_client_app (release mode)",
+      "name": "collector (release mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release"
