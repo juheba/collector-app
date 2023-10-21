@@ -1,4 +1,4 @@
-package com.auth0.sample
+package de.juheba.collector
 
 import android.content.Context
 import android.content.Intent
@@ -20,7 +20,7 @@ import org.junit.runner.RunWith
 class SmokeTest {
 
     private val device: UiDevice
-    private val PACKAGE_NAME = "com.auth0.sample"
+    private val PACKAGE_NAME = "de.juheba.collector"
     private val LOGIN_BUTTON = "Login"
     private val LOGOUT_BUTTON = "Logout"
     private val UL_BUTTON = "Log In"

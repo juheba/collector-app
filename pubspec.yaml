@@ -1,4 +1,4 @@
-name: sample
+name: collector
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -69,6 +69,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - .env
+    - local-dev.env
     - images/logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see

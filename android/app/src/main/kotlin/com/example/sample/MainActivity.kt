@@ -1,4 +1,4 @@
-package com.auth0.sample
+package de.juheba.collector
 
 import io.flutter.embedding.android.FlutterActivity
 
