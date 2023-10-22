@@ -31,13 +31,7 @@ class UserWidget extends StatelessWidget {
             children: [
               UserEntryWidget(propertyName: 'Id', propertyValue: user.sub),
               UserEntryWidget(propertyName: 'Name', propertyValue: user.name),
-              UserEntryWidget(propertyName: 'Email', propertyValue: user.email),
-              UserEntryWidget(
-                  propertyName: 'Email Verified?',
-                  propertyValue: user.isEmailVerified.toString()),
-              UserEntryWidget(
-                  propertyName: 'Updated at',
-                  propertyValue: user.updatedAt?.toIso8601String()),
+              UserEntryWidget(propertyName: 'Email', propertyValue: user.email)
             ],
           ),
         ),
@@ -70,9 +64,11 @@ class UserEntryWidget extends StatelessWidget {
   final String propertyName;
   final String? propertyValue;
 
-  const UserEntryWidget(
-      {required this.propertyName, required this.propertyValue, final Key? key})
-      : super(key: key);
+  const UserEntryWidget({
+    required this.propertyName,
+    required this.propertyValue,
+    final Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

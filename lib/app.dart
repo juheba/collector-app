@@ -1,5 +1,6 @@
 import 'package:auth0_flutter/auth0_flutter.dart';
 import 'package:auth0_flutter/auth0_flutter_web.dart';
+import 'package:collector/access_user_credentials.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -8,15 +9,15 @@ import 'constants.dart';
 import 'hero.dart';
 import 'user.dart';
 
-class ExampleApp extends StatefulWidget {
+class App extends StatefulWidget {
   final Auth0? auth0;
-  const ExampleApp({this.auth0, final Key? key}) : super(key: key);
+  const App({this.auth0, super.key});
 
   @override
-  State<ExampleApp> createState() => _ExampleAppState();
+  State<App> createState() => _AppState();
 }
 
-class _ExampleAppState extends State<ExampleApp> {
+class _AppState extends State<App> {
   UserProfile? _user;
   String? _idToken;
 
@@ -32,10 +33,28 @@ class _ExampleAppState extends State<ExampleApp> {
         Auth0Web(dotenv.env['AUTH0_DOMAIN']!, dotenv.env['AUTH0_CLIENT_ID']!);
 
     if (kIsWeb) {
-      auth0Web.onLoad().then((final credentials) => setState(() {
-            _user = credentials?.user;
-            _idToken = credentials?.idToken;
-          }));
+      auth0Web.onLoad().then(
+            (final credentials) => setState(() {
+
+              if (credentials != null) {
+                AccessUserCredentials().writeUserCredentials(credentials);
+                _user = credentials.user;
+                _idToken = credentials.idToken;
+                return;
+              }
+
+              AccessUserCredentials().isUserPresent().then((isPresent) {
+                if (isPresent) {
+                  AccessUserCredentials().readUserProfile().then((value) => _user = value);
+                  AccessUserCredentials().readUserCredentialsIdToken().then((value) => _idToken = value);
+                }
+                else {
+                  _user = null;
+                  _idToken = null;
+                }
+              });
+            }),
+          );
     }
   }
 
@@ -48,6 +67,7 @@ class _ExampleAppState extends State<ExampleApp> {
       Credentials credentials = await auth0
           .webAuthentication(scheme: dotenv.env['AUTH0_CUSTOM_SCHEME'])
           .login();
+      AccessUserCredentials().writeUserCredentials(credentials);
 
       setState(() {
         _user = credentials.user;
@@ -61,13 +81,16 @@ class _ExampleAppState extends State<ExampleApp> {
   Future<void> logout() async {
     try {
       if (kIsWeb) {
+        await AccessUserCredentials().removeUserCredentials();
         await auth0Web.logout(returnToUrl: 'http://localhost:3000');
       } else {
         await auth0
             .webAuthentication(scheme: dotenv.env['AUTH0_CUSTOM_SCHEME'])
             .logout();
         setState(() {
+          AccessUserCredentials().removeUserCredentials();
           _user = null;
+          _idToken = null;
         });
       }
     } catch (e) {

@@ -12,7 +12,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:collector/example_app.dart';
+import 'package:collector/app.dart';
 
 import 'widget_test.mocks.dart';
 
@@ -46,7 +46,7 @@ AUTH0_CLIENT_ID=bar
           'tokenType': 'Bearer'
         })));
 
-    await tester.pumpWidget(ExampleApp(auth0: mocked));
+    await tester.pumpWidget(App(auth0: mocked));
 
     final loginButton = find.text('Login');
 
