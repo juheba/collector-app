@@ -79,39 +79,51 @@ class _ExampleAppState extends State<ExampleApp> {
   Widget build(final BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          body: Padding(
-        padding: const EdgeInsets.only(
-          top: padding,
-          bottom: padding,
-          left: padding / 2,
-          right: padding / 2,
+        body: Padding(
+          padding: const EdgeInsets.only(
+            top: padding,
+            bottom: padding,
+            left: padding / 2,
+            right: padding / 2,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Row(
+                  children: [
+                    _user != null && _idToken != null
+                        ? Expanded(
+                            child: UserWidget(
+                              user: _user!,
+                              idToken: _idToken!,
+                            ),
+                          )
+                        : const Expanded(child: HeroWidget())
+                  ],
+                ),
+              ),
+              _user != null
+                  ? ElevatedButton(
+                      onPressed: logout,
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.black),
+                      ),
+                      child: const Text('Logout'),
+                    )
+                  : ElevatedButton(
+                      onPressed: login,
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.black),
+                      ),
+                      child: const Text('Login'),
+                    )
+            ],
+          ),
         ),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          Expanded(
-              child: Row(children: [
-            _user != null && _idToken != null
-                ? Expanded(child: UserWidget(user: _user!, idToken: _idToken!,))
-                : const Expanded(child: HeroWidget())
-          ])),
-          _user != null
-              ? ElevatedButton(
-                  onPressed: logout,
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.black),
-                  ),
-                  child: const Text('Logout'),
-                )
-              : ElevatedButton(
-                  onPressed: login,
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.black),
-                  ),
-                  child: const Text('Login'),
-                )
-        ]),
-      )),
+      ),
     );
   }
 }
