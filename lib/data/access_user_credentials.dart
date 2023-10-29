@@ -71,7 +71,7 @@ class AccessUserCredentials {
             sub: keyValueMap[UserCredentialsKeys.userProfileSub.key] ?? '',
             name: keyValueMap[UserCredentialsKeys.userProfileName.key],
             email: keyValueMap[UserCredentialsKeys.userProfileEmail.key],
-            profileUrl: Uri.parse(
+            pictureUrl: Uri.parse(
               keyValueMap[UserCredentialsKeys.userProfilePicture.key] as String,
             ),
           ),

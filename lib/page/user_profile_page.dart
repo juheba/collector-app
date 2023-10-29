@@ -13,7 +13,6 @@ class UserPageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pictureUrl = user.pictureUrl;
-    // id, name, email, email verified, updated_at
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

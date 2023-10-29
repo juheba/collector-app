@@ -1,6 +1,7 @@
 import 'package:auth0_flutter/auth0_flutter.dart';
 import 'package:auth0_flutter/auth0_flutter_web.dart';
 import 'package:collector/data/access_user_credentials.dart';
+import 'package:collector/page/shared/collector_app_bar.dart';
 import 'package:collector/utils/constants.dart';
 import 'package:collector/page/hero_page.dart';
 import 'package:collector/page/user_profile_page.dart';
@@ -95,6 +96,10 @@ class _AppState extends State<App> {
   Widget build(final BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        appBar: CollectorAppBar(
+          userPictureUrl: _user?.pictureUrl,
+          userName: _user?.name ?? '',
+        ),
         body: Padding(
           padding: const EdgeInsets.only(
             top: padding,
@@ -116,6 +121,8 @@ class _AppState extends State<App> {
                             ),
                           )
                         : const Expanded(child: HeroPageWidget()),
+//                        : const Expanded(child: CollectionsPageWidget()),
+//                        : const Expanded(child: ItemsPageWidget()),
                   ],
                 ),
               ),
@@ -136,6 +143,13 @@ class _AppState extends State<App> {
                     ),
             ],
           ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            print('Button Pressed');
+          },
+          tooltip: 'Add something',
+          child: const Icon(Icons.add),
         ),
       ),
     );
