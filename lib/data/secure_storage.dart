@@ -1,6 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-/// SecureSotrage is defined as a Singleton.
+/// SecureStorage is defined as a Singleton.
 class SecureStorage {
   late FlutterSecureStorage _storage;
   static final SecureStorage _instance = SecureStorage._internal();
@@ -19,7 +19,8 @@ class SecureStorage {
   }
 
   Future<Map<String, String>> readKeys(List<String> keys) async {
-    List<Future<String?>> futures = keys.map((key) => _storage.read(key: key)).toList();
+    List<Future<String?>> futures =
+        keys.map((key) => _storage.read(key: key)).toList();
     List<String?> values = await Future.wait(futures);
 
     Map<String, String> resultMap = {};

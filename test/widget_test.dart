@@ -18,33 +18,40 @@ import 'widget_test.mocks.dart';
 
 @GenerateMocks([Auth0, WebAuthentication])
 void main() async {
-  dotenv.testLoad(fileInput: '''AUTH0_DOMAIN=foo
+  dotenv.testLoad(
+    fileInput: '''AUTH0_DOMAIN=foo
 AUTH0_CLIENT_ID=bar
-''');
+''',
+  );
   final mockedWebAuth = MockWebAuthentication();
   final mocked = MockAuth0();
 
-  testWidgets('can execute login flow',
-      (WidgetTester tester) async {
+  testWidgets('can execute login flow', (WidgetTester tester) async {
     when(mocked.webAuthentication()).thenReturn(mockedWebAuth);
-    when(mockedWebAuth.login(
-      audience: anyNamed('audience'),
-      invitationUrl: anyNamed('invitationUrl'),
-      organizationId: anyNamed('organizationId'),
-      redirectUrl: anyNamed('redirectUrl'),
-      scopes: anyNamed('scopes'),
-      parameters: anyNamed('parameters'),
-      useEphemeralSession: anyNamed('useEphemeralSession'),
-      idTokenValidationConfig: anyNamed('idTokenValidationConfig'),
-    )).thenAnswer((_) => Future.value(Credentials.fromMap({
+    when(
+      mockedWebAuth.login(
+        audience: anyNamed('audience'),
+        invitationUrl: anyNamed('invitationUrl'),
+        organizationId: anyNamed('organizationId'),
+        redirectUrl: anyNamed('redirectUrl'),
+        scopes: anyNamed('scopes'),
+        parameters: anyNamed('parameters'),
+        useEphemeralSession: anyNamed('useEphemeralSession'),
+        idTokenValidationConfig: anyNamed('idTokenValidationConfig'),
+      ),
+    ).thenAnswer(
+      (_) => Future.value(
+        Credentials.fromMap({
           'accessToken': 'accessToken',
           'idToken': 'idToken',
           'refreshToken': 'refreshToken',
           'expiresAt': DateTime.now().toIso8601String(),
           'scopes': ['a'],
           'userProfile': {'sub': '123', 'name': 'John Doe'},
-          'tokenType': 'Bearer'
-        })));
+          'tokenType': 'Bearer',
+        }),
+      ),
+    );
 
     await tester.pumpWidget(App(auth0: mocked));
 
@@ -58,16 +65,18 @@ AUTH0_CLIENT_ID=bar
     await tester.tap(loginButton);
     await tester.pumpAndSettle();
 
-    verify(mockedWebAuth.login(
-      audience: anyNamed('audience'),
-      invitationUrl: anyNamed('invitationUrl'),
-      organizationId: anyNamed('organizationId'),
-      redirectUrl: anyNamed('redirectUrl'),
-      scopes: anyNamed('scopes'),
-      parameters: anyNamed('parameters'),
-      useEphemeralSession: anyNamed('useEphemeralSession'),
-      idTokenValidationConfig: anyNamed('idTokenValidationConfig'),
-    )).called(1);
+    verify(
+      mockedWebAuth.login(
+        audience: anyNamed('audience'),
+        invitationUrl: anyNamed('invitationUrl'),
+        organizationId: anyNamed('organizationId'),
+        redirectUrl: anyNamed('redirectUrl'),
+        scopes: anyNamed('scopes'),
+        parameters: anyNamed('parameters'),
+        useEphemeralSession: anyNamed('useEphemeralSession'),
+        idTokenValidationConfig: anyNamed('idTokenValidationConfig'),
+      ),
+    ).called(1);
 
     final logoutButton = find.text('Logout');
 
@@ -82,9 +91,11 @@ AUTH0_CLIENT_ID=bar
     await tester.tap(logoutButton);
     await tester.pumpAndSettle();
 
-    verify(mockedWebAuth.logout(
-      returnTo: anyNamed('returnTo'),
-    )).called(1);
+    verify(
+      mockedWebAuth.logout(
+        returnTo: anyNamed('returnTo'),
+      ),
+    ).called(1);
 
     // Shows login button when logged out
     expect(find.text('Login'), findsOneWidget);

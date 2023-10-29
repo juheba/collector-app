@@ -1,13 +1,14 @@
+// '/profile' wenn logged in
+
 import 'package:flutter/material.dart';
 import 'package:auth0_flutter/auth0_flutter.dart';
 import 'package:flutter/services.dart';
 
-class UserWidget extends StatelessWidget {
+class UserPageWidget extends StatelessWidget {
   final UserProfile user;
   final String idToken;
 
-  const UserWidget({required this.user, required this.idToken, final Key? key})
-      : super(key: key);
+  const UserPageWidget({required this.user, required this.idToken, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class UserWidget extends StatelessWidget {
             children: [
               UserEntryWidget(propertyName: 'Id', propertyValue: user.sub),
               UserEntryWidget(propertyName: 'Name', propertyValue: user.name),
-              UserEntryWidget(propertyName: 'Email', propertyValue: user.email)
+              UserEntryWidget(propertyName: 'Email', propertyValue: user.email),
             ],
           ),
         ),
@@ -39,10 +40,8 @@ class UserWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              TextButton(
-                  onPressed: () => copyToken(context),
-                  child: const Text('Copy Token')),
-              SelectableText(idToken)
+              TextButton(onPressed: () => copyToken(context), child: const Text('Copy Token')),
+              SelectableText(idToken),
             ],
           ),
         ),
@@ -67,16 +66,17 @@ class UserEntryWidget extends StatelessWidget {
   const UserEntryWidget({
     required this.propertyName,
     required this.propertyValue,
-    final Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: const EdgeInsets.all(6),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [Text(propertyName), Text(propertyValue ?? '')],
-        ));
+      padding: const EdgeInsets.all(6),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [Text(propertyName), Text(propertyValue ?? '')],
+      ),
+    );
   }
 }

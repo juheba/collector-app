@@ -1,9 +1,8 @@
 import 'package:auth0_flutter/auth0_flutter.dart';
-import 'package:collector/secure_storage.dart';
+import 'package:collector/data/secure_storage.dart';
 
 const userCredentialsKeyPrefix = 'user_credentials_';
-const userCredentialsUserProfileKeyPrefix =
-    '${userCredentialsKeyPrefix}userprofile_';
+const userCredentialsUserProfileKeyPrefix = '${userCredentialsKeyPrefix}userprofile_';
 
 enum UserCredentialsKeys {
   idToken('${userCredentialsKeyPrefix}idToken'),
@@ -22,28 +21,20 @@ enum UserCredentialsKeys {
 /// AccessUserCredentials is defined as Singleton.
 /// Access (read and write) user credentials in SecretStore.
 class AccessUserCredentials {
-  static final AccessUserCredentials _instance =
-      AccessUserCredentials._internal();
+  static final AccessUserCredentials _instance = AccessUserCredentials._internal();
   factory AccessUserCredentials() => _instance;
 
   AccessUserCredentials._internal();
 
   void writeUserCredentials(Credentials credentials) {
     SecureStorage().write(UserCredentialsKeys.idToken.key, credentials.idToken);
-    SecureStorage()
-        .write(UserCredentialsKeys.accessToken.key, credentials.accessToken);
-    SecureStorage().write(UserCredentialsKeys.expiresAt.key,
-        credentials.expiresAt.toIso8601String());
-    SecureStorage()
-        .write(UserCredentialsKeys.tokenType.key, credentials.tokenType);
-    SecureStorage()
-        .write(UserCredentialsKeys.userProfileSub.key, credentials.user.sub);
-    SecureStorage()
-        .write(UserCredentialsKeys.userProfileName.key, credentials.user.name ?? '');
-    SecureStorage()
-        .write(UserCredentialsKeys.userProfileEmail.key, credentials.user.email ?? '');
-    SecureStorage().write(
-        UserCredentialsKeys.userProfilePicture.key, credentials.user.pictureUrl.toString());
+    SecureStorage().write(UserCredentialsKeys.accessToken.key, credentials.accessToken);
+    SecureStorage().write(UserCredentialsKeys.expiresAt.key, credentials.expiresAt.toIso8601String());
+    SecureStorage().write(UserCredentialsKeys.tokenType.key, credentials.tokenType);
+    SecureStorage().write(UserCredentialsKeys.userProfileSub.key, credentials.user.sub);
+    SecureStorage().write(UserCredentialsKeys.userProfileName.key, credentials.user.name ?? '');
+    SecureStorage().write(UserCredentialsKeys.userProfileEmail.key, credentials.user.email ?? '');
+    SecureStorage().write(UserCredentialsKeys.userProfilePicture.key, credentials.user.pictureUrl.toString());
   }
 
   Future<Credentials> readUserCredentials() async {
@@ -63,8 +54,8 @@ class AccessUserCredentials {
             expiresAt: DateTime.parse(keyValueMap[UserCredentialsKeys.expiresAt.key] ?? ''),
             tokenType: keyValueMap[UserCredentialsKeys.tokenType.key] ?? '',
             user: user,
-            ),
-          );
+          ),
+        );
   }
 
   Future<UserProfile> readUserProfile() async {
@@ -103,5 +94,4 @@ class AccessUserCredentials {
   Future<void> removeUserCredentials() async {
     await SecureStorage().deleteAll();
   }
-
 }
