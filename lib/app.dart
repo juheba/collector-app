@@ -1,7 +1,11 @@
 import 'package:auth0_flutter/auth0_flutter.dart';
 import 'package:auth0_flutter/auth0_flutter_web.dart';
 import 'package:collector/data/access_user_credentials.dart';
+import 'package:collector/page/collections_page.dart';
+import 'package:collector/page/items_page.dart';
 import 'package:collector/page/shared/collector_app_bar.dart';
+import 'package:collector/page/shared/scaffold_nav_bar.dart';
+import 'package:collector/router/router.dart';
 import 'package:collector/utils/constants.dart';
 import 'package:collector/page/hero_page.dart';
 import 'package:collector/page/user_profile_page.dart';
@@ -94,8 +98,10 @@ class _AppState extends State<App> {
 
   @override
   Widget build(final BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return MaterialApp.router(
+      routerConfig: CollectorGoRouter().getRouter(),
+    );
+/*      home: Scaffold(
         appBar: CollectorAppBar(
           userPictureUrl: _user?.pictureUrl,
           userName: _user?.name ?? '',
@@ -120,9 +126,9 @@ class _AppState extends State<App> {
                               idToken: _idToken!,
                             ),
                           )
-                        : const Expanded(child: HeroPageWidget()),
+//                        : const Expanded(child: HeroPageWidget()),
 //                        : const Expanded(child: CollectionsPageWidget()),
-//                        : const Expanded(child: ItemsPageWidget()),
+                        : const Expanded(child: ItemsPageWidget()),
                   ],
                 ),
               ),
@@ -151,7 +157,8 @@ class _AppState extends State<App> {
           tooltip: 'Add something',
           child: const Icon(Icons.add),
         ),
+        bottomNavigationBar: const CollectorNavigationBar(),
       ),
-    );
+    ); */
   }
 }

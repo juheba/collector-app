@@ -34,23 +34,6 @@ class CollectorAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
       ],
-
-/*      actions: [
-        Container(
-          margin: const EdgeInsets.only(right: 12.0),
-          child: GestureDetector(
-            onTap: () {
-              // Add action on profile picture tap if needed
-              print('Profile Picture Tapped!');
-            },
-            child: CircleAvatar(
-              backgroundImage: userPictureUrl != null ? NetworkImage(userPictureUrl as String) : null,
-              radius: 20, // Add your fallback asset image here if needed
-              child: userPictureUrl == null ? const Icon(Icons.person, size: 30, color: Colors.white) : null,
-            ),
-          ),
-        ),
-      ],*/
     );
   }
 

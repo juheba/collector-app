@@ -1,15 +1,6 @@
 import 'package:collector/model/item_model.dart';
 import 'package:flutter/material.dart';
 
-class MediaItem {
-  final String title;
-  final String subtitle;
-  final String type; // Video Game, Blu-ray, Book
-  final IconData iconData;
-
-  MediaItem(this.title, this.subtitle, this.type, this.iconData);
-}
-
 class ItemsListWidget extends StatelessWidget {
   final List<ItemModel> items;
 
