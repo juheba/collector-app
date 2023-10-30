@@ -1,5 +1,6 @@
 import 'package:collector/model/collection_model.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CollectionGridWidget extends StatelessWidget {
   final List<CollectionModel> collections;
@@ -20,8 +21,7 @@ class CollectionGridWidget extends StatelessWidget {
           itemCount: collections.length,
           itemBuilder: (BuildContext context, int index) {
             return CollectionGridElementWidget(
-              title: collections[index].title,
-              color: collections[index].color,
+              collection: collections[index],
             );
           },
         ),
@@ -31,29 +31,35 @@ class CollectionGridWidget extends StatelessWidget {
 }
 
 class CollectionGridElementWidget extends StatelessWidget {
-  final String title;
-  final Color? color;
+  final CollectionModel collection;
 
-  const CollectionGridElementWidget({required this.title, this.color, super.key});
+  const CollectionGridElementWidget({required this.collection, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(8),
-      color: color ?? Colors.teal,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
-          ),
-        ],
-      ),
+    return GestureDetector(
+      onTap: () {
+        GoRouter.of(context).goNamed(
+          'collection-details',
+          pathParameters: {'id': collection.id},
+        );
+      },
+      child: Container(
+          padding: const EdgeInsets.all(8),
+          color: collection.color ?? Colors.teal,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                collection.title,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+            ],
+          )),
     );
   }
 }

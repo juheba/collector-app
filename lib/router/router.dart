@@ -56,6 +56,7 @@ class CollectorGoRouter {
                   builder: (context, state) => const CollectionsPageWidget(),
                   routes: <RouteBase>[
                     GoRoute(
+                      name: 'collection-details',
                       path: ':id/items',
                       builder: (context, state) => CollectionDetailPageWidget(
                         collection: MockCollections.getCollections()[int.parse(state.pathParameters['id']!)],

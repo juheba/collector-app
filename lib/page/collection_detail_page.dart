@@ -13,16 +13,25 @@ class CollectionDetailPageWidget extends StatelessWidget {
     return Column(
       children: [
         Card(
+          color: collection.color,
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(20.0),
             child: Row(
               children: [
+                const Spacer(),
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(collection.title),
+                    Text(
+                      collection.title,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
                   ],
                 ),
+                const Spacer(),
               ],
             ),
           ),
