@@ -9,7 +9,6 @@ class CollectorAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.teal,
       title: const Text('Collector App'),
       actions: [
         if (userName.isNotEmpty)

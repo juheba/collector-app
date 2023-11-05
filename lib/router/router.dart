@@ -44,7 +44,8 @@ class CollectorGoRouter {
                 GoRoute(
                   name: 'home', // Optional, add name to your routes. Allows you navigate by name instead of path
                   path: '/',
-                  builder: (context, state) => const Text('/home'), //HomePageWidget(user: user, idToken: idToken),
+                  builder: (context, state) => const Text('/home'),
+                  //builder: (context, state) => HomePageWidget(user: user, idToken: idToken),
                 ),
               ],
             ),

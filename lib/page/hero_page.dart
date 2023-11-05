@@ -18,7 +18,6 @@ class HeroPageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const MockUserWidget(),
         Container(
           margin: const EdgeInsets.only(bottom: margin),
           child: Image.asset('images/logo.png', width: 24),

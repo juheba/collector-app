@@ -1,3 +1,5 @@
+import 'package:collector/page/shared/collector_app_bar.dart';
+import 'package:collector/page/shared/user_profile_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -11,6 +13,12 @@ class ScaffoldWithNavbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: navigationShell,
+      appBar: CollectorAppBar(
+        userPictureUrl: MockUser.pictureUrl,
+        userName: MockUser.name,
+        //userPictureUrl: _user?.pictureUrl,
+        //userName: _user?.name ?? '',
+      ),
       bottomNavigationBar: NavigationBar(
         labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         selectedIndex: navigationShell.currentIndex,

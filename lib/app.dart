@@ -1,14 +1,8 @@
 import 'package:auth0_flutter/auth0_flutter.dart';
 import 'package:auth0_flutter/auth0_flutter_web.dart';
 import 'package:collector/data/access_user_credentials.dart';
-import 'package:collector/page/collections_page.dart';
-import 'package:collector/page/items_page.dart';
-import 'package:collector/page/shared/collector_app_bar.dart';
-import 'package:collector/page/shared/scaffold_nav_bar.dart';
 import 'package:collector/router/router.dart';
-import 'package:collector/utils/constants.dart';
-import 'package:collector/page/hero_page.dart';
-import 'package:collector/page/user_profile_page.dart';
+import 'package:collector/theme/f159/f159_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -99,6 +93,7 @@ class _AppState extends State<App> {
   @override
   Widget build(final BuildContext context) {
     return MaterialApp.router(
+      darkTheme: F159DarkTheme.combination1.themeData,
       routerConfig: CollectorGoRouter().getRouter(),
     );
 /*      home: Scaffold(
