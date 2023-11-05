@@ -33,6 +33,10 @@ class ScaffoldWithNavbar extends StatelessWidget {
             label: 'Collections',
           ),
           NavigationDestination(
+            icon: Icon(Icons.add_circle_outlined),
+            label: 'Add',
+          ),
+          NavigationDestination(
             icon: Icon(Icons.view_list_rounded),
             label: 'Items',
           ),

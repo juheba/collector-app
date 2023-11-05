@@ -1,5 +1,6 @@
 import 'package:collector/model/item_model.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ItemsListWidget extends StatelessWidget {
   final List<ItemModel> items;
@@ -12,7 +13,15 @@ class ItemsListWidget extends StatelessWidget {
       child: ListView.builder(
         itemCount: items.length,
         itemBuilder: (context, index) {
-          return ItemListElementWidget(item: items[index]);
+          return GestureDetector(
+            onTap: () {
+              GoRouter.of(context).goNamed(
+                'item-details',
+                pathParameters: {'id': items[index].id},
+              );
+            },
+            child: ItemListElementWidget(item: items[index]),
+          );
         },
       ),
     );

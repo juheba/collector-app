@@ -3,7 +3,9 @@ import 'package:collector/model/item_model.dart';
 import 'package:collector/page/collection_detail_page.dart';
 import 'package:collector/page/collections_page.dart';
 import 'package:collector/page/home_page.dart';
+import 'package:collector/page/item_detail_page.dart';
 import 'package:collector/page/items_page.dart';
+import 'package:collector/page/new_item_page.dart';
 import 'package:collector/page/shared/items_widget.dart';
 import 'package:collector/page/shared/scaffold_nav_bar.dart';
 import 'package:collector/page/user_profile_page.dart';
@@ -62,8 +64,17 @@ class CollectorGoRouter {
                       builder: (context, state) => CollectionDetailPageWidget(
                         collection: MockCollections.getCollections()[int.parse(state.pathParameters['id']!)],
                       ),
-                    )
+                    ),
                   ],
+                ),
+              ],
+            ),
+            StatefulShellBranch(
+              routes: <RouteBase>[
+                GoRoute(
+                  name: 'new-item',
+                  path: '/items/new',
+                  builder: (context, state) => const NewItemPageWidget(),
                 ),
               ],
             ),
@@ -73,6 +84,15 @@ class CollectorGoRouter {
                   name: 'items',
                   path: '/items',
                   builder: (context, state) => const ItemsPageWidget(),
+                  routes: <RouteBase>[
+                    GoRoute(
+                      name: 'item-details',
+                      path: ':id/details',
+                      builder: (context, state) => ItemDetailPageWidget(
+                        item: MockItems.getItems()[int.parse(state.pathParameters['id']!)],
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
