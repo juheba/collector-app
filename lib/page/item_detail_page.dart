@@ -1,4 +1,5 @@
 import 'package:collector/model/item_model.dart';
+import 'package:collector/page/shared/item_editor.dart';
 import 'package:collector/page/shared/items_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,7 @@ class ItemDetailPageWidget extends StatelessWidget {
     return Column(
       children: [
         ItemListElementWidget(item: item),
+        ItemEditorForm(item: item),
       ],
     );
   }
