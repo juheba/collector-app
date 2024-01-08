@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class App extends StatefulWidget {
-  final Auth0? auth0;
   const App({this.auth0, super.key});
+  final Auth0? auth0;
 
   @override
   State<App> createState() => _AppState();
@@ -29,7 +29,7 @@ class _AppState extends State<App> {
     auth0Web = Auth0Web(dotenv.env['AUTH0_DOMAIN']!, dotenv.env['AUTH0_CLIENT_ID']!);
 
     if (kIsWeb) {
-      auth0Web.onLoad().then((final credentials) => updateState(credentials));
+      auth0Web.onLoad().then(updateState);
     }
   }
 
@@ -69,10 +69,10 @@ class _AppState extends State<App> {
       if (kIsWeb) {
         return auth0Web.loginWithRedirect(redirectUrl: 'http://localhost:3000');
       }
-      Credentials credentials = await auth0.webAuthentication(scheme: dotenv.env['AUTH0_CUSTOM_SCHEME']).login();
+      final credentials = await auth0.webAuthentication(scheme: dotenv.env['AUTH0_CUSTOM_SCHEME']).login();
       updateState(credentials);
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
   }
 
@@ -86,12 +86,12 @@ class _AppState extends State<App> {
         setDefaultState();
       }
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
   }
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(BuildContext context) {
     return MaterialApp.router(
       theme: m3BluemineLightTheme,
       darkTheme: m3BluemineDarkTheme,

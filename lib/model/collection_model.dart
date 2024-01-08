@@ -20,9 +20,8 @@ class MockCollections {
 }
 
 class CollectionModel {
+  const CollectionModel({required this.id, required this.title, this.color});
   final String id;
   final String title;
   final Color? color;
-
-  const CollectionModel({required this.id, required this.title, this.color});
 }

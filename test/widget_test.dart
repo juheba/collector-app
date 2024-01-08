@@ -6,20 +6,21 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:auth0_flutter/auth0_flutter.dart';
+import 'package:collector/app.dart';
 // Needs to be exported from auth0_flutter
 // ignore: depend_on_referenced_packages
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:collector/app.dart';
 
 import 'widget_test.mocks.dart';
 
 @GenerateMocks([Auth0, WebAuthentication])
 void main() async {
   dotenv.testLoad(
-    fileInput: '''AUTH0_DOMAIN=foo
+    fileInput: '''
+AUTH0_DOMAIN=foo
 AUTH0_CLIENT_ID=bar
 ''',
   );

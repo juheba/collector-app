@@ -48,7 +48,7 @@ class HiveDatabaseService extends DatabaseService {
   }
 
   @override
-  Future<Object> loadData(String tablename, Object key) async {
+  Future<dynamic> loadData(String tablename, Object key) async {
     var box = await Hive.openBox('$boxPrefix$tablename');
     var item = await box.get(key);
     return item;

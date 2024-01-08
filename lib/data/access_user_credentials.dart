@@ -14,17 +14,17 @@ enum UserCredentialsKeys {
   userProfileEmail('${userCredentialsUserProfileKeyPrefix}email'),
   userProfilePicture('${userCredentialsUserProfileKeyPrefix}picture');
 
-  final String key;
   const UserCredentialsKeys(this.key);
+  final String key;
 }
 
 /// AccessUserCredentials is defined as Singleton.
 /// Access (read and write) user credentials in SecretStore.
 class AccessUserCredentials {
-  static final AccessUserCredentials _instance = AccessUserCredentials._internal();
   factory AccessUserCredentials() => _instance;
 
   AccessUserCredentials._internal();
+  static final AccessUserCredentials _instance = AccessUserCredentials._internal();
 
   void writeUserCredentials(Credentials credentials) {
     SecureStorage().write(UserCredentialsKeys.idToken.key, credentials.idToken);
@@ -38,16 +38,16 @@ class AccessUserCredentials {
   }
 
   Future<Credentials> readUserCredentials() async {
-    List<String> credentialKeys = [
+    final credentialKeys = <String>[
       UserCredentialsKeys.idToken.key,
       UserCredentialsKeys.accessToken.key,
       UserCredentialsKeys.expiresAt.key,
       UserCredentialsKeys.tokenType.key,
     ];
 
-    UserProfile user = await readUserProfile();
+    final user = await readUserProfile();
 
-    return await SecureStorage().readKeys(credentialKeys).then(
+    return SecureStorage().readKeys(credentialKeys).then(
           (keyValueMap) => Credentials(
             idToken: keyValueMap[UserCredentialsKeys.idToken.key] ?? '',
             accessToken: keyValueMap[UserCredentialsKeys.accessToken.key] ?? '',
@@ -59,35 +59,35 @@ class AccessUserCredentials {
   }
 
   Future<UserProfile> readUserProfile() async {
-    List<String> userProfileKeys = [
+    final userProfileKeys = <String>[
       UserCredentialsKeys.userProfileSub.key,
       UserCredentialsKeys.userProfileName.key,
       UserCredentialsKeys.userProfileEmail.key,
       UserCredentialsKeys.userProfilePicture.key,
     ];
 
-    return await SecureStorage().readKeys(userProfileKeys).then(
+    return SecureStorage().readKeys(userProfileKeys).then(
           (keyValueMap) => UserProfile(
             sub: keyValueMap[UserCredentialsKeys.userProfileSub.key] ?? '',
             name: keyValueMap[UserCredentialsKeys.userProfileName.key],
             email: keyValueMap[UserCredentialsKeys.userProfileEmail.key],
             pictureUrl: Uri.parse(
-              keyValueMap[UserCredentialsKeys.userProfilePicture.key] as String,
+              keyValueMap[UserCredentialsKeys.userProfilePicture.key] ?? '',
             ),
           ),
         );
   }
 
   Future<String?> readUserCredentialsIdToken() async {
-    return await SecureStorage().read(UserCredentialsKeys.idToken.key);
+    return SecureStorage().read(UserCredentialsKeys.idToken.key);
   }
 
   Future<String?> readUserCredentialsUserProfileSub() async {
-    return await SecureStorage().read(UserCredentialsKeys.userProfileSub.key);
+    return SecureStorage().read(UserCredentialsKeys.userProfileSub.key);
   }
 
   Future<bool> isUserPresent() async {
-    String? sub = await SecureStorage().read(UserCredentialsKeys.userProfileSub.key);
+    final sub = await SecureStorage().read(UserCredentialsKeys.userProfileSub.key);
     return sub != null && sub.isNotEmpty;
   }
 

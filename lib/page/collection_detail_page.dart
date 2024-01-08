@@ -3,12 +3,11 @@ import 'package:collector/page/shared/item_list.dart';
 import 'package:flutter/material.dart';
 
 class CollectionDetailPageWidget extends StatelessWidget {
-  final CollectionModel collection;
-
   const CollectionDetailPageWidget({
     required this.collection,
     super.key,
   });
+  final CollectionModel collection;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,7 @@ class CollectionDetailPageWidget extends StatelessWidget {
         Card(
           color: collection.color,
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20),
             child: Row(
               children: [
                 const Spacer(),

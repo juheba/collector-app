@@ -1,29 +1,16 @@
 import 'package:collector/model/collection_model.dart';
-import 'package:collector/model/item_model.dart';
 import 'package:collector/page/collection_detail_page.dart';
 import 'package:collector/page/collections_page.dart';
-import 'package:collector/page/home_page.dart';
 import 'package:collector/page/item_detail_page.dart';
 import 'package:collector/page/items_page.dart';
 import 'package:collector/page/new_item_page.dart';
 import 'package:collector/page/shared/scaffold_nav_bar.dart';
-import 'package:collector/page/user_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 /// CollectorGoRouter is defined as a Singleton.
 class CollectorGoRouter {
-  late GoRouter _router;
-  static final CollectorGoRouter _instance = CollectorGoRouter._internal();
   factory CollectorGoRouter() => _instance;
-
-  // Create keys for `root` & `section` navigator avoiding unnecessary rebuilds
-  final _rootNavigatorKey = GlobalKey<NavigatorState>();
-  final _sectionNavigatorKey = GlobalKey<NavigatorState>();
-
-  GoRouter getRouter() {
-    return _router;
-  }
 
   CollectorGoRouter._internal() {
     _router = GoRouter(
@@ -109,5 +96,15 @@ class CollectorGoRouter {
         ),
       ],
     );
+  }
+  late GoRouter _router;
+  static final CollectorGoRouter _instance = CollectorGoRouter._internal();
+
+  // Create keys for `root` & `section` navigator avoiding unnecessary rebuilds
+  final _rootNavigatorKey = GlobalKey<NavigatorState>();
+  final _sectionNavigatorKey = GlobalKey<NavigatorState>();
+
+  GoRouter getRouter() {
+    return _router;
   }
 }

@@ -40,7 +40,7 @@ class ItemDetailCubit extends Cubit<ItemDetailState> {
       state.copyWith(
         status: item != null ? ItemDetailStatus.loaded : ItemDetailStatus.newly,
         item: item,
-        editItem: item ?? ItemModel.createDefault(),
+        editItem: item ?? ItemModel.blank(),
       ),
     );
   }
@@ -52,7 +52,7 @@ class ItemDetailCubit extends Cubit<ItemDetailState> {
     ItemStatus? status,
     bool? isLendable,
   }) async {
-    var item = state.editItem;
+    final item = state.editItem;
     item?.update(
       title: title,
       description: description,
@@ -73,6 +73,6 @@ class ItemDetailCubit extends Cubit<ItemDetailState> {
   }
 
   Future<void> initForm() async {
-    emit(state.copyWith(editItem: ItemModel.createDefault()));
+    emit(state.copyWith(editItem: ItemModel.blank()));
   }
 }

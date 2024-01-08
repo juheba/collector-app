@@ -6,12 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ItemDetailPageWidget extends StatelessWidget {
-  final String id;
-
   const ItemDetailPageWidget({
     required this.id,
     super.key,
   });
+  final String id;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +28,7 @@ class ItemDetailPageWidget extends StatelessWidget {
               return Column(
                 children: [
                   ItemListElementWidget(item: state.item!),
-                  ItemEditorForm(item: state.item!),
+                  ItemEditorForm(item: state.item),
                 ],
               );
 
@@ -37,7 +36,7 @@ class ItemDetailPageWidget extends StatelessWidget {
               return Column(
                 children: [
                   ItemListElementWidget(item: state.item!),
-                  ItemEditorForm(item: state.item!),
+                  ItemEditorForm(item: state.item),
                 ],
               );
 
@@ -45,7 +44,7 @@ class ItemDetailPageWidget extends StatelessWidget {
               return Column(
                 children: [
                   ItemListElementWidget(item: state.item!),
-                  ItemEditorForm(item: state.item!),
+                  ItemEditorForm(item: state.item),
                 ],
               );
 

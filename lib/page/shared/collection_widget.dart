@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class CollectionGridWidget extends StatelessWidget {
-  final List<CollectionModel> collections;
-
   const CollectionGridWidget({
     required this.collections,
     super.key,
   });
+  final List<CollectionModel> collections;
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +33,11 @@ class CollectionGridWidget extends StatelessWidget {
 }
 
 class CollectionGridElementWidget extends StatelessWidget {
-  final CollectionModel collection;
-
   const CollectionGridElementWidget({
     required this.collection,
     super.key,
   });
+  final CollectionModel collection;
 
   @override
   Widget build(BuildContext context) {

@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 
 class OwnershipStatusSingleChoiceSegmentedButton extends StatefulWidget {
   const OwnershipStatusSingleChoiceSegmentedButton({
+    required this.statusChanged,
     super.key,
     this.selected,
-    required this.statusChanged,
   });
 
   final ItemOwnershipStatus? selected;
-  final Function(ItemOwnershipStatus status) statusChanged;
+  final void Function(ItemOwnershipStatus status) statusChanged;
 
   @override
   State<OwnershipStatusSingleChoiceSegmentedButton> createState() => _OwnershipStatusSingleChoiceSegmentedButtonState();

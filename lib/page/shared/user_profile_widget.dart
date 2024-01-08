@@ -22,22 +22,21 @@ class MockUserWidget extends StatelessWidget {
 }
 
 class UserProfileWidget extends StatelessWidget {
-  final String? name;
-  final String idToken;
-  final Uri? pictureUrl;
-
   const UserProfileWidget({
     required this.name,
     required this.idToken,
     this.pictureUrl,
     super.key,
   });
+  final String? name;
+  final String idToken;
+  final Uri? pictureUrl;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10),
         child: Row(
           children: [
             Column(

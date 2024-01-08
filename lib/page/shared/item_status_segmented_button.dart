@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 
 class ItemStatusSingleChoiceSegmentedButton extends StatefulWidget {
   const ItemStatusSingleChoiceSegmentedButton({
+    required this.statusChanged,
     super.key,
     this.selectedStatus,
-    required this.statusChanged,
   });
 
   final ItemStatus? selectedStatus;
-  final Function(ItemStatus status) statusChanged;
+  final void Function(ItemStatus status) statusChanged;
 
   @override
   State<ItemStatusSingleChoiceSegmentedButton> createState() => _ItemStatusSingleChoiceSegmentedButtonState();

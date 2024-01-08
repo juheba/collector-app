@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
 
 class ColorCombination {
+  const ColorCombination._(this.primary, this.secondary, this.button, this.text);
   final Color primary;
   final Color secondary;
   final Color button;
   final Color text;
-
-  const ColorCombination._(this.primary, this.secondary, this.button, this.text);
 
   static const combination1 =
       ColorCombination._(Color(0xFF2C3368), Color(0xFFEEA351), Color(0xFFC12D66), Color(0xFFEED67A));
 }
 
 class F159DarkTheme {
-  final ColorCombination colors;
-  late ThemeData themeData;
-
   F159DarkTheme._(this.colors) {
     themeData = ThemeData(
       brightness: Brightness.dark,
@@ -89,6 +85,8 @@ class F159DarkTheme {
       ),
     );
   }
+  final ColorCombination colors;
+  late ThemeData themeData;
 
   static final combination1 = F159DarkTheme._(ColorCombination.combination1);
 }

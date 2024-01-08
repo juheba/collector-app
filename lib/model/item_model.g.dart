@@ -78,13 +78,10 @@ class ItemTypeAdapter extends TypeAdapter<ItemType> {
     switch (obj) {
       case ItemType.game:
         writer.writeByte(0);
-        break;
       case ItemType.book:
         writer.writeByte(1);
-        break;
       case ItemType.movie:
         writer.writeByte(2);
-        break;
     }
   }
 
@@ -119,13 +116,10 @@ class ItemOwnershipStatusAdapter extends TypeAdapter<ItemOwnershipStatus> {
     switch (obj) {
       case ItemOwnershipStatus.wishlist:
         writer.writeByte(0);
-        break;
       case ItemOwnershipStatus.owner:
         writer.writeByte(1);
-        break;
       case ItemOwnershipStatus.borrower:
         writer.writeByte(2);
-        break;
     }
   }
 
@@ -161,13 +155,10 @@ class ItemStatusAdapter extends TypeAdapter<ItemStatus> {
     switch (obj) {
       case ItemStatus.todo:
         writer.writeByte(0);
-        break;
       case ItemStatus.processing:
         writer.writeByte(1);
-        break;
       case ItemStatus.done:
         writer.writeByte(2);
-        break;
     }
   }
 

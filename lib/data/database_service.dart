@@ -80,6 +80,6 @@ enum TableNames {
   collection('Collections'),
   item('Items');
 
-  final String name;
   const TableNames(this.name);
+  final String name;
 }

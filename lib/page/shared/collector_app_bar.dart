@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CollectorAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final Uri? userPictureUrl;
-  final String userName;
-
   const CollectorAppBar({
+    required this.userName,
     super.key,
     this.userPictureUrl,
-    required this.userName,
   });
+  final Uri? userPictureUrl;
+  final String userName;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,7 @@ class CollectorAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         if (userName.isNotEmpty)
           Container(
-            margin: const EdgeInsets.only(right: 12.0),
+            margin: const EdgeInsets.only(right: 12),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -28,7 +27,7 @@ class CollectorAppBar extends StatelessWidget implements PreferredSizeWidget {
                 const SizedBox(width: 8),
                 GestureDetector(
                   onTap: () {
-                    print('Profile Picture Tapped!');
+                    debugPrint('Profile Picture Tapped!');
                   },
                   child: CircleAvatar(
                     backgroundImage: userPictureUrl != null ? NetworkImage(userPictureUrl.toString()) : null,

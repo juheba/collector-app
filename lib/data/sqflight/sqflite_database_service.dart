@@ -1,6 +1,6 @@
 import 'package:collector/data/database_service.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:sqflite/sqflite.dart';
 
 class SqfliteDatabaseService extends DatabaseService {
   late Database _db;
@@ -20,16 +20,16 @@ class SqfliteDatabaseService extends DatabaseService {
   }
 
   @override
-  Future<Object> loadData(String tablename, String key) async {
+  Future<dynamic> loadData(String tablename, String key) async {
     _db = await openDatabase(dbFileName);
-    List<Map> list = await _db.rawQuery('SELECT * FROM $tablename WHERE key="$key"');
+    final list = await _db.rawQuery('SELECT * FROM $tablename WHERE key="$key"');
     return list.isNotEmpty ? list.first['value'] : null;
   }
 
   @override
   Future<Map<String, dynamic>> loadAllData(String tablename) async {
     _db = await openDatabase(dbFileName);
-    List<Map> list = await _db.rawQuery('SELECT * FROM $tablename');
+    final list = await _db.rawQuery('SELECT * FROM $tablename');
     return Map<String, dynamic>.from(list.first);
   }
 

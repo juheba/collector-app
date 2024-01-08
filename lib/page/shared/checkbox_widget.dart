@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 class IsLendableCheckbox extends StatefulWidget {
   const IsLendableCheckbox({
+    required this.onChanged,
     super.key,
     this.isSelected,
-    required this.onChanged,
   });
   final bool? isSelected;
-  final Function(bool status) onChanged;
+  final void Function(bool status) onChanged;
 
   @override
   State<IsLendableCheckbox> createState() => _IsLendableCheckboxState();

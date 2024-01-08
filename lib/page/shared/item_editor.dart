@@ -7,9 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ItemEditorForm extends StatefulWidget {
-  ItemModel? item;
-
   ItemEditorForm({this.item, super.key});
+  ItemModel? item;
 
   @override
   State<ItemEditorForm> createState() => _ItemEditorFormState();
@@ -69,9 +68,8 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
     return Form(
       key: _formKey,
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             TextFormField(
               controller: titleTextEditingController,
@@ -134,7 +132,7 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
+                  borderRadius: BorderRadius.circular(30),
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
               ),
@@ -153,6 +151,3 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
     );
   }
 }
-
-//  final ItemType type;
-

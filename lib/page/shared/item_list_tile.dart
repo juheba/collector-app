@@ -2,28 +2,27 @@ import 'package:collector/model/item_model.dart';
 import 'package:flutter/material.dart';
 
 class ItemListElementWidget extends StatelessWidget {
-  final ItemModel item;
-
   const ItemListElementWidget({
     required this.item,
     super.key,
   });
+  final ItemModel item;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.all(8.0),
-      elevation: 5.0,
+      margin: const EdgeInsets.all(8),
+      elevation: 5,
       child: ListTile(
         leading: Icon(
           item.type.icon,
-          size: 50.0,
+          size: 50,
           color: item.type.color,
         ),
         title: Text(
           item.title,
           style: const TextStyle(
-            fontSize: 18.0,
+            fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
         ),

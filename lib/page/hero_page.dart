@@ -11,7 +11,7 @@ final Shader linearGradient = const LinearGradient(
   ],
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
-).createShader(const Rect.fromLTWH(0.0, 0.0, 500.0, 70.0));
+).createShader(const Rect.fromLTWH(0, 0, 500, 70));
 
 class HeroPageWidget extends StatelessWidget {
   const HeroPageWidget({super.key});

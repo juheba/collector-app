@@ -1,18 +1,17 @@
 // '/profile' wenn logged in
 
-import 'package:flutter/material.dart';
 import 'package:auth0_flutter/auth0_flutter.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class UserPageWidget extends StatelessWidget {
-  final UserProfile user;
-  final String idToken;
-
   const UserPageWidget({
     required this.user,
     required this.idToken,
     super.key,
   });
+  final UserProfile user;
+  final String idToken;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +42,6 @@ class UserPageWidget extends StatelessWidget {
         ),
         Card(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               TextButton(
                 onPressed: () => copyToken(context),
@@ -68,14 +66,13 @@ class UserPageWidget extends StatelessWidget {
 }
 
 class UserEntryWidget extends StatelessWidget {
-  final String propertyName;
-  final String? propertyValue;
-
   const UserEntryWidget({
     required this.propertyName,
     required this.propertyValue,
     super.key,
   });
+  final String propertyName;
+  final String? propertyValue;
 
   @override
   Widget build(BuildContext context) {

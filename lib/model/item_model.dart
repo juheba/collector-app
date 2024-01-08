@@ -13,10 +13,11 @@ enum ItemType {
   @HiveField(2)
   movie('Movie', Icons.movie, Colors.blueGrey);
 
+  const ItemType(this.name, this.icon, this.color);
+
   final String name;
   final IconData icon;
   final Color color;
-  const ItemType(this.name, this.icon, this.color);
 }
 
 @HiveType(typeId: 2)
@@ -28,10 +29,11 @@ enum ItemOwnershipStatus {
   @HiveField(2)
   borrower('BORROWER', Icons.event_outlined, Colors.deepOrange);
 
+  const ItemOwnershipStatus(this.name, this.icon, this.color);
+
   final String name;
   final IconData icon;
   final Color color;
-  const ItemOwnershipStatus(this.name, this.icon, this.color);
 }
 
 const defaultItemOwnershipStatus = ItemOwnershipStatus.wishlist;
@@ -45,10 +47,10 @@ enum ItemStatus {
   @HiveField(2)
   done('DONE', Icons.check_circle, Colors.green);
 
+  const ItemStatus(this.name, this.icon, this.color);
   final String name;
   final IconData icon;
   final Color color;
-  const ItemStatus(this.name, this.icon, this.color);
 }
 
 const defaultItemStatus = ItemStatus.todo;
@@ -57,6 +59,23 @@ const defaultIsLendable = false;
 
 @HiveType(typeId: 0)
 class ItemModel extends HiveObject {
+  ItemModel({
+    required this.title,
+    required this.type,
+    String? id,
+    this.description,
+    bool? isLendable,
+    ItemOwnershipStatus? ownershipStatus,
+    ItemStatus? status,
+  }) {
+    this.id = id == null || id.isEmpty ? const Uuid().v4() : id;
+    this.isLendable = isLendable ?? defaultIsLendable;
+    this.ownershipStatus = ownershipStatus ?? defaultItemOwnershipStatus;
+    this.status = status ?? defaultItemStatus;
+  }
+
+  factory ItemModel.blank() => ItemModel(title: '', type: ItemType.book);
+
   @HiveField(0)
   late String id;
   @HiveField(1)
@@ -71,25 +90,6 @@ class ItemModel extends HiveObject {
   late ItemOwnershipStatus ownershipStatus;
   @HiveField(6, defaultValue: defaultItemStatus)
   late ItemStatus status;
-
-  ItemModel({
-    String? id,
-    required this.title,
-    required this.type,
-    this.description,
-    bool? isLendable,
-    ItemOwnershipStatus? ownershipStatus,
-    ItemStatus? status,
-  }) {
-    this.id = id == null || id.isEmpty ? const Uuid().v4() : id;
-    this.isLendable = isLendable ?? defaultIsLendable;
-    this.ownershipStatus = ownershipStatus ?? defaultItemOwnershipStatus;
-    this.status = status ?? defaultItemStatus;
-  }
-
-  static ItemModel createDefault() {
-    return ItemModel(title: 'Title', type: ItemType.book);
-  }
 
   ItemModel update({
     String? title,
