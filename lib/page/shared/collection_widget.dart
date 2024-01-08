@@ -5,7 +5,10 @@ import 'package:go_router/go_router.dart';
 class CollectionGridWidget extends StatelessWidget {
   final List<CollectionModel> collections;
 
-  const CollectionGridWidget({required this.collections, super.key});
+  const CollectionGridWidget({
+    required this.collections,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +36,10 @@ class CollectionGridWidget extends StatelessWidget {
 class CollectionGridElementWidget extends StatelessWidget {
   final CollectionModel collection;
 
-  const CollectionGridElementWidget({required this.collection, super.key});
+  const CollectionGridElementWidget({
+    required this.collection,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -8,7 +8,11 @@ class UserPageWidget extends StatelessWidget {
   final UserProfile user;
   final String idToken;
 
-  const UserPageWidget({required this.user, required this.idToken, super.key});
+  const UserPageWidget({
+    required this.user,
+    required this.idToken,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +26,9 @@ class UserPageWidget extends StatelessWidget {
               margin: const EdgeInsets.only(bottom: 12),
               child: CircleAvatar(
                 radius: 56,
-                child: ClipOval(child: Image.network(pictureUrl.toString())),
+                child: ClipOval(
+                  child: Image.network(pictureUrl.toString()),
+                ),
               ),
             ),
           ),
@@ -39,7 +45,10 @@ class UserPageWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              TextButton(onPressed: () => copyToken(context), child: const Text('Copy Token')),
+              TextButton(
+                onPressed: () => copyToken(context),
+                child: const Text('Copy Token'),
+              ),
               SelectableText(idToken),
             ],
           ),
@@ -74,7 +83,10 @@ class UserEntryWidget extends StatelessWidget {
       padding: const EdgeInsets.all(6),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [Text(propertyName), Text(propertyValue ?? '')],
+        children: [
+          Text(propertyName),
+          Text(propertyValue ?? ''),
+        ],
       ),
     );
   }

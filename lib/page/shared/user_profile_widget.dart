@@ -54,7 +54,11 @@ class UserProfileWidget extends StatelessWidget {
             if (pictureUrl != null)
               CircleAvatar(
                 radius: 30,
-                child: ClipOval(child: Image.network(pictureUrl.toString())),
+                child: ClipOval(
+                  child: Image.network(
+                    pictureUrl.toString(),
+                  ),
+                ),
               ),
           ],
         ),

@@ -1,14 +1,17 @@
 import 'package:collector/data/database_service.dart';
 import 'package:collector/middleware/cubit/item_detail_cubit.dart';
 import 'package:collector/page/shared/item_editor.dart';
-import 'package:collector/page/shared/items_widget.dart';
+import 'package:collector/page/shared/item_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ItemDetailPageWidget extends StatelessWidget {
   final String id;
 
-  const ItemDetailPageWidget({required this.id, super.key});
+  const ItemDetailPageWidget({
+    required this.id,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

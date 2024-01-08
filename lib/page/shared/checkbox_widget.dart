@@ -2,9 +2,13 @@ import 'package:collector/model/item_model.dart';
 import 'package:flutter/material.dart';
 
 class IsLendableCheckbox extends StatefulWidget {
-  const IsLendableCheckbox({super.key, this.selectedIsLendable, required this.isLendableChanged});
-  final bool? selectedIsLendable;
-  final Function(bool status) isLendableChanged;
+  const IsLendableCheckbox({
+    super.key,
+    this.isSelected,
+    required this.onChanged,
+  });
+  final bool? isSelected;
+  final Function(bool status) onChanged;
 
   @override
   State<IsLendableCheckbox> createState() => _IsLendableCheckboxState();
@@ -16,7 +20,7 @@ class _IsLendableCheckboxState extends State<IsLendableCheckbox> {
   @override
   void initState() {
     super.initState();
-    isChecked = widget.selectedIsLendable ?? defaultIsLendable;
+    isChecked = widget.isSelected ?? defaultIsLendable;
   }
 
   @override
@@ -26,7 +30,7 @@ class _IsLendableCheckboxState extends State<IsLendableCheckbox> {
       onChanged: (bool? value) {
         setState(() {
           isChecked = value!;
-          widget.isLendableChanged(isChecked);
+          widget.onChanged(isChecked);
         });
       },
     );

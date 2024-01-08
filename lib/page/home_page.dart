@@ -8,7 +8,11 @@ class HomePageWidget extends StatelessWidget {
   final UserProfile user;
   final String idToken;
 
-  const HomePageWidget({required this.user, required this.idToken, super.key});
+  const HomePageWidget({
+    required this.user,
+    required this.idToken,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -104,8 +104,8 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             OwnershipStatusSingleChoiceSegmentedButton(
-              selectedOwnership: context.read<ItemDetailCubit>().state.item?.ownershipStatus,
-              ownershipStatusChanged: (status) => context.read<ItemDetailCubit>().updateItem(ownershipStatus: status),
+              selected: context.read<ItemDetailCubit>().state.item?.ownershipStatus,
+              statusChanged: (status) => context.read<ItemDetailCubit>().updateItem(ownershipStatus: status),
             ),
             const SizedBox(height: 10),
             const Text(
@@ -121,8 +121,8 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IsLendableCheckbox(
-                  selectedIsLendable: context.read<ItemDetailCubit>().state.item?.isLendable,
-                  isLendableChanged: (isLendable) => context.read<ItemDetailCubit>().updateItem(isLendable: isLendable),
+                  isSelected: context.read<ItemDetailCubit>().state.item?.isLendable,
+                  onChanged: (isLendable) => context.read<ItemDetailCubit>().updateItem(isLendable: isLendable),
                 ),
                 const Text(
                   'is lendable?',

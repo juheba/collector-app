@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class ScaffoldWithNavbar extends StatelessWidget {
-  const ScaffoldWithNavbar(this.navigationShell, {super.key});
+  const ScaffoldWithNavbar(
+    this.navigationShell, {
+    super.key,
+  });
 
   /// The navigation shell and container for the branch Navigators.
   final StatefulNavigationShell navigationShell;
@@ -23,7 +26,7 @@ class ScaffoldWithNavbar extends StatelessWidget {
         labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         selectedIndex: navigationShell.currentIndex,
         onDestinationSelected: _onTap,
-        destinations: const <Widget>[
+        destinations: const [
           NavigationDestination(
             icon: Icon(Icons.home_filled),
             label: 'Home',
@@ -49,7 +52,7 @@ class ScaffoldWithNavbar extends StatelessWidget {
     );
   }
 
-  void _onTap(index) {
+  void _onTap(int index) {
     navigationShell.goBranch(
       index,
       // A common pattern when using bottom navigation bars is to support

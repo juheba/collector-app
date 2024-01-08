@@ -1,11 +1,14 @@
 import 'package:collector/model/collection_model.dart';
-import 'package:collector/page/shared/items_widget.dart';
+import 'package:collector/page/shared/item_list.dart';
 import 'package:flutter/material.dart';
 
 class CollectionDetailPageWidget extends StatelessWidget {
   final CollectionModel collection;
 
-  const CollectionDetailPageWidget({required this.collection, super.key});
+  const CollectionDetailPageWidget({
+    required this.collection,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

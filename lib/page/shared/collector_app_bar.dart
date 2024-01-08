@@ -4,7 +4,11 @@ class CollectorAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Uri? userPictureUrl;
   final String userName;
 
-  const CollectorAppBar({super.key, this.userPictureUrl, required this.userName});
+  const CollectorAppBar({
+    super.key,
+    this.userPictureUrl,
+    required this.userName,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +21,10 @@ class CollectorAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(userName, style: const TextStyle(color: Colors.white, fontSize: 16)),
+                Text(
+                  userName,
+                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                ),
                 const SizedBox(width: 8),
                 GestureDetector(
                   onTap: () {
