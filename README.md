@@ -1,3 +1,6 @@
+# HELP?!
+Generate Hive Adapter Classes with: `dart run build_runner build`
+
 # Flutter Sample App
 
 This sample app demonstrates the integration of the Auth0 Flutter SDK into a Flutter app. The sample is a companion to the [Auth0 Flutter Quickstart](https://auth0.com/docs/quickstart/native/flutter/interactive).

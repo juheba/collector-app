@@ -1,10 +1,14 @@
+import 'package:collector/middleware/cubit/item_detail_cubit.dart';
 import 'package:collector/model/item_model.dart';
+import 'package:collector/page/shared/checkbox_widget.dart';
 import 'package:collector/page/shared/item_ownership_status_segmented_button.dart';
 import 'package:collector/page/shared/item_status_segmented_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ItemEditorForm extends StatefulWidget {
-  late ItemModel? item;
+  ItemModel? item;
+
   ItemEditorForm({this.item, super.key});
 
   @override
@@ -13,6 +17,52 @@ class ItemEditorForm extends StatefulWidget {
 
 class _ItemEditorFormState extends State<ItemEditorForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  late TextEditingController titleTextEditingController;
+  late TextEditingController descriptionTextEditingController;
+
+  late bool isNew;
+
+  @override
+  void initState() {
+    super.initState();
+    isNew = widget.item == null;
+
+    titleTextEditingController = TextEditingController(text: context.read<ItemDetailCubit>().state.item?.title);
+    titleTextEditingController.addListener(() {
+      context.read<ItemDetailCubit>().updateItem(title: titleTextEditingController.text);
+    });
+
+    descriptionTextEditingController =
+        TextEditingController(text: context.read<ItemDetailCubit>().state.item?.description);
+    descriptionTextEditingController.addListener(() {
+      context.read<ItemDetailCubit>().updateItem(description: descriptionTextEditingController.text);
+    });
+  }
+
+  void showSnack(BuildContext context) {
+    const snackBar = SnackBar(
+      content: Text('Item saved.'),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  @override
+  void dispose() {
+    // Dispose controllers when the widget is disposed
+    titleTextEditingController.dispose();
+    descriptionTextEditingController.dispose();
+    super.dispose();
+  }
+
+  void resetForm() {
+    if (isNew) {
+      widget.item = null;
+      context.read<ItemDetailCubit>().startEditing(widget.item);
+      titleTextEditingController.clear();
+      descriptionTextEditingController.clear();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +74,7 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             TextFormField(
+              controller: titleTextEditingController,
               decoration: const InputDecoration(
                 labelText: 'Title',
                 hintText: 'Enter title',
@@ -39,6 +90,7 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
             ),
             const SizedBox(height: 10),
             TextFormField(
+              controller: descriptionTextEditingController,
               decoration: const InputDecoration(
                 labelText: 'Description',
                 hintText: 'Enter description',
@@ -51,19 +103,28 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
               'Ownership Status:',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            const OwnershipStatusSingleChoiceSegmentedButton(),
+            OwnershipStatusSingleChoiceSegmentedButton(
+              selectedOwnership: context.read<ItemDetailCubit>().state.item?.ownershipStatus,
+              ownershipStatusChanged: (status) => context.read<ItemDetailCubit>().updateItem(ownershipStatus: status),
+            ),
             const SizedBox(height: 10),
             const Text(
               'Progress Status:',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            const ItemStatusSingleChoiceSegmentedButton(),
+            ItemStatusSingleChoiceSegmentedButton(
+              selectedStatus: context.read<ItemDetailCubit>().state.item?.status,
+              statusChanged: (status) => context.read<ItemDetailCubit>().updateItem(status: status),
+            ),
             const SizedBox(height: 10),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IsLendableCheckbox(),
-                Text(
+                IsLendableCheckbox(
+                  selectedIsLendable: context.read<ItemDetailCubit>().state.item?.isLendable,
+                  isLendableChanged: (isLendable) => context.read<ItemDetailCubit>().updateItem(isLendable: isLendable),
+                ),
+                const Text(
                   'is lendable?',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
@@ -79,37 +140,16 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
               ),
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  // Process data.
+                  context.read<ItemDetailCubit>().submitForm();
+                  showSnack(context);
+                  resetForm();
                 }
               },
-              child: widget.item == null ? const Text('Add') : const Text('Save'),
+              child: isNew ? const Text('Add') : const Text('Save'),
             ),
           ],
         ),
       ),
-    );
-  }
-}
-
-class IsLendableCheckbox extends StatefulWidget {
-  const IsLendableCheckbox({super.key});
-
-  @override
-  State<IsLendableCheckbox> createState() => _IsLendableCheckboxState();
-}
-
-class _IsLendableCheckboxState extends State<IsLendableCheckbox> {
-  bool isChecked = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Checkbox(
-      value: isChecked,
-      onChanged: (bool? value) {
-        setState(() {
-          isChecked = value!;
-        });
-      },
     );
   }
 }

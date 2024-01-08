@@ -2,7 +2,6 @@ import 'package:auth0_flutter/auth0_flutter.dart';
 import 'package:auth0_flutter/auth0_flutter_web.dart';
 import 'package:collector/data/access_user_credentials.dart';
 import 'package:collector/router/router.dart';
-import 'package:collector/theme/f159/f159_theme.dart';
 import 'package:collector/theme/m3_bluemine_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

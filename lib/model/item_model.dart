@@ -1,32 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:uuid/uuid.dart';
 
-class MockItems {
-  const MockItems();
+part 'item_model.g.dart';
 
-  static List<ItemModel> getItems() {
-    return [
-      ItemModel(id: '0', title: 'The Legend of Zelda', type: ItemType.game),
-      ItemModel(id: '1', title: 'Super Mario Bros.', type: ItemType.game),
-      ItemModel(id: '2', title: 'Halo: Combat Evolved', type: ItemType.game),
-      ItemModel(id: '3', title: '1984', type: ItemType.book),
-      ItemModel(id: '4', title: 'To Kill a Mockingbird', type: ItemType.book),
-      ItemModel(id: '5', title: 'Harry Potter and the Philosopher\'s Stone', type: ItemType.book),
-      ItemModel(id: '6', title: 'Inception', type: ItemType.movie),
-      ItemModel(id: '7', title: 'The Matrix', type: ItemType.movie),
-      ItemModel(id: '8', title: 'Pulp Fiction', type: ItemType.movie),
-      ItemModel(id: '9', title: 'The Great Gatsby', type: ItemType.book),
-      ItemModel(id: '10', title: 'The Hobbit', type: ItemType.book),
-      ItemModel(id: '11', title: 'The Lord of the Rings', type: ItemType.book),
-      ItemModel(id: '12', title: 'Star Wars: A New Hope', type: ItemType.movie),
-      ItemModel(id: '13', title: 'Interstellar', type: ItemType.movie),
-      ItemModel(id: '14', title: 'The Dark Knight', type: ItemType.movie),
-    ];
-  }
-}
-
+@HiveType(typeId: 3)
 enum ItemType {
+  @HiveField(0)
   game('Game', Icons.videogame_asset, Colors.lightBlue),
+  @HiveField(1)
   book('Book', Icons.book, Colors.deepOrange),
+  @HiveField(2)
   movie('Movie', Icons.movie, Colors.blueGrey);
 
   final String name;
@@ -35,9 +19,13 @@ enum ItemType {
   const ItemType(this.name, this.icon, this.color);
 }
 
+@HiveType(typeId: 2)
 enum ItemOwnershipStatus {
+  @HiveField(0)
   wishlist('WISHLIST', Icons.list, Colors.yellow),
+  @HiveField(1)
   owner('OWNER', Icons.person, Colors.green),
+  @HiveField(2)
   borrower('BORROWER', Icons.event_outlined, Colors.deepOrange);
 
   final String name;
@@ -46,9 +34,15 @@ enum ItemOwnershipStatus {
   const ItemOwnershipStatus(this.name, this.icon, this.color);
 }
 
+const defaultItemOwnershipStatus = ItemOwnershipStatus.wishlist;
+
+@HiveType(typeId: 1)
 enum ItemStatus {
+  @HiveField(0)
   todo('TODO', Icons.start, Colors.blue),
+  @HiveField(1)
   processing('PROCESSING', Icons.keyboard_double_arrow_right, Colors.orange),
+  @HiveField(2)
   done('DONE', Icons.check_circle, Colors.green);
 
   final String name;
@@ -57,22 +51,60 @@ enum ItemStatus {
   const ItemStatus(this.name, this.icon, this.color);
 }
 
-class ItemModel {
-  final String id;
-  final String title;
-  final String? description;
-  final ItemType type;
-  bool? isLendable = false;
-  ItemOwnershipStatus? ownershipStatus = ItemOwnershipStatus.wishlist;
-  ItemStatus? status = ItemStatus.todo;
+const defaultItemStatus = ItemStatus.todo;
+
+const defaultIsLendable = false;
+
+@HiveType(typeId: 0)
+class ItemModel extends HiveObject {
+  @HiveField(0)
+  late String id;
+  @HiveField(1)
+  late String title;
+  @HiveField(2)
+  late String? description;
+  @HiveField(3)
+  late ItemType type;
+  @HiveField(4, defaultValue: defaultIsLendable)
+  late bool isLendable;
+  @HiveField(5, defaultValue: defaultItemOwnershipStatus)
+  late ItemOwnershipStatus ownershipStatus;
+  @HiveField(6, defaultValue: defaultItemStatus)
+  late ItemStatus status;
 
   ItemModel({
-    required this.id,
+    String? id,
     required this.title,
     required this.type,
     this.description,
-    this.isLendable,
-    this.ownershipStatus,
-    this.status,
-  });
+    bool? isLendable,
+    ItemOwnershipStatus? ownershipStatus,
+    ItemStatus? status,
+  }) {
+    this.id = id == null || id.isEmpty ? const Uuid().v4() : id;
+    this.isLendable = isLendable ?? defaultIsLendable;
+    this.ownershipStatus = ownershipStatus ?? defaultItemOwnershipStatus;
+    this.status = status ?? defaultItemStatus;
+  }
+
+  static ItemModel createDefault() {
+    return ItemModel(title: 'Title', type: ItemType.book);
+  }
+
+  ItemModel update({
+    String? title,
+    ItemType? type,
+    String? description,
+    ItemOwnershipStatus? ownershipStatus,
+    ItemStatus? status,
+    bool? isLendable,
+  }) {
+    this.title = title ?? this.title;
+    this.type = type ?? this.type;
+    this.description = description ?? this.description;
+    this.isLendable = isLendable ?? this.isLendable;
+    this.ownershipStatus = ownershipStatus ?? this.ownershipStatus;
+    this.status = status ?? this.status;
+    return this;
+  }
 }

@@ -1,29 +1,42 @@
+import 'package:collector/middleware/cubit/item_list_cubit.dart';
 import 'package:collector/model/item_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class ItemsListWidget extends StatelessWidget {
-  final List<ItemModel> items;
-
-  const ItemsListWidget({required this.items, super.key});
+  const ItemsListWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              GoRouter.of(context).goNamed(
-                'item-details',
-                pathParameters: {'id': items[index].id},
-              );
-            },
-            child: ItemListElementWidget(item: items[index]),
-          );
-        },
-      ),
+    return BlocBuilder<ItemListCubit, ItemState>(
+      builder: (context, state) {
+        switch (state.status) {
+          case ItemListStatus.initial:
+            return const Center(child: CircularProgressIndicator());
+
+          case ItemListStatus.loaded:
+            return Expanded(
+              child: ListView.builder(
+                itemCount: state.items.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      GoRouter.of(context).goNamed(
+                        'item-details',
+                        pathParameters: {'id': state.items[index].id},
+                      );
+                    },
+                    child: ItemListElementWidget(item: state.items[index]),
+                  );
+                },
+              ),
+            );
+
+          case ItemListStatus.failure:
+            return const Text('Upsi');
+        }
+      },
     );
   }
 }

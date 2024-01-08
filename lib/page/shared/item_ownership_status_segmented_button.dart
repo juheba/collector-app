@@ -2,14 +2,29 @@ import 'package:collector/model/item_model.dart';
 import 'package:flutter/material.dart';
 
 class OwnershipStatusSingleChoiceSegmentedButton extends StatefulWidget {
-  const OwnershipStatusSingleChoiceSegmentedButton({super.key});
+  const OwnershipStatusSingleChoiceSegmentedButton(
+      {super.key, this.selectedOwnership, required this.ownershipStatusChanged});
+  final ItemOwnershipStatus? selectedOwnership;
+  final Function(ItemOwnershipStatus status) ownershipStatusChanged;
 
   @override
   State<OwnershipStatusSingleChoiceSegmentedButton> createState() => _OwnershipStatusSingleChoiceSegmentedButtonState();
 }
 
 class _OwnershipStatusSingleChoiceSegmentedButtonState extends State<OwnershipStatusSingleChoiceSegmentedButton> {
-  ItemOwnershipStatus view = ItemOwnershipStatus.wishlist;
+  late ItemOwnershipStatus view;
+
+  @override
+  void initState() {
+    super.initState();
+    view = widget.selectedOwnership ?? defaultItemOwnershipStatus;
+  }
+
+  void resetState() {
+    setState(() {
+      view = defaultItemOwnershipStatus;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +62,7 @@ class _OwnershipStatusSingleChoiceSegmentedButtonState extends State<OwnershipSt
           // selected at one time, so its value is always the first
           // item in the selected set.
           view = newSelection.first;
+          widget.ownershipStatusChanged(view);
         });
       },
     );

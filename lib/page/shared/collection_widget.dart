@@ -45,21 +45,22 @@ class CollectionGridElementWidget extends StatelessWidget {
         );
       },
       child: Container(
-          padding: const EdgeInsets.all(8),
-          color: collection.color ?? Colors.teal,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                collection.title,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
+        padding: const EdgeInsets.all(8),
+        color: collection.color ?? Colors.teal,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              collection.title,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
               ),
-            ],
-          )),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

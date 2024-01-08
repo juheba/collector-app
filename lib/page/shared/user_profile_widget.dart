@@ -4,7 +4,7 @@ class MockUser {
   static const String name = 'Name Mockname';
   static const String idToken = 'bearerJWT12345678910111213';
   static final Uri pictureUrl = Uri.parse(
-    'https://upload.wikimedia.org/wikipedia/commons/4/4f/Dash%2C_the_mascot_of_the_Dart_programming_language.png',
+    'https://img-new.cgtrader.com/items/3579119/b0c7a67e96/flutter-dash-3d-model-animated-obj-fbx-stl-blend.jpg',
   );
 }
 

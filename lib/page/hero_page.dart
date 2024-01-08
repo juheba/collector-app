@@ -1,6 +1,5 @@
 // '/' wenn not logged in
 
-import 'package:collector/page/shared/user_profile_widget.dart';
 import 'package:collector/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

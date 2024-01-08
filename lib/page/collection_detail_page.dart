@@ -1,5 +1,4 @@
 import 'package:collector/model/collection_model.dart';
-import 'package:collector/model/item_model.dart';
 import 'package:collector/page/shared/items_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -36,11 +35,7 @@ class CollectionDetailPageWidget extends StatelessWidget {
             ),
           ),
         ),
-        ItemsListWidget(items: [
-          MockItems.getItems()[3],
-          MockItems.getItems()[1],
-          MockItems.getItems()[7],
-        ]),
+        const ItemsListWidget(),
       ],
     );
   }

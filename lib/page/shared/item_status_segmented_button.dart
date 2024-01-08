@@ -2,14 +2,22 @@ import 'package:collector/model/item_model.dart';
 import 'package:flutter/material.dart';
 
 class ItemStatusSingleChoiceSegmentedButton extends StatefulWidget {
-  const ItemStatusSingleChoiceSegmentedButton({super.key});
+  const ItemStatusSingleChoiceSegmentedButton({super.key, this.selectedStatus, required this.statusChanged});
+  final ItemStatus? selectedStatus;
+  final Function(ItemStatus status) statusChanged;
 
   @override
   State<ItemStatusSingleChoiceSegmentedButton> createState() => _ItemStatusSingleChoiceSegmentedButtonState();
 }
 
 class _ItemStatusSingleChoiceSegmentedButtonState extends State<ItemStatusSingleChoiceSegmentedButton> {
-  ItemStatus view = ItemStatus.todo;
+  late ItemStatus view;
+
+  @override
+  void initState() {
+    super.initState();
+    view = widget.selectedStatus ?? defaultItemStatus;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +55,7 @@ class _ItemStatusSingleChoiceSegmentedButtonState extends State<ItemStatusSingle
           // selected at one time, so its value is always the first
           // item in the selected set.
           view = newSelection.first;
+          widget.statusChanged(view);
         });
       },
     );
