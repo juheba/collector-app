@@ -27,4 +27,8 @@ class ItemListCubit extends Cubit<ItemState> {
       emit(state.copyWith(status: ItemListStatus.failure));
     }
   }
+
+  Future<void> toggleSelectionMode() async {
+    emit(state.copyWith(isSelectionModeActive: !state.isSelectionModeActive));
+  }
 }

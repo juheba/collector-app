@@ -11,10 +11,38 @@ class ItemsPageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<ItemListCubit>(
       create: (context) => ItemListCubit(DatabaseService.instance)..loadItems(),
-      child: const Column(
-        children: [
-          ItemsListWidget(),
-        ],
+      child: BlocBuilder<ItemListCubit, ItemState>(
+        builder: (context, state) {
+          switch (state.status) {
+            case ItemListStatus.initial:
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+
+            case ItemListStatus.loaded:
+              return Column(
+                children: [
+                  AppBar(
+                    actions: [
+                      IconButton(
+                        onPressed: () => context.read<ItemListCubit>().toggleSelectionMode(),
+                        icon: const Icon(Icons.select_all),
+                      ),
+                    ],
+                  ),
+                  Expanded(
+                    child: ItemsListWidget(
+                      items: state.items,
+                      isSelectionModeActive: state.isSelectionModeActive,
+                    ),
+                  ),
+                ],
+              );
+
+            case ItemListStatus.failure:
+              return const Text('Upsi');
+          }
+        },
       ),
     );
   }

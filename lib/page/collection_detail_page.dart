@@ -37,7 +37,10 @@ class CollectionDetailPageWidget extends StatelessWidget {
             ),
           ),
         ),
-        const ItemsListWidget(),
+        const ItemsListWidget(
+          items: [],
+          isSelectionModeActive: false,
+        ),
       ],
     );
   }
