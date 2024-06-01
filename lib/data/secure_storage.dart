@@ -5,16 +5,20 @@ class SecureStorage {
   factory SecureStorage() => _instance;
 
   SecureStorage._internal() {
-    _storage = const FlutterSecureStorage();
+    _storage = const FlutterSecureStorage(
+      mOptions: MacOsOptions(
+        synchronizable: true,
+      ),
+    );
   }
+
   late FlutterSecureStorage _storage;
   static final SecureStorage _instance = SecureStorage._internal();
 
-  void write(String key, String value) {
-    _storage.write(key: key, value: value);
-  }
+  Future<void> write(String key, String value) async => _storage.write(key: key, value: value);
 
-  Future<String?> read(String key) {
+  Future<String?> read(String key) async {
+    print('contains: ${await _storage.containsKey(key: key)}');
     return _storage.read(key: key);
   }
 

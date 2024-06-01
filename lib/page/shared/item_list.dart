@@ -1,4 +1,3 @@
-import 'package:collector/middleware/cubit/item_list_cubit.dart';
 import 'package:collector/model/item_model.dart';
 import 'package:collector/page/shared/item_list_tile.dart';
 import 'package:flutter/material.dart';

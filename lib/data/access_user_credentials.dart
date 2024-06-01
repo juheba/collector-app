@@ -26,15 +26,15 @@ class AccessUserCredentials {
   AccessUserCredentials._internal();
   static final AccessUserCredentials _instance = AccessUserCredentials._internal();
 
-  void writeUserCredentials(Credentials credentials) {
-    SecureStorage().write(UserCredentialsKeys.idToken.key, credentials.idToken);
-    SecureStorage().write(UserCredentialsKeys.accessToken.key, credentials.accessToken);
-    SecureStorage().write(UserCredentialsKeys.expiresAt.key, credentials.expiresAt.toIso8601String());
-    SecureStorage().write(UserCredentialsKeys.tokenType.key, credentials.tokenType);
-    SecureStorage().write(UserCredentialsKeys.userProfileSub.key, credentials.user.sub);
-    SecureStorage().write(UserCredentialsKeys.userProfileName.key, credentials.user.name ?? '');
-    SecureStorage().write(UserCredentialsKeys.userProfileEmail.key, credentials.user.email ?? '');
-    SecureStorage().write(UserCredentialsKeys.userProfilePicture.key, credentials.user.pictureUrl.toString());
+  Future<void> writeUserCredentials(Credentials credentials) async {
+    await SecureStorage().write(UserCredentialsKeys.idToken.key, credentials.idToken);
+    await SecureStorage().write(UserCredentialsKeys.accessToken.key, credentials.accessToken);
+    await SecureStorage().write(UserCredentialsKeys.expiresAt.key, credentials.expiresAt.toIso8601String());
+    await SecureStorage().write(UserCredentialsKeys.tokenType.key, credentials.tokenType);
+    await SecureStorage().write(UserCredentialsKeys.userProfileSub.key, credentials.user.sub);
+    await SecureStorage().write(UserCredentialsKeys.userProfileName.key, credentials.user.name ?? '');
+    await SecureStorage().write(UserCredentialsKeys.userProfileEmail.key, credentials.user.email ?? '');
+    await SecureStorage().write(UserCredentialsKeys.userProfilePicture.key, credentials.user.pictureUrl.toString());
   }
 
   Future<Credentials> readUserCredentials() async {
@@ -87,7 +87,7 @@ class AccessUserCredentials {
   }
 
   Future<bool> isUserPresent() async {
-    final sub = await SecureStorage().read(UserCredentialsKeys.userProfileSub.key);
+    final sub = await readUserCredentialsUserProfileSub();
     return sub != null && sub.isNotEmpty;
   }
 

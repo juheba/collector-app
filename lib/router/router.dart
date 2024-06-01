@@ -1,8 +1,10 @@
+import 'package:collector/data/access_user_credentials.dart';
 import 'package:collector/model/collection_model.dart';
 import 'package:collector/page/collection_detail_page.dart';
 import 'package:collector/page/collections_page.dart';
 import 'package:collector/page/item_detail_page.dart';
 import 'package:collector/page/items_page.dart';
+import 'package:collector/page/login_page.dart';
 import 'package:collector/page/new_item_page.dart';
 import 'package:collector/page/shared/scaffold_nav_bar.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +18,36 @@ class CollectorGoRouter {
     _router = GoRouter(
       navigatorKey: _rootNavigatorKey,
       initialLocation: '/',
+      redirect: (context, state) async {
+        final isUserPresent = await AccessUserCredentials().isUserPresent();
+        final isLoginPage = state.matchedLocation == '/login';
+
+        if (!isUserPresent && !isLoginPage) {
+          return '/login';
+        } else if (isUserPresent && isLoginPage) {
+          return '/home';
+        }
+        return null;
+      },
       routes: <RouteBase>[
+        GoRoute(
+          path: '/login',
+          builder: (context, state) => const LoginPageWidget(),
+        ),
+        GoRoute(
+          path: '/callback',
+          redirect: (context, state) async {
+            final uri = Uri.base;
+            final queryCode = uri.queryParameters['code'];
+            final queryState = uri.queryParameters['state'];
+
+            if (queryCode != null && queryState != null) {
+              return '/home';
+            } else {
+              return '/login';
+            }
+          },
+        ),
         StatefulShellRoute.indexedStack(
           builder: (context, state, navigationShell) {
             // Return the widget that implements the custom shell (e.g a BottomNavigationBar).
@@ -31,7 +62,7 @@ class CollectorGoRouter {
               routes: <RouteBase>[
                 GoRoute(
                   name: 'home', // Optional, add name to your routes. Allows you navigate by name instead of path
-                  path: '/',
+                  path: '/home',
                   builder: (context, state) => const Text('/home'),
                   //builder: (context, state) => HomePageWidget(user: user, idToken: idToken),
                 ),
@@ -88,7 +119,7 @@ class CollectorGoRouter {
                   name: 'user',
                   path: '/user',
                   builder: (context, state) => const Text('/user'),
-                  //builder: (context, state) => const UserPageWidget(),
+                  //builder: (context, state) => UserPageWidget(),
                 ),
               ],
             ),

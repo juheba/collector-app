@@ -1,4 +1,4 @@
-// '/' wenn logged in
+// '/home' wenn logged in
 
 import 'package:auth0_flutter/auth0_flutter.dart';
 import 'package:collector/page/shared/user_profile_widget.dart';
