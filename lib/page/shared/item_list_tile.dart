@@ -30,7 +30,8 @@ class ItemListElementWidget extends StatelessWidget {
       margin: const EdgeInsets.all(8),
       elevation: 5,
       child: ListTile(
-        onTap: onTap,
+        minVerticalPadding: 24,
+        onTap: isSelectionModeActive ? null : onTap,
         leading: isSelectionModeActive
             ? Row(
                 mainAxisSize: MainAxisSize.min,
@@ -50,7 +51,13 @@ class ItemListElementWidget extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        subtitle: const Text('fixer text'),
+        subtitle: (item.description != null)
+            ? Text(
+                item.description!,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              )
+            : null,
         trailing: Text(
           item.type.name,
           style: const TextStyle(color: Colors.grey),

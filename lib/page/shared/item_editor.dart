@@ -1,4 +1,5 @@
 import 'package:collector/middleware/cubit/item/item_detail_cubit.dart';
+import 'package:collector/middleware/cubit/item/item_list_cubit.dart';
 import 'package:collector/model/item_model.dart';
 import 'package:collector/page/shared/checkbox_widget.dart';
 import 'package:collector/page/shared/item_ownership_status_segmented_button.dart';
@@ -65,6 +66,11 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final headlineStyle = theme.textTheme.labelLarge;
+
+    const spacingBox = SizedBox(height: 20);
+
     return Form(
       key: _formKey,
       child: Padding(
@@ -86,7 +92,7 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
                 return null;
               },
             ),
-            const SizedBox(height: 10),
+            spacingBox,
             TextFormField(
               controller: descriptionTextEditingController,
               decoration: const InputDecoration(
@@ -95,26 +101,27 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
                 prefixIcon: Icon(Icons.description),
                 border: OutlineInputBorder(),
               ),
+              maxLines: 10,
             ),
-            const SizedBox(height: 20),
-            const Text(
+            spacingBox,
+            Text(
               'Ownership Status:',
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: headlineStyle,
             ),
             OwnershipStatusSingleChoiceSegmentedButton(
               selected: context.read<ItemDetailCubit>().state.item?.ownershipStatus,
               statusChanged: (status) => context.read<ItemDetailCubit>().updateItem(ownershipStatus: status),
             ),
-            const SizedBox(height: 10),
-            const Text(
+            spacingBox,
+            Text(
               'Progress Status:',
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: headlineStyle,
             ),
             ItemStatusSingleChoiceSegmentedButton(
               selectedStatus: context.read<ItemDetailCubit>().state.item?.status,
               statusChanged: (status) => context.read<ItemDetailCubit>().updateItem(status: status),
             ),
-            const SizedBox(height: 10),
+            spacingBox,
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -122,28 +129,46 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
                   isSelected: context.read<ItemDetailCubit>().state.item?.isLendable,
                   onChanged: (isLendable) => context.read<ItemDetailCubit>().updateItem(isLendable: isLendable),
                 ),
-                const Text(
+                Text(
                   'is lendable?',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: headlineStyle,
                 ),
               ],
             ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
+            spacingBox,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (!isNew) ...[
+                  OutlinedButton(
+                    style: theme.outlinedButtonTheme.style?.copyWith(
+                      foregroundColor: WidgetStatePropertyAll(theme.colorScheme.secondary),
+                    ),
+                    onPressed: () => context.read<ItemListCubit>().deleteItem(widget.item?.id ?? ''),
+                    child: const Text('Löschen'),
+                  ),
+                  const SizedBox(
+                    width: 12,
+                  ),
+                  OutlinedButton(
+                    onPressed: () => context.read<ItemDetailCubit>().cancelEditing(),
+                    child: const Text('Abbrechen'),
+                  ),
+                  const SizedBox(
+                    width: 12,
+                  ),
+                ],
+                FilledButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      context.read<ItemDetailCubit>().submitForm();
+                      showSnack(context);
+                      resetForm();
+                    }
+                  },
+                  child: isNew ? const Text('Add') : const Text('Save'),
                 ),
-                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-              ),
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  context.read<ItemDetailCubit>().submitForm();
-                  showSnack(context);
-                  resetForm();
-                }
-              },
-              child: isNew ? const Text('Add') : const Text('Save'),
+              ],
             ),
           ],
         ),

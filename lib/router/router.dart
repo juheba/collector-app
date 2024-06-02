@@ -20,15 +20,15 @@ class CollectorGoRouter {
   CollectorGoRouter._internal() {
     _router = GoRouter(
       navigatorKey: _rootNavigatorKey,
-      initialLocation: '/login',
+      initialLocation: LoginPageWidget.routePath,
       redirect: (context, state) async {
         final isUserPresent = await AccessUserCredentials().isUserPresent();
-        final isLoginPage = state.matchedLocation == '/login';
+        final isLoginPage = state.matchedLocation == LoginPageWidget.routePath;
 
         if (!isUserPresent && !isLoginPage) {
-          return '/login';
+          return LoginPageWidget.routePath;
         } else if (isUserPresent && isLoginPage) {
-          return '/home';
+          return HomePageWidget.routePath;
         }
         return null;
       },
@@ -38,12 +38,12 @@ class CollectorGoRouter {
           builder: (context, state) => const CallbackPage(),
         ),
         GoRoute(
-          path: '/login',
+          path: LoginPageWidget.routePath,
           redirect: (context, state) async {
             final isUserPresent = await AccessUserCredentials().isUserPresent();
 
             if (isUserPresent) {
-              return '/home';
+              return HomePageWidget.routePath;
             }
             return null;
           },
@@ -62,8 +62,8 @@ class CollectorGoRouter {
               // each routes with its sub routes if available e.g feed/uuid/details
               routes: <RouteBase>[
                 GoRoute(
-                  name: 'home', // Optional, add name to your routes. Allows you navigate by name instead of path
-                  path: '/home',
+                  name: HomePageWidget.routeName,
+                  path: HomePageWidget.routePath,
                   builder: (context, state) => const HomePageWidget(),
                 ),
               ],
@@ -71,13 +71,13 @@ class CollectorGoRouter {
             StatefulShellBranch(
               routes: <RouteBase>[
                 GoRoute(
-                  name: 'collections',
-                  path: '/collections',
+                  name: CollectionsPageWidget.routeName,
+                  path: CollectionsPageWidget.routePath,
                   builder: (context, state) => const CollectionsPageWidget(),
                   routes: <RouteBase>[
                     GoRoute(
-                      name: 'collection-details',
-                      path: ':id/items',
+                      name: CollectionDetailPageWidget.routeName,
+                      path: CollectionDetailPageWidget.routePath,
                       builder: (context, state) => CollectionDetailPageWidget(
                         collection: MockCollections.getCollections()[int.parse(state.pathParameters['id']!)],
                       ),
@@ -89,8 +89,8 @@ class CollectorGoRouter {
             StatefulShellBranch(
               routes: <RouteBase>[
                 GoRoute(
-                  name: 'new-item',
-                  path: '/items/new',
+                  name: NewItemPageWidget.routeName,
+                  path: NewItemPageWidget.routePath,
                   builder: (context, state) => const NewItemPageWidget(),
                 ),
               ],
@@ -98,13 +98,13 @@ class CollectorGoRouter {
             StatefulShellBranch(
               routes: <RouteBase>[
                 GoRoute(
-                  name: 'items',
-                  path: '/items',
+                  name: ItemsPageWidget.routeName,
+                  path: ItemsPageWidget.routePath,
                   builder: (context, state) => const ItemsPageWidget(),
                   routes: <RouteBase>[
                     GoRoute(
-                      name: 'item-details',
-                      path: ':id/details',
+                      name: ItemDetailPageWidget.routeName,
+                      path: ItemDetailPageWidget.routePath,
                       builder: (context, state) => ItemDetailPageWidget(
                         id: state.pathParameters['id']!,
                       ),
@@ -116,8 +116,8 @@ class CollectorGoRouter {
             StatefulShellBranch(
               routes: <RouteBase>[
                 GoRoute(
-                  name: 'user',
-                  path: '/user',
+                  name: UserPageWidget.routeName,
+                  path: UserPageWidget.routePath,
                   builder: (context, state) => const UserPageWidget(),
                 ),
               ],

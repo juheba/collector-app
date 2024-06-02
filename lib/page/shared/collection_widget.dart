@@ -1,4 +1,5 @@
 import 'package:collector/model/collection_model.dart';
+import 'package:collector/page/collection_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -11,22 +12,20 @@ class CollectionGridWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        constraints: const BoxConstraints.expand(),
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 5,
-            mainAxisSpacing: 5,
-          ),
-          itemCount: collections.length,
-          itemBuilder: (BuildContext context, int index) {
-            return CollectionGridElementWidget(
-              collection: collections[index],
-            );
-          },
+    return Container(
+      constraints: const BoxConstraints.expand(),
+      child: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 5,
+          mainAxisSpacing: 5,
         ),
+        itemCount: collections.length,
+        itemBuilder: (BuildContext context, int index) {
+          return CollectionGridElementWidget(
+            collection: collections[index],
+          );
+        },
       ),
     );
   }
@@ -42,12 +41,10 @@ class CollectionGridElementWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        GoRouter.of(context).goNamed(
-          'collection-details',
-          pathParameters: {'id': collection.id},
-        );
-      },
+      onTap: () => context.goNamed(
+        CollectionDetailPageWidget.routeName,
+        pathParameters: {'id': collection.id},
+      ),
       child: Card(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -55,9 +52,10 @@ class CollectionGridElementWidget extends StatelessWidget {
             Text(
               collection.name,
               textAlign: TextAlign.center,
-              style: const TextStyle(
+              style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
+                color: collection.visibility.foregroundColor,
               ),
             ),
             Icon(

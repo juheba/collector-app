@@ -1,11 +1,16 @@
 import 'package:collector/auth/auth_service.dart';
 import 'package:collector/middleware/cubit/user/user_profile_cubit.dart';
+import 'package:collector/page/scaffold_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserPageWidget extends StatelessWidget {
   const UserPageWidget({super.key});
+
+  static const routeName = 'user';
+  static const routePath = '/user';
+  static const pageTitle = 'User profile';
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +19,8 @@ class UserPageWidget extends StatelessWidget {
       child: BlocBuilder<UserProfileCubit, UserProfileState>(
         builder: (context, state) {
           final pictureUrl = state.user?.pictureUrl;
-          return Scaffold(
+          return ScaffoldPage(
+            title: pageTitle,
             body: SingleChildScrollView(
               padding: const EdgeInsets.all(16),
               child: Column(

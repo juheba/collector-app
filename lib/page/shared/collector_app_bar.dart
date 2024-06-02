@@ -2,43 +2,37 @@ import 'package:flutter/material.dart';
 
 class CollectorAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CollectorAppBar({
-    required this.userName,
+    required this.label,
+    this.onNavigateBack,
+    this.actions,
+    this.backgroundColor,
+    this.foregroundColor,
     super.key,
-    this.userPictureUrl,
   });
-  final Uri? userPictureUrl;
-  final String userName;
+
+  final Widget label;
+  final void Function()? onNavigateBack;
+  final List<Widget>? actions;
+
+  final Color? backgroundColor;
+  final Color? foregroundColor;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text('Collector App'),
-      actions: [
-        if (userName.isNotEmpty)
-          Container(
-            margin: const EdgeInsets.only(right: 12),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  userName,
-                  style: const TextStyle(color: Colors.white, fontSize: 16),
-                ),
-                const SizedBox(width: 8),
-                GestureDetector(
-                  onTap: () {
-                    debugPrint('Profile Picture Tapped!');
-                  },
-                  child: CircleAvatar(
-                    backgroundImage: userPictureUrl != null ? NetworkImage(userPictureUrl.toString()) : null,
-                    radius: 20,
-                    child: userPictureUrl == null ? const Icon(Icons.person, size: 30, color: Colors.white) : null,
-                  ),
-                ),
-              ],
-            ),
-          ),
-      ],
+      title: label,
+      leading: (onNavigateBack != null)
+          ? IconButton(
+              onPressed: onNavigateBack,
+              icon: Icon(
+                Icons.arrow_back,
+                color: foregroundColor,
+              ),
+            )
+          : null,
+      actions: actions,
+      backgroundColor: backgroundColor,
+      foregroundColor: foregroundColor,
     );
   }
 

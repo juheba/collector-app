@@ -19,5 +19,10 @@ class ItemDetailState extends Equatable {
       );
 
   @override
-  List<dynamic> get props => [status, item, errorMessage, editItem];
+  List<dynamic> get props => [
+        status,
+        item,
+        errorMessage,
+        editItem,
+      ];
 }

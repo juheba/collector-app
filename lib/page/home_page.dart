@@ -1,5 +1,6 @@
 // '/home' wenn logged in
 
+import 'package:collector/page/scaffold_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePageWidget extends StatelessWidget {
@@ -7,11 +8,20 @@ class HomePageWidget extends StatelessWidget {
     super.key,
   });
 
+  static const routeName = 'home';
+  static const routePath = '/home';
+  static const pageTitle = 'Home';
+
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [Text('/home')],
+    return const ScaffoldPage(
+      title: pageTitle,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('/home'),
+        ],
+      ),
     );
   }
 }

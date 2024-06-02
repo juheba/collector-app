@@ -33,14 +33,23 @@ class ItemDetailCubit extends Cubit<ItemDetailState> {
 
   Future<void> saveItem(ItemModel item) async {
     await databaseService.saveItem(item.id, item);
+    await loadItem(item.id);
   }
 
   Future<void> startEditing(ItemModel? item) async {
     emit(
       state.copyWith(
-        status: item != null ? ItemDetailStatus.loaded : ItemDetailStatus.newly,
+        status: ItemDetailStatus.newly,
         item: item,
         editItem: item ?? ItemModel.blank(),
+      ),
+    );
+  }
+
+  Future<void> cancelEditing() async {
+    emit(
+      state.copyWith(
+        status: ItemDetailStatus.loaded,
       ),
     );
   }
@@ -66,6 +75,13 @@ class ItemDetailCubit extends Cubit<ItemDetailState> {
         editItem: item,
       ),
     );
+  }
+
+  Future<void> delete() async {
+    final key = state.item?.key as String?;
+    if (key != null) {
+      await databaseService.deleteItem(key);
+    }
   }
 
   Future<void> submitForm() async {

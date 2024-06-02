@@ -1,5 +1,8 @@
-import 'package:collector/page/shared/collector_app_bar.dart';
-import 'package:collector/page/shared/user_profile_widget.dart';
+import 'package:collector/page/collections_page.dart';
+import 'package:collector/page/home_page.dart';
+import 'package:collector/page/items_page.dart';
+import 'package:collector/page/new_item_page.dart';
+import 'package:collector/page/user_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -16,12 +19,6 @@ class ScaffoldWithNavbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: navigationShell,
-      appBar: CollectorAppBar(
-        userPictureUrl: MockUser.pictureUrl,
-        userName: MockUser.name,
-        //userPictureUrl: _user?.pictureUrl,
-        //userName: _user?.name ?? '',
-      ),
       bottomNavigationBar: NavigationBar(
         labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         selectedIndex: navigationShell.currentIndex,
@@ -29,23 +26,23 @@ class ScaffoldWithNavbar extends StatelessWidget {
         destinations: const [
           NavigationDestination(
             icon: Icon(Icons.home_filled),
-            label: 'Home',
+            label: HomePageWidget.pageTitle,
           ),
           NavigationDestination(
             icon: Icon(Icons.grid_view_rounded),
-            label: 'Collections',
+            label: CollectionsPageWidget.pageTitle,
           ),
           NavigationDestination(
             icon: Icon(Icons.add_circle_outlined),
-            label: 'Add',
+            label: NewItemPageWidget.pageTitle,
           ),
           NavigationDestination(
             icon: Icon(Icons.view_list_rounded),
-            label: 'Items',
+            label: ItemsPageWidget.pageTitle,
           ),
           NavigationDestination(
             icon: Icon(Icons.account_circle),
-            label: 'Profile',
+            label: UserPageWidget.pageTitle,
           ),
         ],
       ),

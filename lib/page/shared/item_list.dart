@@ -1,4 +1,6 @@
 import 'package:collector/model/item_model.dart';
+import 'package:collector/page/item_detail_page.dart';
+import 'package:collector/page/items_page.dart';
 import 'package:collector/page/shared/item_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -29,8 +31,8 @@ class _ItemsListWidgetState extends State<ItemsListWidget> {
 
         return ItemListElementWidget(
           item: item,
-          onTap: () => GoRouter.of(context).goNamed(
-            'item-details',
+          onTap: () => context.goNamed(
+            ItemDetailPageWidget.routeName,
             pathParameters: {'id': item.id},
           ),
           isSelectionModeActive: widget.isSelectionModeActive,

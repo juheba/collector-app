@@ -18,7 +18,13 @@ class MockCollections {
 
 /*
 class CollectionModel {
-  const CollectionModel({required this.id, required this.title, this.color});
+  const CollectionModel({
+    required this.id,
+    required this.title,
+    this.color,
+    this.foregroundColor,
+  });
+
   final String id;
   final String title;
   final Color? color;
@@ -27,14 +33,30 @@ class CollectionModel {
 @HiveType(typeId: 1)
 enum CollectionVisibility {
   @HiveField(0)
-  public('PUBLIC', Icons.lock_open, Colors.blue),
-  @HiveField(1)
-  private('PRIVATE', Icons.lock, Colors.orange);
+  public(
+    name: 'PUBLIC',
+    icon: Icons.lock_open,
+    color: Colors.blue,
+  ),
 
-  const CollectionVisibility(this.name, this.icon, this.color);
+  @HiveField(1)
+  private(
+    name: 'PRIVATE',
+    icon: Icons.lock,
+    color: Colors.orange,
+  );
+
+  const CollectionVisibility({
+    required this.name,
+    required this.icon,
+    required this.color,
+    this.foregroundColor,
+  });
+
   final String name;
   final IconData icon;
   final Color color;
+  final Color? foregroundColor;
 }
 
 const defaultVisibility = CollectionVisibility.public;

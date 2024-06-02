@@ -18,6 +18,9 @@ final Shader linearGradient = const LinearGradient(
 class LoginPageWidget extends StatelessWidget {
   const LoginPageWidget({super.key});
 
+  static const routeName = 'login';
+  static const routePath = '/login';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +30,7 @@ class LoginPageWidget extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Image.asset('images/logo.png', height: 240, width: 240),
+              Image.asset('assets/images/logo.png', height: 240, width: 240),
               const SizedBox(
                 height: 32,
               ),
