@@ -3,6 +3,7 @@ import 'package:collector/model/collection_model.dart';
 import 'package:collector/page/callback_page.dart';
 import 'package:collector/page/collection_detail_page.dart';
 import 'package:collector/page/collections_page.dart';
+import 'package:collector/page/home_page.dart';
 import 'package:collector/page/item_detail_page.dart';
 import 'package:collector/page/items_page.dart';
 import 'package:collector/page/login_page.dart';
@@ -63,8 +64,7 @@ class CollectorGoRouter {
                 GoRoute(
                   name: 'home', // Optional, add name to your routes. Allows you navigate by name instead of path
                   path: '/home',
-                  builder: (context, state) => const Text('/home'),
-                  //builder: (context, state) => HomePageWidget(user: user, idToken: idToken),
+                  builder: (context, state) => const HomePageWidget(),
                 ),
               ],
             ),
