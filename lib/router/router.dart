@@ -33,6 +33,10 @@ class CollectorGoRouter {
       },
       routes: <RouteBase>[
         GoRoute(
+          path: '/callback',
+          builder: (context, state) => const CallbackPage(),
+        ),
+        GoRoute(
           path: '/login',
           redirect: (context, state) async {
             final isUserPresent = await AccessUserCredentials().isUserPresent();
@@ -43,10 +47,6 @@ class CollectorGoRouter {
             return null;
           },
           builder: (context, state) => const LoginPageWidget(),
-        ),
-        GoRoute(
-          path: '/callback',
-          builder: (context, state) => const CallbackPage(),
         ),
         StatefulShellRoute.indexedStack(
           builder: (context, state, navigationShell) {
@@ -118,7 +118,7 @@ class CollectorGoRouter {
                 GoRoute(
                   name: 'user',
                   path: '/user',
-                  builder: (context, state) => UserPageWidget(),
+                  builder: (context, state) => const UserPageWidget(),
                 ),
               ],
             ),

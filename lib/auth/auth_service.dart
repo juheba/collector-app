@@ -10,10 +10,6 @@ class AuthService {
   AuthService._internal() {
     auth0 = Auth0(dotenv.env['AUTH0_DOMAIN']!, dotenv.env['AUTH0_CLIENT_ID']!);
     auth0Web = Auth0Web(dotenv.env['AUTH0_DOMAIN']!, dotenv.env['AUTH0_CLIENT_ID']!);
-
-    /*if (kIsWeb) {
-      await auth0Web.onLoad().then(updateState);
-    }*/
   }
 
   static final AuthService _instance = AuthService._internal();
@@ -26,11 +22,11 @@ class AuthService {
     try {
       Credentials credentials;
       if (kIsWeb) {
-        return auth0Web.loginWithRedirect(redirectUrl: 'http://localhost:3000/callback');
+        return auth0Web.loginWithRedirect(redirectUrl: 'http://localhost:3000/#/callback');
       } else {
         credentials = await auth0.webAuthentication(scheme: dotenv.env['AUTH0_CUSTOM_SCHEME']).login();
+        await updateState(credentials);
       }
-      await updateState(credentials);
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -44,6 +40,7 @@ class AuthService {
       } else {
         await auth0.webAuthentication(scheme: dotenv.env['AUTH0_CUSTOM_SCHEME']).logout();
       }
+      await updateState(null);
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -51,7 +48,11 @@ class AuthService {
 
   Future<void> loadWebCredentials() async {
     if (kIsWeb) {
-      await auth0Web.onLoad().then(updateState);
+      try {
+        await auth0Web.onLoad().then(updateState);
+      } catch (e) {
+        debugPrint('Failed to load web credentials: $e');
+      }
     }
   }
 
@@ -60,7 +61,6 @@ class AuthService {
       // Has credentials -> write them to secret store and set user state.
       isAuthorized = true;
       await AccessUserCredentials().writeUserCredentials(credentials);
-      print('login credentials idToken: ${credentials.idToken}');
       return;
     }
     isAuthorized = await AccessUserCredentials().isUserPresent();

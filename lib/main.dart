@@ -1,4 +1,5 @@
 import 'package:collector/app.dart';
+import 'package:collector/auth/auth_service.dart';
 import 'package:collector/data/hive/hive_database_service.dart';
 import 'package:flutter/foundation.dart'; // Import foundation to use kIsWeb
 import 'package:flutter/material.dart';
@@ -20,6 +21,8 @@ void main() async {
     final directory = await getApplicationDocumentsDirectory();
     Hive.init(directory.path);
   }
+
+  await AuthService().loadWebCredentials(); // Load web credentials
 
   runApp(const App());
 }

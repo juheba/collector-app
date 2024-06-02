@@ -18,7 +18,6 @@ class SecureStorage {
   Future<void> write(String key, String value) async => _storage.write(key: key, value: value);
 
   Future<String?> read(String key) async {
-    print('contains: ${await _storage.containsKey(key: key)}');
     return _storage.read(key: key);
   }
 
