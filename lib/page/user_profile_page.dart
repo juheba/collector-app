@@ -1,57 +1,68 @@
 // '/profile' wenn logged in
 
-import 'package:auth0_flutter/auth0_flutter.dart';
+import 'package:collector/auth/auth_service.dart';
+import 'package:collector/middleware/cubit/user_profile_cubit_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserPageWidget extends StatelessWidget {
   const UserPageWidget({
-    required this.user,
-    required this.idToken,
     super.key,
   });
-  final UserProfile user;
-  final String idToken;
 
   @override
   Widget build(BuildContext context) {
-    final pictureUrl = user.pictureUrl;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (pictureUrl != null)
-          Center(
-            child: Container(
-              margin: const EdgeInsets.only(bottom: 12),
-              child: CircleAvatar(
-                radius: 56,
-                child: ClipOval(
-                  child: Image.network(pictureUrl.toString()),
+    return BlocProvider(
+      create: (context) => UserProfileCubit()..loadUser(),
+      child: BlocBuilder<UserProfileCubit, UserProfileState>(
+        builder: (context, state) {
+          final pictureUrl = state.user?.pictureUrl;
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (pictureUrl != null)
+                Center(
+                  child: Container(
+                    margin: const EdgeInsets.only(bottom: 12),
+                    child: CircleAvatar(
+                      radius: 56,
+                      child: ClipOval(
+                        child: Image.network(pictureUrl.toString()),
+                      ),
+                    ),
+                  ),
+                ),
+              Card(
+                child: Column(
+                  children: [
+                    UserEntryWidget(propertyName: 'Id', propertyValue: state.user?.sub),
+                    UserEntryWidget(propertyName: 'Name', propertyValue: state.user?.name),
+                    UserEntryWidget(propertyName: 'Email', propertyValue: state.user?.email),
+                  ],
                 ),
               ),
-            ),
-          ),
-        Card(
-          child: Column(
-            children: [
-              UserEntryWidget(propertyName: 'Id', propertyValue: user.sub),
-              UserEntryWidget(propertyName: 'Name', propertyValue: user.name),
-              UserEntryWidget(propertyName: 'Email', propertyValue: user.email),
-            ],
-          ),
-        ),
-        Card(
-          child: Column(
-            children: [
-              TextButton(
-                onPressed: () => copyToken(context),
-                child: const Text('Copy Token'),
+              Card(
+                child: Column(
+                  children: [
+                    TextButton(
+                      onPressed: () => copyToken(context),
+                      child: const Text('Copy Token'),
+                    ),
+                    SelectableText(state.idToken ?? ''),
+                  ],
+                ),
               ),
-              SelectableText(idToken),
+              Align(
+                child: TextButton(
+                  onPressed: () => AuthService().logout(),
+                  child: const Text('Logout'),
+                ),
+              ),
             ],
-          ),
-        ),
-      ],
+          );
+        },
+      ),
     );
   }
 
@@ -61,7 +72,7 @@ class UserPageWidget extends StatelessWidget {
     );
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    Clipboard.setData(ClipboardData(text: idToken));
+    Clipboard.setData(ClipboardData(text: context.read<UserProfileCubit>().state.idToken ?? ''));
   }
 }
 

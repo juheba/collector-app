@@ -1,5 +1,6 @@
 import 'package:collector/data/access_user_credentials.dart';
 import 'package:collector/model/collection_model.dart';
+import 'package:collector/page/callback_page.dart';
 import 'package:collector/page/collection_detail_page.dart';
 import 'package:collector/page/collections_page.dart';
 import 'package:collector/page/item_detail_page.dart';
@@ -7,6 +8,7 @@ import 'package:collector/page/items_page.dart';
 import 'package:collector/page/login_page.dart';
 import 'package:collector/page/new_item_page.dart';
 import 'package:collector/page/shared/scaffold_nav_bar.dart';
+import 'package:collector/page/user_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,7 +19,7 @@ class CollectorGoRouter {
   CollectorGoRouter._internal() {
     _router = GoRouter(
       navigatorKey: _rootNavigatorKey,
-      initialLocation: '/',
+      initialLocation: '/login',
       redirect: (context, state) async {
         final isUserPresent = await AccessUserCredentials().isUserPresent();
         final isLoginPage = state.matchedLocation == '/login';
@@ -32,21 +34,19 @@ class CollectorGoRouter {
       routes: <RouteBase>[
         GoRoute(
           path: '/login',
+          redirect: (context, state) async {
+            final isUserPresent = await AccessUserCredentials().isUserPresent();
+
+            if (isUserPresent) {
+              return '/home';
+            }
+            return null;
+          },
           builder: (context, state) => const LoginPageWidget(),
         ),
         GoRoute(
           path: '/callback',
-          redirect: (context, state) async {
-            final uri = Uri.base;
-            final queryCode = uri.queryParameters['code'];
-            final queryState = uri.queryParameters['state'];
-
-            if (queryCode != null && queryState != null) {
-              return '/home';
-            } else {
-              return '/login';
-            }
-          },
+          builder: (context, state) => const CallbackPage(),
         ),
         StatefulShellRoute.indexedStack(
           builder: (context, state, navigationShell) {
@@ -118,8 +118,7 @@ class CollectorGoRouter {
                 GoRoute(
                   name: 'user',
                   path: '/user',
-                  builder: (context, state) => const Text('/user'),
-                  //builder: (context, state) => UserPageWidget(),
+                  builder: (context, state) => UserPageWidget(),
                 ),
               ],
             ),
