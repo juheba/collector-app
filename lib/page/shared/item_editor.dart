@@ -1,4 +1,4 @@
-import 'package:collector/middleware/cubit/item_detail_cubit.dart';
+import 'package:collector/middleware/cubit/item/item_detail_cubit.dart';
 import 'package:collector/model/item_model.dart';
 import 'package:collector/page/shared/checkbox_widget.dart';
 import 'package:collector/page/shared/item_ownership_status_segmented_button.dart';
