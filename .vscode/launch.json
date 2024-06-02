@@ -8,8 +8,17 @@
       "name": "[Chrome] collector",
       "request": "launch",
       "type": "dart",
-      "args": ["--web-port=3000", "--web-renderer=html"],
+      "args": [
+        "--web-port=3000",
+        "--web-renderer=html"
+      ],
       "deviceId": "chrome",
+    },
+    {
+      "name": "[Pixel 👾] collector",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "Pixel 7a",
     },
     {
       "name": "[Samsung] collector",
