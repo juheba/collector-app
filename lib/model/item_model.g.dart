@@ -17,13 +17,15 @@ class ItemModelAdapter extends TypeAdapter<ItemModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ItemModel(
-      id: fields[0] as String,
       title: fields[1] as String,
       type: fields[3] as ItemType,
+      id: fields[0] as String?,
       description: fields[2] as String?,
-      isLendable: fields[4] as bool?,
-      ownershipStatus: fields[5] as ItemOwnershipStatus?,
-      status: fields[6] as ItemStatus?,
+      isLendable: fields[4] == null ? false : fields[4] as bool?,
+      ownershipStatus: fields[5] == null
+          ? ItemOwnershipStatus.wishlist
+          : fields[5] as ItemOwnershipStatus?,
+      status: fields[6] == null ? ItemStatus.todo : fields[6] as ItemStatus?,
     );
   }
 
@@ -52,7 +54,10 @@ class ItemModelAdapter extends TypeAdapter<ItemModel> {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || other is ItemModelAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
+      identical(this, other) ||
+      other is ItemModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }
 
 class ItemTypeAdapter extends TypeAdapter<ItemType> {
@@ -78,10 +83,13 @@ class ItemTypeAdapter extends TypeAdapter<ItemType> {
     switch (obj) {
       case ItemType.game:
         writer.writeByte(0);
+        break;
       case ItemType.book:
         writer.writeByte(1);
+        break;
       case ItemType.movie:
         writer.writeByte(2);
+        break;
     }
   }
 
@@ -90,7 +98,10 @@ class ItemTypeAdapter extends TypeAdapter<ItemType> {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || other is ItemTypeAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
+      identical(this, other) ||
+      other is ItemTypeAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }
 
 class ItemOwnershipStatusAdapter extends TypeAdapter<ItemOwnershipStatus> {
@@ -116,10 +127,13 @@ class ItemOwnershipStatusAdapter extends TypeAdapter<ItemOwnershipStatus> {
     switch (obj) {
       case ItemOwnershipStatus.wishlist:
         writer.writeByte(0);
+        break;
       case ItemOwnershipStatus.owner:
         writer.writeByte(1);
+        break;
       case ItemOwnershipStatus.borrower:
         writer.writeByte(2);
+        break;
     }
   }
 
@@ -129,7 +143,9 @@ class ItemOwnershipStatusAdapter extends TypeAdapter<ItemOwnershipStatus> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ItemOwnershipStatusAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
+      other is ItemOwnershipStatusAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }
 
 class ItemStatusAdapter extends TypeAdapter<ItemStatus> {
@@ -155,10 +171,13 @@ class ItemStatusAdapter extends TypeAdapter<ItemStatus> {
     switch (obj) {
       case ItemStatus.todo:
         writer.writeByte(0);
+        break;
       case ItemStatus.processing:
         writer.writeByte(1);
+        break;
       case ItemStatus.done:
         writer.writeByte(2);
+        break;
     }
   }
 
@@ -168,5 +187,7 @@ class ItemStatusAdapter extends TypeAdapter<ItemStatus> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ItemStatusAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
+      other is ItemStatusAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }

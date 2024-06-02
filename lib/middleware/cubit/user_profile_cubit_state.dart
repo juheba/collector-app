@@ -1,4 +1,4 @@
-part of 'user_profile_cubit_cubit.dart';
+part of 'user_profile_cubit.dart';
 
 class UserProfileState extends Equatable {
   const UserProfileState({this.user, this.idToken});

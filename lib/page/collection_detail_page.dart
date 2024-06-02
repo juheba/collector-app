@@ -14,7 +14,7 @@ class CollectionDetailPageWidget extends StatelessWidget {
     return Column(
       children: [
         Card(
-          color: collection.color,
+          //color: collection.color,
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: Row(
@@ -23,7 +23,7 @@ class CollectionDetailPageWidget extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      collection.title,
+                      collection.name,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,

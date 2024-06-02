@@ -50,17 +50,21 @@ class CollectionGridElementWidget extends StatelessWidget {
       },
       child: Container(
         padding: const EdgeInsets.all(8),
-        color: collection.color ?? Colors.teal,
+        color: Theme.of(context).colorScheme.surface,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              collection.title,
+              collection.name,
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
+            ),
+            Icon(
+              collection.visibility.icon,
+              color: collection.visibility.color,
             ),
           ],
         ),

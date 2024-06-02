@@ -1,5 +1,5 @@
 import 'package:collector/auth/auth_service.dart';
-import 'package:collector/middleware/cubit/user_profile_cubit_cubit.dart';
+import 'package:collector/middleware/cubit/user_profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

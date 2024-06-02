@@ -143,6 +143,7 @@ class MockWebAuthentication extends _i1.Mock implements _i4.WebAuthentication {
     String? redirectUrl,
     String? organizationId,
     String? invitationUrl,
+    bool? useHTTPS = false,
     bool? useEphemeralSession = false,
     Map<String, String>? parameters = const {},
     _i5.IdTokenValidationConfig? idTokenValidationConfig =
@@ -159,6 +160,7 @@ class MockWebAuthentication extends _i1.Mock implements _i4.WebAuthentication {
             #redirectUrl: redirectUrl,
             #organizationId: organizationId,
             #invitationUrl: invitationUrl,
+            #useHTTPS: useHTTPS,
             #useEphemeralSession: useEphemeralSession,
             #parameters: parameters,
             #idTokenValidationConfig: idTokenValidationConfig,
@@ -176,6 +178,7 @@ class MockWebAuthentication extends _i1.Mock implements _i4.WebAuthentication {
               #redirectUrl: redirectUrl,
               #organizationId: organizationId,
               #invitationUrl: invitationUrl,
+              #useHTTPS: useHTTPS,
               #useEphemeralSession: useEphemeralSession,
               #parameters: parameters,
               #idTokenValidationConfig: idTokenValidationConfig,
@@ -186,11 +189,18 @@ class MockWebAuthentication extends _i1.Mock implements _i4.WebAuthentication {
       ) as _i7.Future<_i5.Credentials>);
 
   @override
-  _i7.Future<void> logout({String? returnTo}) => (super.noSuchMethod(
+  _i7.Future<void> logout({
+    String? returnTo,
+    bool? useHTTPS = false,
+  }) =>
+      (super.noSuchMethod(
         Invocation.method(
           #logout,
           [],
-          {#returnTo: returnTo},
+          {
+            #returnTo: returnTo,
+            #useHTTPS: useHTTPS,
+          },
         ),
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),
