@@ -48,9 +48,7 @@ class CollectionGridElementWidget extends StatelessWidget {
           pathParameters: {'id': collection.id},
         );
       },
-      child: Container(
-        padding: const EdgeInsets.all(8),
-        color: Theme.of(context).colorScheme.surface,
+      child: Card(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

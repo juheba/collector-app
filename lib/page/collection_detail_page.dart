@@ -16,7 +16,7 @@ class CollectionDetailPageWidget extends StatelessWidget {
         Card(
           //color: collection.color,
           child: Padding(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(16),
             child: Row(
               children: [
                 const Spacer(),
