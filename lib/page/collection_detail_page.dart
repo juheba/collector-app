@@ -6,16 +6,19 @@ import 'package:go_router/go_router.dart';
 
 class CollectionDetailPageWidget extends StatelessWidget {
   const CollectionDetailPageWidget({
-    required this.collection,
+    required this.collectionId,
     super.key,
   });
-  final CollectionModel collection;
+
+  final String collectionId;
 
   static const routeName = 'collectionDetails';
   static const routePath = ':id/items';
 
   @override
   Widget build(BuildContext context) {
+    final collection = MockCollections.getCollections().firstWhere((collection) => collection.id == collectionId);
+
     return ScaffoldPage(
       title: collection.name,
       appBarBackgroundColor: collection.visibility.color,

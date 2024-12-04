@@ -53,13 +53,10 @@ class RestApiService {
       switch (e.response?.statusCode) {
         case 400:
           errorMessage = 'Bad request';
-          break;
         case 401:
           errorMessage = 'Unauthorized';
-          break;
         case 404:
           errorMessage = 'Not found';
-          break;
         default:
           errorMessage = 'Something went wrong';
       }

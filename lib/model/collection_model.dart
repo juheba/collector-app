@@ -73,6 +73,18 @@ class CollectionModel extends HiveObject {
     this.visibility = visibility ?? defaultVisibility;
   }
 
+  factory CollectionModel.fromJson(Map<String, dynamic> json) {
+    return CollectionModel(
+      id: json['collectionId'] as String,
+      name: json['name'] as String,
+      description: json['description'] as String,
+      visibility: CollectionVisibility.values.firstWhere(
+        (v) => v.name == (json['visibility'] as String).toUpperCase(),
+        orElse: () => defaultVisibility,
+      ),
+    );
+  }
+
   factory CollectionModel.blank() => CollectionModel(name: '');
 
   @HiveField(0)

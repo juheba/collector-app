@@ -88,14 +88,14 @@ class _Loaded extends StatelessWidget {
                         Text('Process: ${item.status.name}'),
                         if (item.isLendable)
                           Text(
-                            'Kann ausgelendet werden',
+                            'Kann ausgeliehen werden',
                             style: Theme.of(context).textTheme.labelSmall?.copyWith(
                                   color: Colors.green,
                                 ),
                           )
                         else
                           Text(
-                            'Kann nicht ausgelendet werden',
+                            'Kann nicht ausgeliehen werden',
                             style: Theme.of(context).textTheme.labelSmall?.copyWith(
                                   color: Colors.grey,
                                 ),

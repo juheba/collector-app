@@ -16,7 +16,7 @@ class CollectionListCubit extends Cubit<CollectionState> {
 
   Future<void> loadCollections() async {
     try {
-      final test = await CollectorApiService().getAllCollections();
+      final onlinecollections = await CollectorApiService().getAllCollections();
       final collections = await databaseService.loadAllCollections();
       emit(
         state.copyWith(

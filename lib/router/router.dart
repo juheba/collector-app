@@ -79,7 +79,7 @@ class CollectorGoRouter {
                       name: CollectionDetailPageWidget.routeName,
                       path: CollectionDetailPageWidget.routePath,
                       builder: (context, state) => CollectionDetailPageWidget(
-                        collection: MockCollections.getCollections()[int.parse(state.pathParameters['id']!)],
+                        collectionId: state.pathParameters['id']!,
                       ),
                     ),
                   ],
