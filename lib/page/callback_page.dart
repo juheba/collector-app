@@ -36,7 +36,7 @@ class _CallbackPageState extends State<CallbackPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: CircularProgressIndicator(),
       ),
