@@ -15,7 +15,7 @@ class ItemDetailCubit extends Cubit<ItemDetailState> {
 
   Future<void> loadItem(String id) async {
     try {
-      final item = (await ItemApiService().getAllItems()).firstWhere((item) => item.id == id);
+      final item = await ItemApiService().getItemById(id);
       //final item = await databaseService.loadItem(id);
       emit(
         state.copyWith(

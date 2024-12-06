@@ -20,6 +20,24 @@ class ItemApiService {
     return getItems();
   }
 
+  Future<ItemModel?> getItemById(String itemId) async {
+    try {
+      // Call the API
+      final itemResponse = (await _itemApi.getItem(itemId: itemId)).data;
+
+      if (itemResponse == null) {
+        return null;
+      }
+
+      return ItemMapperImpl().mapExernalToItemModel(
+        itemResponse.item,
+      );
+    } catch (e) {
+      // TODO: ErrorHandling einbauen!
+      throw Exception('Failed to fetch collections: $e');
+    }
+  }
+
   Future<List<ItemModel>> getItems({num? limit, String? nextKey}) async {
     try {
       // Call the API

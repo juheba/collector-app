@@ -15,11 +15,15 @@ class CollectionDetailCubit extends Cubit<CollectionDetailState> {
 
   Future<void> loadCollection(String id) async {
     try {
-      final collection =
-          (await CollectionApiService().getAllCollections()).firstWhere((collection) => collection.id == id);
+      final collection = await CollectionApiService().getCollectionById(id);
       //final collections_db = await databaseService.loadCollection(id);
 
-      final collectionItems = (await CollectionApiService().getAllItemsOfCollection(collection.id)).toList();
+      List<ItemModel> collectionItems;
+      if (collection == null) {
+        collectionItems = [];
+      } else {
+        collectionItems = (await CollectionApiService().getAllItemsOfCollection(collection.id)).toList();
+      }
       emit(
         state.copyWith(
           status: CollectionDetailStatus.loaded,

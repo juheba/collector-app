@@ -37,6 +37,24 @@ class CollectionApiService {
     }
   }
 
+  Future<CollectionModel?> getCollectionById(String collectionId) async {
+    try {
+      // Call the API
+      final collectionResponse = (await _collectionApi.getCollection(collectionId: collectionId)).data;
+
+      if (collectionResponse == null) {
+        return null;
+      }
+
+      return CollectionMapperImpl().mapExernalToCollectionModel(
+        collectionResponse.collection,
+      );
+    } catch (e) {
+      // TODO: ErrorHandling einbauen!
+      throw Exception('Failed to fetch collection: $e');
+    }
+  }
+
   Future<List<ItemModel>> getAllItemsOfCollection(String collectionId) async {
     try {
       // Call the API
