@@ -14,9 +14,13 @@ class CollectionApiService {
   late final CollectionApi _collectionApi;
 
   Future<List<CollectionModel>> getAllCollections() async {
+    return getCollections();
+  }
+
+  Future<List<CollectionModel>> getCollections({num? limit, String? nextKey}) async {
     try {
       // Call the API
-      final collectionsResponse = (await _collectionApi.getCollections()).data;
+      final collectionsResponse = (await _collectionApi.getCollections(limit: limit, nextKey: nextKey)).data;
 
       if (collectionsResponse == null) {
         return [];

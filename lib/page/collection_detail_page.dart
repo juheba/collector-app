@@ -1,7 +1,10 @@
+import 'package:collector/data/persistence/database_service.dart';
+import 'package:collector/middleware/cubit/collection/collection_detail_cubit.dart';
 import 'package:collector/model/collection_model.dart';
 import 'package:collector/page/scaffold_page.dart';
 import 'package:collector/page/shared/item_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class CollectionDetailPageWidget extends StatelessWidget {
@@ -17,16 +20,29 @@ class CollectionDetailPageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final collection = MockCollections.getCollections().firstWhere((collection) => collection.id == collectionId);
-
-    return ScaffoldPage(
-      title: collection.name,
-      appBarBackgroundColor: collection.visibility.color,
-      appBarForegroundColor: collection.visibility.foregroundColor,
-      onNavigateBack: () => context.pop(),
-      body: const ItemsListWidget(
-        items: [],
-        isSelectionModeActive: false,
+    return BlocProvider(
+      create: (context) => CollectionDetailCubit(DatabaseService.instance)..loadCollection(collectionId),
+      child: BlocBuilder<CollectionDetailCubit, CollectionDetailState>(
+        builder: (context, state) {
+          if (state.collection == null) {
+            return ScaffoldPage(
+              title: '',
+              onNavigateBack: () => context.pop(),
+              body: const CircularProgressIndicator(),
+            );
+          } else {
+            return ScaffoldPage(
+              title: state.collection!.name,
+              appBarBackgroundColor: state.collection!.visibility.color,
+              appBarForegroundColor: state.collection!.visibility.foregroundColor,
+              onNavigateBack: () => context.pop(),
+              body: const ItemsListWidget(
+                items: [],
+                isSelectionModeActive: false,
+              ),
+            );
+          }
+        },
       ),
     );
   }

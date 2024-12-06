@@ -1,3 +1,4 @@
+import 'package:collector/data/api/collection/collection_api_service.dart';
 import 'package:collector/data/persistence/database_service.dart';
 import 'package:collector/model/collection_model.dart';
 import 'package:equatable/equatable.dart';
@@ -12,7 +13,9 @@ class CollectionDetailCubit extends Cubit<CollectionDetailState> {
 
   Future<void> loadCollection(String id) async {
     try {
-      final collection = await databaseService.loadCollection(id);
+      final collection =
+          (await CollectionApiService().getAllCollections()).firstWhere((collection) => collection.id == id);
+      //final collections_db = await databaseService.loadCollection(id);
       emit(
         state.copyWith(
           status: CollectionDetailStatus.loaded,
