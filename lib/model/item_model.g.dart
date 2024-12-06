@@ -18,7 +18,7 @@ class ItemModelAdapter extends TypeAdapter<ItemModel> {
     };
     return ItemModel(
       title: fields[1] as String,
-      type: fields[3] as ItemType,
+      type: fields[3] as ItemType?,
       id: fields[0] as String?,
       description: fields[2] as String?,
       isLendable: fields[4] == null ? false : fields[4] as bool?,
@@ -73,6 +73,8 @@ class ItemTypeAdapter extends TypeAdapter<ItemType> {
         return ItemType.book;
       case 2:
         return ItemType.movie;
+      case 3:
+        return ItemType.undefined;
       default:
         return ItemType.game;
     }
@@ -89,6 +91,9 @@ class ItemTypeAdapter extends TypeAdapter<ItemType> {
         break;
       case ItemType.movie:
         writer.writeByte(2);
+        break;
+      case ItemType.undefined:
+        writer.writeByte(3);
         break;
     }
   }

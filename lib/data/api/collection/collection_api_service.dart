@@ -1,7 +1,9 @@
 import 'package:collector/data/api/aws_collector_service.dart';
 import 'package:collector/data/api/collection/collection_mapper.dart';
+import 'package:collector/data/api/item/item_mapper.dart';
 import 'package:collector/generated/openapi/collector-api/api/collection_api.dart';
 import 'package:collector/model/collection_model.dart';
+import 'package:collector/model/item_model.dart';
 
 class CollectionApiService {
   factory CollectionApiService() => _instance;
@@ -32,6 +34,24 @@ class CollectionApiService {
     } catch (e) {
       // TODO: ErrorHandling einbauen!
       throw Exception('Failed to fetch collections: $e');
+    }
+  }
+
+  Future<List<ItemModel>> getAllItemsOfCollection(String collectionId) async {
+    try {
+      // Call the API
+      final collectionItemsResponse = (await _collectionApi.getCollectionItems(collectionId: collectionId)).data;
+
+      if (collectionItemsResponse == null) {
+        return [];
+      }
+
+      return ItemMapperImpl().mapExernalToListItemModel(
+        collectionItemsResponse.items.toList(),
+      );
+    } catch (e) {
+      // TODO: ErrorHandling einbauen!
+      throw Exception('Failed to fetch items of collection: $e');
     }
   }
 }

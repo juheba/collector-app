@@ -1,6 +1,8 @@
 import 'package:collector/data/api/collection/collection_api_service.dart';
 import 'package:collector/data/persistence/database_service.dart';
+import 'package:collector/generated/openapi/collector-api/model/collection.dart';
 import 'package:collector/model/collection_model.dart';
+import 'package:collector/model/item_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,10 +18,13 @@ class CollectionDetailCubit extends Cubit<CollectionDetailState> {
       final collection =
           (await CollectionApiService().getAllCollections()).firstWhere((collection) => collection.id == id);
       //final collections_db = await databaseService.loadCollection(id);
+
+      final collectionItems = (await CollectionApiService().getAllItemsOfCollection(collection.id)).toList();
       emit(
         state.copyWith(
           status: CollectionDetailStatus.loaded,
           collection: collection,
+          items: collectionItems,
           editCollection: collection,
         ),
       );

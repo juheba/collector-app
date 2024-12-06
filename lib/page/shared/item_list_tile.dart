@@ -21,9 +21,9 @@ class ItemListElementWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final icon = Icon(
-      item.type.icon,
+      item.type?.icon,
       size: 50,
-      color: item.type.color,
+      color: item.type?.color,
     );
 
     return Card(
@@ -59,7 +59,7 @@ class ItemListElementWidget extends StatelessWidget {
               )
             : null,
         trailing: Text(
-          item.type.name,
+          item.type?.name ?? '',
           style: const TextStyle(color: Colors.grey),
         ),
       ),

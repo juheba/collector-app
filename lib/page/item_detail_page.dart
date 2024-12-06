@@ -73,9 +73,9 @@ class _Loaded extends StatelessWidget {
                 child: Row(
                   children: [
                     Icon(
-                      item.type.icon,
+                      item.type?.icon,
                       size: 50,
-                      color: item.type.color,
+                      color: item.type?.color,
                     ),
                     const SizedBox(
                       width: 12,

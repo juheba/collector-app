@@ -36,8 +36,8 @@ class CollectionDetailPageWidget extends StatelessWidget {
               appBarBackgroundColor: state.collection!.visibility.color,
               appBarForegroundColor: state.collection!.visibility.foregroundColor,
               onNavigateBack: () => context.pop(),
-              body: const ItemsListWidget(
-                items: [],
+              body: ItemsListWidget(
+                items: state.items ?? [],
                 isSelectionModeActive: false,
               ),
             );

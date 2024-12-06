@@ -11,7 +11,9 @@ enum ItemType {
   @HiveField(1)
   book('Book', Icons.book, Colors.deepOrange),
   @HiveField(2)
-  movie('Movie', Icons.movie, Colors.blueGrey);
+  movie('Movie', Icons.movie, Color.fromARGB(255, 212, 209, 52)),
+  @HiveField(3)
+  undefined('Undefined', Icons.help_center, Color.fromARGB(255, 75, 86, 87));
 
   const ItemType(this.name, this.icon, this.color);
 
@@ -61,7 +63,7 @@ const defaultIsLendable = false;
 class ItemModel extends HiveObject {
   ItemModel({
     required this.title,
-    required this.type,
+    this.type,
     String? id,
     this.description,
     bool? isLendable,
@@ -74,7 +76,7 @@ class ItemModel extends HiveObject {
     this.status = status ?? defaultItemStatus;
   }
 
-  factory ItemModel.blank() => ItemModel(title: '', type: ItemType.book);
+  factory ItemModel.blank() => ItemModel(title: '', type: ItemType.undefined);
 
   @HiveField(0)
   late String id;
@@ -83,7 +85,7 @@ class ItemModel extends HiveObject {
   @HiveField(2)
   late String? description;
   @HiveField(3)
-  late ItemType type;
+  late ItemType? type;
   @HiveField(4, defaultValue: defaultIsLendable)
   late bool isLendable;
   @HiveField(5, defaultValue: defaultItemOwnershipStatus)
