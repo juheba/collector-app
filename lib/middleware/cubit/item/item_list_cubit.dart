@@ -1,3 +1,4 @@
+import 'package:collector/data/api/item/item_api_service.dart';
 import 'package:collector/data/persistence/database_service.dart';
 import 'package:collector/model/item_model.dart';
 import 'package:equatable/equatable.dart';
@@ -15,13 +16,12 @@ class ItemListCubit extends Cubit<ItemState> {
 
   Future<void> loadItems() async {
     try {
-      // TODO: hier item api aufrufen etc pp.
-      //final test = await OLDCollectorApiService().getAllItems();
-      final items = await databaseService.loadAllItems();
+      final items = await ItemApiService().getAllItems();
+      //final items = await databaseService.loadAllItems().toList();
       emit(
         state.copyWith(
           status: ItemListStatus.loaded,
-          items: items.values.toList(),
+          items: items,
         ),
       );
     } catch (e) {
