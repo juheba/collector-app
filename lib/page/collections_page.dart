@@ -1,8 +1,7 @@
 // '/' wenn not logged in
 
-import 'package:collector/data/database_service.dart';
+import 'package:collector/data/persistence/database_service.dart';
 import 'package:collector/middleware/cubit/collection/collection_list_cubit.dart';
-import 'package:collector/model/collection_model.dart';
 import 'package:collector/page/scaffold_page.dart';
 import 'package:collector/page/shared/collection_widget.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-import 'package:collector/data/database_service.dart';
+import 'package:collector/data/persistence/database_service.dart';
 import 'package:collector/model/item_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

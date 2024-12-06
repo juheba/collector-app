@@ -1,4 +1,4 @@
-import 'package:collector/data/database_service.dart';
+import 'package:collector/data/persistence/database_service.dart';
 import 'package:collector/middleware/cubit/item/item_detail_cubit.dart';
 import 'package:collector/page/scaffold_page.dart';
 

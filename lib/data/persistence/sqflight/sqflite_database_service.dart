@@ -1,4 +1,4 @@
-import 'package:collector/data/database_service.dart';
+import 'package:collector/data/persistence/database_service.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:sqflite/sqflite.dart';
 

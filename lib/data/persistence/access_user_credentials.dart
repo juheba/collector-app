@@ -1,5 +1,5 @@
 import 'package:auth0_flutter/auth0_flutter.dart';
-import 'package:collector/data/secure_storage.dart';
+import 'package:collector/data/persistence/secure_storage.dart';
 
 const userCredentialsKeyPrefix = 'user_credentials_';
 const userCredentialsUserProfileKeyPrefix = '${userCredentialsKeyPrefix}userprofile_';

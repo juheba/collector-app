@@ -1,5 +1,4 @@
-import 'package:collector/data/access_user_credentials.dart';
-import 'package:collector/model/collection_model.dart';
+import 'package:collector/data/persistence/access_user_credentials.dart';
 import 'package:collector/page/callback_page.dart';
 import 'package:collector/page/collection_detail_page.dart';
 import 'package:collector/page/collections_page.dart';

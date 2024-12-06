@@ -1,5 +1,5 @@
 import 'package:auth0_flutter/auth0_flutter.dart';
-import 'package:collector/data/access_user_credentials.dart';
+import 'package:collector/data/persistence/access_user_credentials.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
