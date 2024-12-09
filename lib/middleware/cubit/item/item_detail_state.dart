@@ -3,8 +3,13 @@ part of 'item_detail_cubit.dart';
 enum ItemDetailStatus { initial, loaded, newly, edited, failure }
 
 class ItemDetailState extends Equatable {
-  const ItemDetailState(
-      {this.status = ItemDetailStatus.initial, this.item, this.collections, this.editItem, this.errorMessage});
+  const ItemDetailState({
+    this.status = ItemDetailStatus.initial,
+    this.item,
+    this.collections,
+    this.editItem,
+    this.errorMessage,
+  });
 
   final ItemDetailStatus status;
   final ItemModel? item;
@@ -12,12 +17,13 @@ class ItemDetailState extends Equatable {
   final String? errorMessage;
   final ItemModel? editItem;
 
-  ItemDetailState copyWith(
-          {ItemDetailStatus? status,
-          ItemModel? item,
-          List<CollectionModel>? collections,
-          String? errorMessage,
-          ItemModel? editItem}) =>
+  ItemDetailState copyWith({
+    ItemDetailStatus? status,
+    ItemModel? item,
+    List<CollectionModel>? collections,
+    String? errorMessage,
+    ItemModel? editItem,
+  }) =>
       ItemDetailState(
         status: status ?? this.status,
         item: item ?? this.item,

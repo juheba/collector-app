@@ -25,9 +25,13 @@ class _CallbackPageState extends State<CallbackPage> {
       try {
         await AuthService().auth0Web.onLoad();
         await AuthService().loadWebCredentials();
-        context.go('/home');
+        if (context.mounted) {
+          context.go('/home');
+        }
       } catch (e) {
-        context.go('/login');
+        if (context.mounted) {
+          context.go('/login');
+        }
       }
     } else {
       context.go('/login');

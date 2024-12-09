@@ -70,7 +70,8 @@ class ItemModel extends HiveObject {
     ItemOwnershipStatus? ownershipStatus,
     ItemStatus? status,
   }) {
-    this.id = id == null || id.isEmpty ? const Uuid().v4() : id;
+//    this.id = id == null || id.isEmpty ? const Uuid().v4() : id;
+    this.id = id == null || id.isEmpty ? '' : id;
     this.isLendable = isLendable ?? defaultIsLendable;
     this.ownershipStatus = ownershipStatus ?? defaultItemOwnershipStatus;
     this.status = status ?? defaultItemStatus;

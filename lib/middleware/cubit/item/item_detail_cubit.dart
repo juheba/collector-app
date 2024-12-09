@@ -36,8 +36,33 @@ class ItemDetailCubit extends Cubit<ItemDetailState> {
   }
 
   Future<void> saveItem(ItemModel item) async {
-    await databaseService.saveItem(item.id, item);
-    await loadItem(item.id);
+    //await databaseService.saveItem(item.id, item);
+    //await loadItem(item.id);
+
+    try {
+      final ItemModel updatedItem;
+      if (item.id.isEmpty) {
+        updatedItem = await ItemApiService().createItem(item);
+      } else {
+        updatedItem = await ItemApiService().updateItem(item);
+      }
+
+      emit(
+        state.copyWith(
+          status: ItemDetailStatus.newly,
+          item: updatedItem,
+          editItem: updatedItem,
+        ),
+      );
+    } catch (e) {
+      // Handle errors or emit error state
+      emit(
+        state.copyWith(
+          status: ItemDetailStatus.failure,
+          errorMessage: e.toString(),
+        ),
+      );
+    }
   }
 
   Future<void> startEditing(ItemModel? item) async {

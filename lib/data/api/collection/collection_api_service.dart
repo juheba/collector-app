@@ -32,7 +32,7 @@ class CollectionApiService {
         collectionsResponse.collections.toList(),
       );
     } catch (e) {
-      // TODO: ErrorHandling einbauen!
+      // TODO(me): ErrorHandling einbauen!
       throw Exception('Failed to fetch collections: $e');
     }
   }
@@ -50,7 +50,7 @@ class CollectionApiService {
         collectionResponse.collection,
       );
     } catch (e) {
-      // TODO: ErrorHandling einbauen!
+      // TODO(me): ErrorHandling einbauen!
       throw Exception('Failed to fetch collection: $e');
     }
   }
@@ -68,7 +68,7 @@ class CollectionApiService {
         collectionItemsResponse.items.toList(),
       );
     } catch (e) {
-      // TODO: ErrorHandling einbauen!
+      // TODO(me): ErrorHandling einbauen!
       throw Exception('Failed to fetch items of collection: $e');
     }
   }

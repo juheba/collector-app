@@ -46,7 +46,11 @@ class LoginPageWidget extends StatelessWidget {
                 height: 32,
               ),
               ElevatedButton(
-                onPressed: () => AuthService().login().then((value) => context.go('/home')),
+                onPressed: () => AuthService().login().then((value) {
+                  if (context.mounted) {
+                    context.go('/home');
+                  }
+                }),
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.all<Color>(Colors.black),
                 ),

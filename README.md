@@ -1,5 +1,5 @@
 # HELP?!
-* Generate Hive Adapter Classes with: `dart run build_runner build`
+* Generate Hive Adapter Classes and Smartstruct Mapper with: `dart run build_runner build`
 * To generate collector-api, visit the collector-contract Repository.
 
 # Flutter Sample App
