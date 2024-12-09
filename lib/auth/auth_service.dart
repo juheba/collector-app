@@ -56,6 +56,17 @@ class AuthService {
     }
   }
 
+  Future<Credentials?> refreshCredentials({required String refreshToken}) async {
+    try {
+      final credentials = await auth0.api.renewCredentials(refreshToken: refreshToken);
+      debugPrint('Renewed credentials successfully');
+      return credentials;
+    } catch (e) {
+      debugPrint('Failed to renew credentials with refresh token: $e');
+      return null;
+    }
+  }
+
   Future<void> updateState(Credentials? credentials) async {
     if (credentials != null) {
       // Has credentials -> write them to secret store and set user state.

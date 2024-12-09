@@ -43,6 +43,21 @@ class AWSCollectorService {
         onError: (error, handler) async {
           // Handle error and retry if needed (e.g., 401 Unauthorized)
           if (error.response?.statusCode == 401) {
+            final credentials = await AccessUserCredentials().readUserCredentials();
+            if (credentials.refreshToken != null) {
+              final newCredentials = await AuthService().refreshCredentials(refreshToken: credentials.refreshToken!);
+              if (newCredentials != null) {
+                await AccessUserCredentials().writeUserCredentials(newCredentials);
+
+                // Update the request header with the new access token
+                error.requestOptions.headers['Authorization'] = 'Bearer ${newCredentials.accessToken}';
+
+                // Repeat the request with the updated header
+                return handler.resolve(await dio.fetch(error.requestOptions));
+              } else {
+                await AuthService().logout();
+              }
+            }
             try {
               await AuthService().logout();
             } catch (e) {
