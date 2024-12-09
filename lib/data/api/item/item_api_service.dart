@@ -98,7 +98,16 @@ class ItemApiService {
       return ItemMapperImpl().mapExernalToItemModel(itemResponse.item);
     } catch (e) {
       // TODO(me): ErrorHandling einbauen!
-      throw Exception('Failed to create item: $e');
+      throw Exception('Failed to update item: $e');
+    }
+  }
+
+  Future<void> deleteItem(String itemId) async {
+    try {
+      await _itemApi.deleteItem(itemId: itemId);
+    } catch (e) {
+      // TODO(me): ErrorHandling einbauen!
+      throw Exception('Failed to delete item: $e');
     }
   }
 

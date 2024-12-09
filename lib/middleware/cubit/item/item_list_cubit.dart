@@ -11,7 +11,8 @@ class ItemListCubit extends Cubit<ItemState> {
   final DatabaseService databaseService;
 
   Future<void> deleteItem(String id) async {
-    await databaseService.deleteItem(id);
+    //await databaseService.deleteItem(id);
+    await ItemApiService().deleteItem(id);
   }
 
   Future<void> loadItems() async {

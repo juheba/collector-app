@@ -161,7 +161,7 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
                     style: theme.outlinedButtonTheme.style?.copyWith(
                       foregroundColor: WidgetStatePropertyAll(theme.colorScheme.secondary),
                     ),
-                    onPressed: () => context.read<ItemListCubit>().deleteItem(widget.item?.id ?? ''),
+                    onPressed: () => context.read<ItemDetailCubit>().delete(),
                     child: const Text('Delete'),
                   ),
                   const SizedBox(
