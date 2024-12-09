@@ -20,7 +20,9 @@ class CollectionModelAdapter extends TypeAdapter<CollectionModel> {
       name: fields[1] as String,
       id: fields[0] as String?,
       description: fields[2] as String?,
-      visibility: fields[3] == null ? CollectionVisibility.public : fields[3] as CollectionVisibility?,
+      visibility: fields[3] == null
+          ? CollectionVisibility.public
+          : fields[3] as CollectionVisibility?,
     );
   }
 
@@ -44,7 +46,9 @@ class CollectionModelAdapter extends TypeAdapter<CollectionModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is CollectionModelAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
+      other is CollectionModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }
 
 class CollectionVisibilityAdapter extends TypeAdapter<CollectionVisibility> {
@@ -81,5 +85,7 @@ class CollectionVisibilityAdapter extends TypeAdapter<CollectionVisibility> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is CollectionVisibilityAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
+      other is CollectionVisibilityAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }
