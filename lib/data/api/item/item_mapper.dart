@@ -5,6 +5,7 @@ import 'package:collector/generated/openapi/collector-api/model/item.dart';
 import 'package:collector/generated/openapi/collector-api/model/item_ownership_status_enum.dart';
 import 'package:collector/generated/openapi/collector-api/model/item_status_enum.dart';
 import 'package:collector/generated/openapi/collector-api/model/update_item_request.dart';
+import 'package:collector/model/attachment_model.dart';
 import 'package:collector/model/collection_model.dart';
 import 'package:collector/model/item_model.dart';
 import 'package:flutter/material.dart';
@@ -22,8 +23,14 @@ abstract class ItemMapper {
   late ItemStatus status;
 
   @Mapping(source: 'itemId', target: 'id')
+  @Mapping(source: mapExernalToAttachmentModel, target: 'attachment')
   @Mapping(source: mapExernalToItemType, target: 'type')
   ItemModel mapExernalToItemModel(Item external);
+
+  @IgnoreMapping()
+  static AttachmentModel mapExernalToAttachmentModel(Item external) {
+    return AttachmentModel(attachmentUrl: external.attachmentUrl);
+  }
 
   @IgnoreMapping()
   static ItemType mapExernalToItemType(Item external) => external.itemType == null

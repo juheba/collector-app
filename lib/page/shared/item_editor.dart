@@ -104,6 +104,23 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
               maxLines: 10,
             ),
             spacingBox,
+            OutlinedButton(
+              onPressed: () => context.read<ItemDetailCubit>().selectImage(),
+              child: const Text('upload Image'),
+            ),
+            if (context.read<ItemDetailCubit>().state.image != null)
+              Image.memory(
+                context.read<ItemDetailCubit>().state.image!,
+                height: 200,
+                width: 200,
+              )
+            else if (context.read<ItemDetailCubit>().state.item?.attachment?.attachmentUrl != null)
+              Image.network(
+                context.read<ItemDetailCubit>().state.item!.attachment!.attachmentUrl!,
+                height: 200,
+                width: 200,
+              ),
+            spacingBox,
             Text(
               'Ownership Status:',
               style: headlineStyle,
@@ -145,14 +162,14 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
                       foregroundColor: WidgetStatePropertyAll(theme.colorScheme.secondary),
                     ),
                     onPressed: () => context.read<ItemListCubit>().deleteItem(widget.item?.id ?? ''),
-                    child: const Text('Löschen'),
+                    child: const Text('Delete'),
                   ),
                   const SizedBox(
                     width: 12,
                   ),
                   OutlinedButton(
                     onPressed: () => context.read<ItemDetailCubit>().cancelEditing(),
-                    child: const Text('Abbrechen'),
+                    child: const Text('Cancel'),
                   ),
                   const SizedBox(
                     width: 12,

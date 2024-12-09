@@ -20,6 +20,7 @@ class ItemMapperImpl extends ItemMapper {
       ownershipStatus:
           mapExernalToItemOwnershipStatus(external.ownershipStatus),
       status: mapExernalToItemStatus(external.status),
+      attachment: ItemMapper.mapExernalToAttachmentModel(external),
     );
     return itemmodel;
   }

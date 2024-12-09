@@ -9,6 +9,7 @@ class ItemDetailState extends Equatable {
     this.collections,
     this.editItem,
     this.errorMessage,
+    this.image,
   });
 
   final ItemDetailStatus status;
@@ -16,6 +17,7 @@ class ItemDetailState extends Equatable {
   final List<CollectionModel>? collections;
   final String? errorMessage;
   final ItemModel? editItem;
+  final Uint8List? image;
 
   ItemDetailState copyWith({
     ItemDetailStatus? status,
@@ -23,6 +25,7 @@ class ItemDetailState extends Equatable {
     List<CollectionModel>? collections,
     String? errorMessage,
     ItemModel? editItem,
+    Uint8List? image,
   }) =>
       ItemDetailState(
         status: status ?? this.status,
@@ -30,6 +33,7 @@ class ItemDetailState extends Equatable {
         collections: collections ?? this.collections,
         errorMessage: errorMessage ?? this.errorMessage,
         editItem: editItem ?? this.editItem,
+        image: image ?? this.image,
       );
 
   @override
@@ -39,5 +43,6 @@ class ItemDetailState extends Equatable {
         collections,
         errorMessage,
         editItem,
+        image,
       ];
 }

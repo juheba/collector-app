@@ -57,6 +57,8 @@ class _Loaded extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const spacingBox = SizedBox(height: 20);
+
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(
@@ -113,6 +115,13 @@ class _Loaded extends StatelessWidget {
               item.description ?? '',
               overflow: TextOverflow.visible,
             ),
+            spacingBox,
+            if (context.read<ItemDetailCubit>().state.item?.attachment?.attachmentUrl != null)
+              Image.network(
+                context.read<ItemDetailCubit>().state.item!.attachment!.attachmentUrl!,
+                height: 200,
+                width: 200,
+              ),
           ],
         ),
       ),

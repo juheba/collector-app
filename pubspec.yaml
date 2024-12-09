@@ -31,6 +31,8 @@ dependencies:
   auth0_flutter: ^1.7.2
   dio: ^5.4.3+1 # Http network package
   equatable: ^2.0.5 # Objekte vergleichen
+
+  file_picker: ^8.1.4
   flex_color_scheme: ^7.3.1
 
   flutter:

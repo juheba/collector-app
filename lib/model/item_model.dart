@@ -1,3 +1,4 @@
+import 'package:collector/model/attachment_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
@@ -69,6 +70,7 @@ class ItemModel extends HiveObject {
     bool? isLendable,
     ItemOwnershipStatus? ownershipStatus,
     ItemStatus? status,
+    this.attachment,
   }) {
 //    this.id = id == null || id.isEmpty ? const Uuid().v4() : id;
     this.id = id == null || id.isEmpty ? '' : id;
@@ -93,6 +95,8 @@ class ItemModel extends HiveObject {
   late ItemOwnershipStatus ownershipStatus;
   @HiveField(6, defaultValue: defaultItemStatus)
   late ItemStatus status;
+  @HiveField(7)
+  late AttachmentModel? attachment;
 
   ItemModel update({
     String? title,
@@ -101,6 +105,7 @@ class ItemModel extends HiveObject {
     ItemOwnershipStatus? ownershipStatus,
     ItemStatus? status,
     bool? isLendable,
+    AttachmentModel? attachment,
   }) {
     this.title = title ?? this.title;
     this.type = type ?? this.type;
@@ -108,6 +113,7 @@ class ItemModel extends HiveObject {
     this.isLendable = isLendable ?? this.isLendable;
     this.ownershipStatus = ownershipStatus ?? this.ownershipStatus;
     this.status = status ?? this.status;
+    this.attachment = attachment ?? this.attachment;
     return this;
   }
 }

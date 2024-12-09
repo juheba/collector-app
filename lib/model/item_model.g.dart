@@ -26,13 +26,14 @@ class ItemModelAdapter extends TypeAdapter<ItemModel> {
           ? ItemOwnershipStatus.wishlist
           : fields[5] as ItemOwnershipStatus?,
       status: fields[6] == null ? ItemStatus.todo : fields[6] as ItemStatus?,
+      attachment: fields[7] as AttachmentModel?,
     );
   }
 
   @override
   void write(BinaryWriter writer, ItemModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -46,7 +47,9 @@ class ItemModelAdapter extends TypeAdapter<ItemModel> {
       ..writeByte(5)
       ..write(obj.ownershipStatus)
       ..writeByte(6)
-      ..write(obj.status);
+      ..write(obj.status)
+      ..writeByte(7)
+      ..write(obj.attachment);
   }
 
   @override
