@@ -5,6 +5,7 @@ import 'package:collector/generated/l10n.dart';
 import 'package:collector/middleware/cubit/collection/collection_list_cubit.dart';
 import 'package:collector/page/scaffold_page.dart';
 import 'package:collector/page/shared/collection_widget.dart';
+import 'package:collector/page/shared/empty_state_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,7 +23,11 @@ class CollectionsPageWidget extends StatelessWidget {
         title: L10n.of(context).collections_page_title,
         body: BlocBuilder<CollectionListCubit, CollectionState>(
           builder: (context, state) {
-            return CollectionGridWidget(collections: state.collections);
+            if (state.collections.isEmpty) {
+              return EmptyStateWidget(message: L10n.of(context).collections_page_empty_state);
+            } else {
+              return CollectionGridWidget(collections: state.collections);
+            }
           },
         ),
       ),

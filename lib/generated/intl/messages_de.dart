@@ -27,6 +27,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "app_name": MessageLookupByLibrary.simpleMessage("Collector-App"),
+        "collections_page_empty_state":
+            MessageLookupByLibrary.simpleMessage("Keine Sammlungen vorhanden."),
         "collections_page_title":
             MessageLookupByLibrary.simpleMessage("Sammlungen"),
         "common_action_add": MessageLookupByLibrary.simpleMessage("Hinzufügen"),

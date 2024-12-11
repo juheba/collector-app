@@ -10,12 +10,13 @@ class EmptyStateWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         SvgPicture.asset('assets/images/empty.svg'),
         const SizedBox(
           height: 32,
         ),
-        Text(message),
+        Text(message, textAlign: TextAlign.center),
       ],
     );
   }

@@ -4,6 +4,10 @@
   "@app_name": {
     "description": "Label: Name of the application"
   },
+  "collections_page_empty_state": "Keine Sammlungen vorhanden.",
+  "@collections_page_empty_state": {
+    "description": "Message: There are no collections available"
+  },
   "collections_page_title": "Sammlungen",
   "@collections_page_title": {
     "description": "Label: Title of the collections page"

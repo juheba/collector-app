@@ -27,6 +27,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "app_name": MessageLookupByLibrary.simpleMessage("Collector-App"),
+        "collections_page_empty_state":
+            MessageLookupByLibrary.simpleMessage("No collection found."),
         "collections_page_title":
             MessageLookupByLibrary.simpleMessage("Collections"),
         "common_action_add": MessageLookupByLibrary.simpleMessage("Add"),
@@ -59,7 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "item_details_ownership_status": m0,
         "item_details_process": m1,
         "items_page_empty_state":
-            MessageLookupByLibrary.simpleMessage("No items found"),
+            MessageLookupByLibrary.simpleMessage("No items found."),
         "items_page_title": MessageLookupByLibrary.simpleMessage("Items"),
         "login_page_login_button":
             MessageLookupByLibrary.simpleMessage("Login"),

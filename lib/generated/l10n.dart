@@ -60,6 +60,16 @@ class L10n {
     );
   }
 
+  /// `No collection found.`
+  String get collections_page_empty_state {
+    return Intl.message(
+      'No collection found.',
+      name: 'collections_page_empty_state',
+      desc: 'Message: There are no collections available',
+      args: [],
+    );
+  }
+
   /// `Collections`
   String get collections_page_title {
     return Intl.message(
@@ -260,10 +270,10 @@ class L10n {
     );
   }
 
-  /// `No items found`
+  /// `No items found.`
   String get items_page_empty_state {
     return Intl.message(
-      'No items found',
+      'No items found.',
       name: 'items_page_empty_state',
       desc: 'Message: There are no items available',
       args: [],
