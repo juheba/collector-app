@@ -36,6 +36,10 @@
   "@editor_item_can_borrow_title": {
     "description": "Label: Can the item be borrowed?"
   },
+  "editor_item_change_image_title": "Bild ändern",
+  "@editor_item_change_image_title": {
+    "description": "Label: Change image for item"
+  },
   "editor_item_description": "Beschreibung",
   "@editor_item_description": {
     "description": "Label: Description of the item"

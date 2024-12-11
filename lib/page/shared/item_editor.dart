@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:collector/generated/l10n.dart';
 import 'package:collector/middleware/cubit/item/item_detail_cubit.dart';
 import 'package:collector/middleware/cubit/item/item_list_cubit.dart';
@@ -106,22 +108,10 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
               maxLines: 10,
             ),
             spacingBox,
-            OutlinedButton(
-              onPressed: () => context.read<ItemDetailCubit>().selectImage(),
-              child: Text(l10n.editor_item_upload_image_title),
+            _ChooseImage(
+              imageData: context.read<ItemDetailCubit>().state.image,
+              imageUrl: context.read<ItemDetailCubit>().state.item?.attachment?.attachmentUrl,
             ),
-            if (context.read<ItemDetailCubit>().state.image != null)
-              Image.memory(
-                context.read<ItemDetailCubit>().state.image!,
-                height: 200,
-                width: 200,
-              )
-            else if (context.read<ItemDetailCubit>().state.item?.attachment?.attachmentUrl != null)
-              Image.network(
-                context.read<ItemDetailCubit>().state.item!.attachment!.attachmentUrl!,
-                height: 200,
-                width: 200,
-              ),
             spacingBox,
             Text(
               l10n.editor_item_ownership_status_title,
@@ -189,6 +179,61 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
                 ),
               ],
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ChooseImage extends StatelessWidget {
+  const _ChooseImage({this.imageUrl, this.imageData});
+
+  final String? imageUrl;
+  final Uint8List? imageData;
+
+  @override
+  Widget build(BuildContext context) {
+    final hasNoImage = imageUrl == null && imageData == null;
+    final uploadButton = hasNoImage
+        ? OutlinedButton(
+            onPressed: () => context.read<ItemDetailCubit>().selectImage(),
+            child: Text(L10n.of(context).editor_item_upload_image_title),
+          )
+        : ElevatedButton(
+            onPressed: () => context.read<ItemDetailCubit>().selectImage(),
+            child: Text(L10n.of(context).editor_item_change_image_title),
+          );
+
+    return Container(
+      constraints: BoxConstraints.tight(const Size(200, 200)),
+      decoration: BoxDecoration(
+        border: hasNoImage ? Border.all(color: Colors.grey) : null,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            if (imageData != null)
+              Image.memory(imageData!)
+            else if (imageUrl != null)
+              Image.network(imageUrl!)
+            else
+              const Expanded(
+                child: Icon(
+                  Icons.upload_file,
+                  size: 48,
+                ),
+              ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: uploadButton,
+              ),
+            )
           ],
         ),
       ),

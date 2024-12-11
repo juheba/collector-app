@@ -39,6 +39,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "common_log_out": MessageLookupByLibrary.simpleMessage("Ausloggen"),
         "editor_item_can_borrow_title":
             MessageLookupByLibrary.simpleMessage("Ist ausleihbar?"),
+        "editor_item_change_image_title":
+            MessageLookupByLibrary.simpleMessage("Bild ändern"),
         "editor_item_description":
             MessageLookupByLibrary.simpleMessage("Beschreibung"),
         "editor_item_description_hint":

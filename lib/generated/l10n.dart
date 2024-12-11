@@ -140,6 +140,16 @@ class L10n {
     );
   }
 
+  /// `Change image`
+  String get editor_item_change_image_title {
+    return Intl.message(
+      'Change image',
+      name: 'editor_item_change_image_title',
+      desc: 'Label: Change image for item',
+      args: [],
+    );
+  }
+
   /// `Description`
   String get editor_item_description {
     return Intl.message(
