@@ -1,3 +1,4 @@
+import 'package:collector/generated/l10n.dart';
 import 'package:collector/middleware/cubit/item/item_detail_cubit.dart';
 import 'package:collector/middleware/cubit/item/item_list_cubit.dart';
 import 'package:collector/model/item_model.dart';
@@ -40,8 +41,8 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
   }
 
   void showSnack(BuildContext context) {
-    const snackBar = SnackBar(
-      content: Text('Item saved.'),
+    final snackBar = SnackBar(
+      content: Text(L10n.of(context).notification_item_saved),
     );
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -66,6 +67,7 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context);
     final theme = Theme.of(context);
     final headlineStyle = theme.textTheme.labelLarge;
 
@@ -79,15 +81,15 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
           children: [
             TextFormField(
               controller: titleTextEditingController,
-              decoration: const InputDecoration(
-                labelText: 'Title',
-                hintText: 'Enter title',
-                prefixIcon: Icon(Icons.title),
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText: l10n.editor_item_title,
+                hintText: l10n.editor_item_title_hint,
+                prefixIcon: const Icon(Icons.title),
+                border: const OutlineInputBorder(),
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter a title';
+                  return l10n.editor_item_title_error;
                 }
                 return null;
               },
@@ -95,18 +97,18 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
             spacingBox,
             TextFormField(
               controller: descriptionTextEditingController,
-              decoration: const InputDecoration(
-                labelText: 'Description',
-                hintText: 'Enter description',
-                prefixIcon: Icon(Icons.description),
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText: l10n.editor_item_description,
+                hintText: l10n.editor_item_description_hint,
+                prefixIcon: const Icon(Icons.description),
+                border: const OutlineInputBorder(),
               ),
               maxLines: 10,
             ),
             spacingBox,
             OutlinedButton(
               onPressed: () => context.read<ItemDetailCubit>().selectImage(),
-              child: const Text('upload Image'),
+              child: Text(l10n.editor_item_upload_image_title),
             ),
             if (context.read<ItemDetailCubit>().state.image != null)
               Image.memory(
@@ -122,7 +124,7 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
               ),
             spacingBox,
             Text(
-              'Ownership Status:',
+              l10n.editor_item_ownership_status_title,
               style: headlineStyle,
             ),
             OwnershipStatusSingleChoiceSegmentedButton(
@@ -131,7 +133,7 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
             ),
             spacingBox,
             Text(
-              'Progress Status:',
+              l10n.editor_item_progress_title,
               style: headlineStyle,
             ),
             ItemStatusSingleChoiceSegmentedButton(
@@ -147,7 +149,7 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
                   onChanged: (isLendable) => context.read<ItemDetailCubit>().updateItem(isLendable: isLendable),
                 ),
                 Text(
-                  'is lendable?',
+                  l10n.editor_item_can_borrow_title,
                   style: headlineStyle,
                 ),
               ],
@@ -162,14 +164,14 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
                       foregroundColor: WidgetStatePropertyAll(theme.colorScheme.secondary),
                     ),
                     onPressed: () => context.read<ItemDetailCubit>().delete(),
-                    child: const Text('Delete'),
+                    child: Text(l10n.common_action_delete),
                   ),
                   const SizedBox(
                     width: 12,
                   ),
                   OutlinedButton(
                     onPressed: () => context.read<ItemDetailCubit>().cancelEditing(),
-                    child: const Text('Cancel'),
+                    child: Text(l10n.common_action_cancel),
                   ),
                   const SizedBox(
                     width: 12,
@@ -183,7 +185,7 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
                       resetForm();
                     }
                   },
-                  child: isNew ? const Text('Add') : const Text('Save'),
+                  child: Text(isNew ? l10n.common_action_add : l10n.common_action_save),
                 ),
               ],
             ),

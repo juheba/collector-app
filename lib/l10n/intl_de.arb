@@ -1,0 +1,137 @@
+{
+  "@@locale": "de",
+  "app_name": "Collector-App",
+  "@app_name": {
+    "description": "Label: Name of the application"
+  },
+  "collections_page_title": "Sammlungen",
+  "@collections_page_title": {
+    "description": "Label: Title of the collections page"
+  },
+  "common_action_add": "Hinzufügen",
+  "@common_action_add": {
+    "description": "Action: Add something"
+  },
+  "common_action_cancel": "Abbrechen",
+  "@common_action_cancel": {
+    "description": "Action: Cancel"
+  },
+  "common_action_delete": "Löschen",
+  "@common_action_delete": {
+    "description": "Action: Delete something"
+  },
+  "common_action_save": "Speichern",
+  "@common_action_save": {
+    "description": "Action: Save something"
+  },
+  "common_log_out": "Ausloggen",
+  "@common_log_out": {
+    "description": "Action: Log out current user"
+  },
+  "editor_item_can_borrow_title": "Ist ausleihbar?",
+  "@editor_item_can_borrow_title": {
+    "description": "Label: Can the item be borrowed?"
+  },
+  "editor_item_description": "Beschreibung",
+  "@editor_item_description": {
+    "description": "Label: Description of the item"
+  },
+  "editor_item_description_hint": "Beschreibung eingeben",
+  "@editor_item_description_hint": {
+    "description": "Hint: Enter description of the item"
+  },
+  "editor_item_ownership_status_title": "Eigentumsstatus",
+  "@editor_item_ownership_status_title": {
+    "description": "Label: Ownership status of the item"
+  },
+  "editor_item_progress_title": "Fortschrittsstatus",
+  "@editor_item_progress_title": {
+    "description": "Label: Progress status of the item"
+  },
+  "editor_item_title": "Titel",
+  "@editor_item_title": {
+    "description": "Label: Title of the item"
+  },
+  "editor_item_title_error": "Titel wird benötigt.",
+  "@editor_item_title_error": {
+    "description": "Error: Title is required"
+  },
+  "editor_item_title_hint": "Titel eingeben",
+  "@editor_item_title_hint": {
+    "description": "Hint: Enter title of the item"
+  },
+  "editor_item_upload_image_title": "Bild auswählen",
+  "@editor_item_upload_image_title": {
+    "description": "Label: Upload image for item"
+  },
+  "home_page_title": "Startseite",
+  "@home_page_title": {
+    "description": "Label: Title of the home page"
+  },
+  "item_details_can_be_borrowed": "Kann ausgeliehen werden",
+  "@item_details_can_be_borrowed": {
+    "description": "Label: Item can be borrowed"
+  },
+  "item_details_can_not_be_borrowed": "Kann nicht ausgeliehen werden",
+  "@item_details_can_not_be_borrowed": {
+    "description": "Label: Item can not be borrowed"
+  },
+  "item_details_ownership_status": "Eigentumsstatus: {status}",
+  "@item_details_ownership_status": {
+    "description": "Label: Ownership status of the item",
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "item_details_process": "Fortschrittsstatus: {status}",
+  "@item_details_process": {
+    "description": "Label: Progress status of the item",
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "items_page_empty_state": "Keine Gegenstände vorhanden.",
+  "@items_page_empty_state": {
+    "description": "Message: There are no items available"
+  },
+  "items_page_title": "Gegenstände",
+  "@items_page_title": {
+    "description": "Label: Title of the items page"
+  },
+  "login_page_login_button": "Login",
+  "@login_page_login_button": {
+    "description": "Label: Title of the login button"
+  },
+  "new_item_page_title": "Neuer Gegenstand",
+  "@new_item_page_title": {
+    "description": "Label: Title of the new item page"
+  },
+  "notification_item_saved": "Gegenstand gespeichert.",
+  "@notification_item_saved": {
+    "description": "Notification: Item saved successfully"
+  },
+  "user_profile_copy_token": "Token kopieren",
+  "@user_profile_copy_token": {
+    "description": "Action: Copy token to clipboard"
+  },
+  "user_profile_email": "E-Mail",
+  "@user_profile_email": {
+    "description": "Label: User's email address"
+  },
+  "user_profile_id": "Benutzer-ID",
+  "@user_profile_id": {
+    "description": "Label: User's ID"
+  },
+  "user_profile_name": "Benutzername",
+  "@user_profile_name": {
+    "description": "Label: Username"
+  },
+  "user_profile_page_title": "Nutzerprofil",
+  "@user_profile_page_title": {
+    "description": "Label: Title of the user profile page"
+  }
+}

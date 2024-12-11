@@ -1,6 +1,7 @@
 // '/login' wenn not logged in
 
 import 'package:collector/auth/auth_service.dart';
+import 'package:collector/generated/l10n.dart';
 import 'package:collector/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -35,7 +36,7 @@ class LoginPageWidget extends StatelessWidget {
                 height: 32,
               ),
               Text(
-                'Collector App',
+                L10n.of(context).app_name,
                 style: GoogleFonts.spaceGrotesk(
                   fontSize: 80,
                   height: 0.8,
@@ -54,7 +55,7 @@ class LoginPageWidget extends StatelessWidget {
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.all<Color>(Colors.black),
                 ),
-                child: const Text('Login'),
+                child: Text(L10n.of(context).login_page_login_button),
               ),
             ],
           ),

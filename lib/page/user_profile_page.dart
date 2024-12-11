@@ -1,4 +1,5 @@
 import 'package:collector/auth/auth_service.dart';
+import 'package:collector/generated/l10n.dart';
 import 'package:collector/middleware/cubit/user/user_profile_cubit.dart';
 import 'package:collector/page/scaffold_page.dart';
 import 'package:flutter/material.dart';
@@ -10,17 +11,18 @@ class UserPageWidget extends StatelessWidget {
 
   static const routeName = 'user';
   static const routePath = '/user';
-  static const pageTitle = 'User profile';
 
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context);
+
     return BlocProvider(
       create: (context) => UserProfileCubit()..loadUser(),
       child: BlocBuilder<UserProfileCubit, UserProfileState>(
         builder: (context, state) {
           final pictureUrl = state.user?.pictureUrl;
           return ScaffoldPage(
-            title: pageTitle,
+            title: l10n.user_profile_page_title,
             body: SingleChildScrollView(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -41,9 +43,9 @@ class UserPageWidget extends StatelessWidget {
                   Card(
                     child: Column(
                       children: [
-                        UserEntryWidget(propertyName: 'Id', propertyValue: state.user?.sub),
-                        UserEntryWidget(propertyName: 'Name', propertyValue: state.user?.name),
-                        UserEntryWidget(propertyName: 'Email', propertyValue: state.user?.email),
+                        UserEntryWidget(propertyName: l10n.user_profile_id, propertyValue: state.user?.sub),
+                        UserEntryWidget(propertyName: l10n.user_profile_name, propertyValue: state.user?.name),
+                        UserEntryWidget(propertyName: l10n.user_profile_email, propertyValue: state.user?.email),
                       ],
                     ),
                   ),
@@ -53,7 +55,7 @@ class UserPageWidget extends StatelessWidget {
                       children: [
                         TextButton(
                           onPressed: () => copyToken(context),
-                          child: const Text('Copy Token'),
+                          child: Text(l10n.user_profile_copy_token),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8),
@@ -66,7 +68,7 @@ class UserPageWidget extends StatelessWidget {
                   Center(
                     child: TextButton(
                       onPressed: () => AuthService().logout(),
-                      child: const Text('Logout'),
+                      child: Text(l10n.common_log_out),
                     ),
                   ),
                 ],

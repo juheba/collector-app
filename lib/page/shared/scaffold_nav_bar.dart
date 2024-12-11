@@ -1,8 +1,4 @@
-import 'package:collector/page/collections_page.dart';
-import 'package:collector/page/home_page.dart';
-import 'package:collector/page/items_page.dart';
-import 'package:collector/page/new_item_page.dart';
-import 'package:collector/page/user_profile_page.dart';
+import 'package:collector/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,32 +13,34 @@ class ScaffoldWithNavbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context);
+
     return Scaffold(
       body: navigationShell,
       bottomNavigationBar: NavigationBar(
         labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         selectedIndex: navigationShell.currentIndex,
         onDestinationSelected: _onTap,
-        destinations: const [
+        destinations: [
           NavigationDestination(
-            icon: Icon(Icons.home_filled),
-            label: HomePageWidget.pageTitle,
+            icon: const Icon(Icons.home_filled),
+            label: l10n.home_page_title,
           ),
           NavigationDestination(
-            icon: Icon(Icons.grid_view_rounded),
-            label: CollectionsPageWidget.pageTitle,
+            icon: const Icon(Icons.grid_view_rounded),
+            label: l10n.collections_page_title,
           ),
           NavigationDestination(
-            icon: Icon(Icons.add_circle_outlined),
-            label: NewItemPageWidget.pageTitle,
+            icon: const Icon(Icons.add_circle_outlined),
+            label: l10n.new_item_page_title,
           ),
           NavigationDestination(
-            icon: Icon(Icons.view_list_rounded),
-            label: ItemsPageWidget.pageTitle,
+            icon: const Icon(Icons.view_list_rounded),
+            label: l10n.items_page_title,
           ),
           NavigationDestination(
-            icon: Icon(Icons.account_circle),
-            label: UserPageWidget.pageTitle,
+            icon: const Icon(Icons.account_circle),
+            label: l10n.user_profile_page_title,
           ),
         ],
       ),

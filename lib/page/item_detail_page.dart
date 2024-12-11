@@ -1,4 +1,5 @@
 import 'package:collector/data/persistence/database_service.dart';
+import 'package:collector/generated/l10n.dart';
 import 'package:collector/middleware/cubit/item/item_detail_cubit.dart';
 import 'package:collector/model/item_model.dart';
 import 'package:collector/page/items_page.dart';
@@ -58,6 +59,7 @@ class _Loaded extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const spacingBox = SizedBox(height: 20);
+    final l10n = L10n.of(context);
 
     return SingleChildScrollView(
       child: Padding(
@@ -86,18 +88,18 @@ class _Loaded extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text('Ownership: ${item.ownershipStatus.name}'),
-                        Text('Process: ${item.status.name}'),
+                        Text(l10n.item_details_ownership_status(item.ownershipStatus.name)),
+                        Text(l10n.item_details_process(item.status.name)),
                         if (item.isLendable)
                           Text(
-                            'Kann ausgeliehen werden',
+                            l10n.item_details_can_be_borrowed,
                             style: Theme.of(context).textTheme.labelSmall?.copyWith(
                                   color: Colors.green,
                                 ),
                           )
                         else
                           Text(
-                            'Kann nicht ausgeliehen werden',
+                            l10n.item_details_can_not_be_borrowed,
                             style: Theme.of(context).textTheme.labelSmall?.copyWith(
                                   color: Colors.grey,
                                 ),
@@ -116,9 +118,9 @@ class _Loaded extends StatelessWidget {
               overflow: TextOverflow.visible,
             ),
             spacingBox,
-            if (context.read<ItemDetailCubit>().state.item?.attachment?.attachmentUrl != null)
+            if (item.attachment?.attachmentUrl != null)
               Image.network(
-                context.read<ItemDetailCubit>().state.item!.attachment!.attachmentUrl!,
+                item.attachment!.attachmentUrl!,
                 height: 200,
                 width: 200,
               ),
