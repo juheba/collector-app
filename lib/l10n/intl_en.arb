@@ -4,6 +4,14 @@
   "@app_name": {
     "description": "Label: Name of the application"
   },
+  "collection_visibility_private": "Privat",
+  "@collection_visibility_private": {
+    "description": "Label: Private"
+  },
+  "collection_visibility_public": "Public",
+  "@collection_visibility_public": {
+    "description": "Label: Public"
+  },
   "collections_page_empty_state": "No collection found.",
   "@collections_page_empty_state": {
     "description": "Message: There are no collections available"

@@ -189,5 +189,13 @@
   "user_profile_page_title": "Nutzerprofil",
   "@user_profile_page_title": {
     "description": "Label: Title of the user profile page"
+  },
+  "collection_visibility_public": "Öffentlich",
+  "@collection_visibility_public": {
+    "description": "Label: Public"
+  },
+  "collection_visibility_private": "Privat",
+  "@collection_visibility_private": {
+    "description": "Label: Private"
   }
 }

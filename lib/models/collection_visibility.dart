@@ -1,0 +1,1 @@
+enum CollectionVisibility { public, private }

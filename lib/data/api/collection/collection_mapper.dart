@@ -1,6 +1,7 @@
 import 'package:collector/generated/openapi/collector-api/model/collection.dart';
 import 'package:collector/generated/openapi/collector-api/model/collection_visibility_enum.dart';
 import 'package:collector/models/collection_model.dart';
+import 'package:collector/models/collection_visibility.dart';
 import 'package:smartstruct/smartstruct.dart';
 
 part 'collection_mapper.mapper.g.dart';
@@ -18,11 +19,10 @@ abstract class CollectionMapper {
   @IgnoreMapping()
   CollectionVisibility mapExernalToCollectionVisibility(
     CollectionVisibilityEnum external,
-  ) {
-    return switch (external) {
-      CollectionVisibilityEnum.PRIVATE => CollectionVisibility.private,
-      CollectionVisibilityEnum.PUBLIC => CollectionVisibility.public,
-      _ => CollectionVisibility.private,
-    };
-  }
+  ) =>
+      switch (external) {
+        CollectionVisibilityEnum.PRIVATE => CollectionVisibility.private,
+        CollectionVisibilityEnum.PUBLIC => CollectionVisibility.public,
+        _ => CollectionVisibility.private,
+      };
 }

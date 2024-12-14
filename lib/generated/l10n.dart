@@ -60,6 +60,26 @@ class L10n {
     );
   }
 
+  /// `Privat`
+  String get collection_visibility_private {
+    return Intl.message(
+      'Privat',
+      name: 'collection_visibility_private',
+      desc: 'Label: Private',
+      args: [],
+    );
+  }
+
+  /// `Public`
+  String get collection_visibility_public {
+    return Intl.message(
+      'Public',
+      name: 'collection_visibility_public',
+      desc: 'Label: Public',
+      args: [],
+    );
+  }
+
   /// `No collection found.`
   String get collections_page_empty_state {
     return Intl.message(
@@ -280,6 +300,126 @@ class L10n {
     );
   }
 
+  /// `Borrower`
+  String get item_ownership_status_borrower {
+    return Intl.message(
+      'Borrower',
+      name: 'item_ownership_status_borrower',
+      desc: 'Label: Borrower',
+      args: [],
+    );
+  }
+
+  /// `Owner`
+  String get item_ownership_status_owner {
+    return Intl.message(
+      'Owner',
+      name: 'item_ownership_status_owner',
+      desc: 'Label: Owner',
+      args: [],
+    );
+  }
+
+  /// `Unknown`
+  String get item_ownership_status_undefined {
+    return Intl.message(
+      'Unknown',
+      name: 'item_ownership_status_undefined',
+      desc: 'Label: Undefined',
+      args: [],
+    );
+  }
+
+  /// `Wishlist`
+  String get item_ownership_status_wishlist {
+    return Intl.message(
+      'Wishlist',
+      name: 'item_ownership_status_wishlist',
+      desc: 'Label: Wishlist',
+      args: [],
+    );
+  }
+
+  /// `Done`
+  String get item_status_done {
+    return Intl.message(
+      'Done',
+      name: 'item_status_done',
+      desc: 'Label: Done',
+      args: [],
+    );
+  }
+
+  /// `In progress`
+  String get item_status_in_progress {
+    return Intl.message(
+      'In progress',
+      name: 'item_status_in_progress',
+      desc: 'Label: In progress',
+      args: [],
+    );
+  }
+
+  /// `ToDo`
+  String get item_status_todo {
+    return Intl.message(
+      'ToDo',
+      name: 'item_status_todo',
+      desc: 'Label: ToDo',
+      args: [],
+    );
+  }
+
+  /// `Unknown`
+  String get item_status_undefined {
+    return Intl.message(
+      'Unknown',
+      name: 'item_status_undefined',
+      desc: 'Label: Undefined',
+      args: [],
+    );
+  }
+
+  /// `Book`
+  String get item_type_book {
+    return Intl.message(
+      'Book',
+      name: 'item_type_book',
+      desc: 'Label: Book',
+      args: [],
+    );
+  }
+
+  /// `Game`
+  String get item_type_game {
+    return Intl.message(
+      'Game',
+      name: 'item_type_game',
+      desc: 'Label: Game',
+      args: [],
+    );
+  }
+
+  /// `Movie`
+  String get item_type_movie {
+    return Intl.message(
+      'Movie',
+      name: 'item_type_movie',
+      desc: 'Label: Movie',
+      args: [],
+    );
+  }
+
+  /// `Others`
+  String get item_type_undefined {
+    return Intl.message(
+      'Others',
+      name: 'item_type_undefined',
+      desc: 'Label: Undefined',
+      args: [],
+    );
+  }
+
   /// `No items found.`
   String get items_page_empty_state {
     return Intl.message(
@@ -376,126 +516,6 @@ class L10n {
       'User profile',
       name: 'user_profile_page_title',
       desc: 'Label: Title of the user profile page',
-      args: [],
-    );
-  }
-
-  /// `Book`
-  String get item_type_book {
-    return Intl.message(
-      'Book',
-      name: 'item_type_book',
-      desc: 'Label: Book',
-      args: [],
-    );
-  }
-
-  /// `Game`
-  String get item_type_game {
-    return Intl.message(
-      'Game',
-      name: 'item_type_game',
-      desc: 'Label: Game',
-      args: [],
-    );
-  }
-
-  /// `Movie`
-  String get item_type_movie {
-    return Intl.message(
-      'Movie',
-      name: 'item_type_movie',
-      desc: 'Label: Movie',
-      args: [],
-    );
-  }
-
-  /// `Others`
-  String get item_type_undefined {
-    return Intl.message(
-      'Others',
-      name: 'item_type_undefined',
-      desc: 'Label: Undefined',
-      args: [],
-    );
-  }
-
-  /// `ToDo`
-  String get item_status_todo {
-    return Intl.message(
-      'ToDo',
-      name: 'item_status_todo',
-      desc: 'Label: ToDo',
-      args: [],
-    );
-  }
-
-  /// `In progress`
-  String get item_status_in_progress {
-    return Intl.message(
-      'In progress',
-      name: 'item_status_in_progress',
-      desc: 'Label: In progress',
-      args: [],
-    );
-  }
-
-  /// `Done`
-  String get item_status_done {
-    return Intl.message(
-      'Done',
-      name: 'item_status_done',
-      desc: 'Label: Done',
-      args: [],
-    );
-  }
-
-  /// `Unknown`
-  String get item_status_undefined {
-    return Intl.message(
-      'Unknown',
-      name: 'item_status_undefined',
-      desc: 'Label: Undefined',
-      args: [],
-    );
-  }
-
-  /// `Wishlist`
-  String get item_ownership_status_wishlist {
-    return Intl.message(
-      'Wishlist',
-      name: 'item_ownership_status_wishlist',
-      desc: 'Label: Wishlist',
-      args: [],
-    );
-  }
-
-  /// `Owner`
-  String get item_ownership_status_owner {
-    return Intl.message(
-      'Owner',
-      name: 'item_ownership_status_owner',
-      desc: 'Label: Owner',
-      args: [],
-    );
-  }
-
-  /// `Borrower`
-  String get item_ownership_status_borrower {
-    return Intl.message(
-      'Borrower',
-      name: 'item_ownership_status_borrower',
-      desc: 'Label: Borrower',
-      args: [],
-    );
-  }
-
-  /// `Unknown`
-  String get item_ownership_status_undefined {
-    return Intl.message(
-      'Unknown',
-      name: 'item_ownership_status_undefined',
-      desc: 'Label: Undefined',
       args: [],
     );
   }

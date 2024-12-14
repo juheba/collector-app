@@ -1,52 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:collector/models/collection_visibility.dart';
 import 'package:uuid/uuid.dart';
-
-part 'collection_model.g.dart';
-
-
-@HiveType(typeId: 1)
-enum CollectionVisibility {
-  @HiveField(0)
-  public(
-    name: 'PUBLIC',
-    icon: Icons.lock_open,
-    color: Colors.blue,
-  ),
-
-  @HiveField(1)
-  private(
-    name: 'PRIVATE',
-    icon: Icons.lock,
-    color: Colors.orange,
-  );
-
-  const CollectionVisibility({
-    required this.name,
-    required this.icon,
-    required this.color,
-    this.foregroundColor,
-  });
-
-  final String name;
-  final IconData icon;
-  final Color color;
-  final Color? foregroundColor;
-}
 
 const defaultVisibility = CollectionVisibility.public;
 
-@HiveType(typeId: 0)
-class CollectionModel extends HiveObject {
+class CollectionModel {
   CollectionModel({
+    required this.id,
     required this.name,
-    String? id,
     this.description,
-    CollectionVisibility? visibility,
-  }) {
-    this.id = id == null || id.isEmpty ? const Uuid().v4() : id;
-    this.visibility = visibility ?? defaultVisibility;
-  }
+    this.visibility = defaultVisibility,
+  });
 
   factory CollectionModel.fromJson(Map<String, dynamic> json) {
     return CollectionModel(
@@ -60,16 +23,15 @@ class CollectionModel extends HiveObject {
     );
   }
 
-  factory CollectionModel.blank() => CollectionModel(name: '');
+  factory CollectionModel.blank() => CollectionModel(
+        id: '',
+        name: '',
+      );
 
-  @HiveField(0)
-  late String id;
-  @HiveField(1)
-  late String name;
-  @HiveField(2)
-  late String? description;
-  @HiveField(3, defaultValue: defaultVisibility)
-  late CollectionVisibility visibility;
+  final String id;
+  final String name;
+  final String? description;
+  final CollectionVisibility visibility;
 
   CollectionModel copyWith({
     String? name,

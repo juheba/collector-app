@@ -1,5 +1,6 @@
 import 'package:collector/models/collection_model.dart';
 import 'package:collector/presentation/pages/collections/collection_detail_page.dart';
+import 'package:collector/presentation/utils/collection_visibility_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

@@ -27,6 +27,10 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "app_name": MessageLookupByLibrary.simpleMessage("Collector-App"),
+        "collection_visibility_private":
+            MessageLookupByLibrary.simpleMessage("Privat"),
+        "collection_visibility_public":
+            MessageLookupByLibrary.simpleMessage("Public"),
         "collections_page_empty_state":
             MessageLookupByLibrary.simpleMessage("No collection found."),
         "collections_page_title":
