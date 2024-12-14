@@ -1,12 +1,12 @@
 import 'dart:typed_data';
 
 import 'package:collector/generated/l10n.dart';
-import 'package:collector/middleware/cubit/item/item_detail_cubit.dart';
-import 'package:collector/middleware/cubit/item/item_list_cubit.dart';
+import 'package:collector/presentation/pages/items/state_management/item_detail_cubit.dart';
+import 'package:collector/presentation/pages/items/state_management/item_list_cubit.dart';
 import 'package:collector/model/item_model.dart';
-import 'package:collector/page/shared/checkbox_widget.dart';
-import 'package:collector/page/shared/item_ownership_status_segmented_button.dart';
-import 'package:collector/page/shared/item_status_segmented_button.dart';
+import 'package:collector/presentation/pages/shared/is_lendable_checkbox_widget.dart';
+import 'package:collector/presentation/pages/shared/item_ownership_status_segmented_button.dart';
+import 'package:collector/presentation/pages/shared/item_status_segmented_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -136,7 +136,7 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
               children: [
                 IsLendableCheckbox(
                   isSelected: context.read<ItemDetailCubit>().state.item?.isLendable,
-                  onChanged: (isLendable) => context.read<ItemDetailCubit>().updateItem(isLendable: isLendable),
+                  onChanged: ({required status}) => context.read<ItemDetailCubit>().updateItem(isLendable: status),
                 ),
                 Text(
                   l10n.editor_item_can_borrow_title,

@@ -1,21 +1,29 @@
 import 'package:collector/model/item_model.dart';
 import 'package:flutter/material.dart';
 
-class ItemListElementWidget extends StatelessWidget {
-  const ItemListElementWidget({
+class ItemListTile extends StatelessWidget {
+  const ItemListTile({
     required this.item,
-    this.onTap,
-    this.isSelectionModeActive = false,
     this.isSelected = false,
+    this.isSelectionModeActive = false,
+    this.onTap,
     this.selectionChanged,
     super.key,
   });
 
+  /// The item to be displayed.
   final ItemModel item;
+
+  /// Whether the item is selected.
+  final bool isSelected;
+
+  /// Callback that is called when the item is tapped.
   final void Function()? onTap;
 
+  /// Whether multiple selection mode is active.
   final bool isSelectionModeActive;
-  final bool isSelected;
+
+  /// Callback that is called when the selection state of the item changes.
   final void Function(bool isSelected)? selectionChanged;
 
   @override

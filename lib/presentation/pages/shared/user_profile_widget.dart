@@ -1,26 +1,5 @@
 import 'package:flutter/material.dart';
 
-class MockUser {
-  static const String name = 'Name Mockname';
-  static const String idToken = 'bearerJWT12345678910111213';
-  static final Uri pictureUrl = Uri.parse(
-    'https://miro.medium.com/v2/resize:fit:720/format:webp/0*vowtRZE_wvyVA7CB',
-  );
-}
-
-class MockUserWidget extends StatelessWidget {
-  const MockUserWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return UserProfileWidget(
-      name: MockUser.name,
-      idToken: MockUser.idToken,
-      pictureUrl: MockUser.pictureUrl,
-    );
-  }
-}
-
 class UserProfileWidget extends StatelessWidget {
   const UserProfileWidget({
     required this.name,

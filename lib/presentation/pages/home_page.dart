@@ -1,7 +1,7 @@
 // '/home' wenn logged in
 
 import 'package:collector/generated/l10n.dart';
-import 'package:collector/page/scaffold_page.dart';
+import 'package:collector/presentation/pages/scaffold_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePageWidget extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:collector/auth/auth_service.dart';
 import 'package:collector/generated/l10n.dart';
-import 'package:collector/middleware/cubit/user/user_profile_cubit.dart';
-import 'package:collector/page/scaffold_page.dart';
+import 'package:collector/presentation/pages/profile/state_management/user_profile_cubit.dart';
+import 'package:collector/presentation/pages/scaffold_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

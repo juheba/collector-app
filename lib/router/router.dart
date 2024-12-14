@@ -1,14 +1,14 @@
 import 'package:collector/data/persistence/access_user_credentials.dart';
-import 'package:collector/page/callback_page.dart';
-import 'package:collector/page/collection_detail_page.dart';
-import 'package:collector/page/collections_page.dart';
-import 'package:collector/page/home_page.dart';
-import 'package:collector/page/item_detail_page.dart';
-import 'package:collector/page/items_page.dart';
-import 'package:collector/page/login_page.dart';
-import 'package:collector/page/new_item_page.dart';
-import 'package:collector/page/shared/scaffold_nav_bar.dart';
-import 'package:collector/page/user_profile_page.dart';
+import 'package:collector/presentation/pages/callback_page.dart';
+import 'package:collector/presentation/pages/collections/collection_detail_page.dart';
+import 'package:collector/presentation/pages/collections/collections_page.dart';
+import 'package:collector/presentation/pages/home_page.dart';
+import 'package:collector/presentation/pages/items/item_detail_page.dart';
+import 'package:collector/presentation/pages/items/items_page.dart';
+import 'package:collector/presentation/pages/login_page.dart';
+import 'package:collector/presentation/pages/items/new_item_page.dart';
+import 'package:collector/presentation/widgets/scaffold_with_nav_bar.dart';
+import 'package:collector/presentation/pages/profile/user_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

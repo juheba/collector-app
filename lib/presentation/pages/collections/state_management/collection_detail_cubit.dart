@@ -63,7 +63,7 @@ class CollectionDetailCubit extends Cubit<CollectionDetailState> {
     CollectionVisibility? collectionVisibility,
   }) async {
     final collection = state.editCollection;
-    collection?.update(
+    collection?.copyWith(
       name: name,
       description: description,
       visibility: collectionVisibility,

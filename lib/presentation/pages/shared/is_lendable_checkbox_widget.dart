@@ -4,11 +4,15 @@ import 'package:flutter/material.dart';
 class IsLendableCheckbox extends StatefulWidget {
   const IsLendableCheckbox({
     required this.onChanged,
-    super.key,
     this.isSelected,
+    super.key,
   });
+
+  /// Whether the checkbox is checked
   final bool? isSelected;
-  final void Function(bool status) onChanged;
+
+  /// Function to be called when the checkbox is toggled
+  final void Function({required bool status}) onChanged;
 
   @override
   State<IsLendableCheckbox> createState() => _IsLendableCheckboxState();
@@ -30,7 +34,7 @@ class _IsLendableCheckboxState extends State<IsLendableCheckbox> {
       onChanged: (bool? value) {
         setState(() {
           isChecked = value!;
-          widget.onChanged(isChecked);
+          widget.onChanged(status: isChecked);
         });
       },
     );

@@ -1,4 +1,4 @@
-import 'package:collector/page/shared/collector_app_bar.dart';
+import 'package:collector/presentation/pages/shared/collector_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class ScaffoldPage extends StatelessWidget {

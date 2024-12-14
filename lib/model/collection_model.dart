@@ -4,31 +4,6 @@ import 'package:uuid/uuid.dart';
 
 part 'collection_model.g.dart';
 
-class MockCollections {
-  const MockCollections();
-
-  static List<CollectionModel> getCollections() {
-    return [
-      CollectionModel(name: 'Favorite Games', visibility: CollectionVisibility.public),
-      CollectionModel(name: 'Epic Movies', visibility: CollectionVisibility.public),
-      CollectionModel(name: 'Inspirational Reads', visibility: CollectionVisibility.private),
-    ];
-  }
-}
-
-/*
-class CollectionModel {
-  const CollectionModel({
-    required this.id,
-    required this.title,
-    this.color,
-    this.foregroundColor,
-  });
-
-  final String id;
-  final String title;
-  final Color? color;
-}*/
 
 @HiveType(typeId: 1)
 enum CollectionVisibility {
@@ -96,14 +71,15 @@ class CollectionModel extends HiveObject {
   @HiveField(3, defaultValue: defaultVisibility)
   late CollectionVisibility visibility;
 
-  CollectionModel update({
+  CollectionModel copyWith({
     String? name,
     CollectionVisibility? visibility,
     String? description,
-  }) {
-    this.name = name ?? this.name;
-    this.description = description ?? this.description;
-    this.visibility = visibility ?? this.visibility;
-    return this;
-  }
+  }) =>
+      CollectionModel(
+        id: id,
+        name: name ?? this.name,
+        description: description ?? this.description,
+        visibility: visibility ?? this.visibility,
+      );
 }

@@ -1,7 +1,7 @@
 import 'package:collector/model/item_model.dart';
-import 'package:collector/page/item_detail_page.dart';
-import 'package:collector/page/items_page.dart';
-import 'package:collector/page/shared/item_list_tile.dart';
+import 'package:collector/presentation/pages/items/item_detail_page.dart';
+import 'package:collector/presentation/pages/items/items_page.dart';
+import 'package:collector/presentation/widgets/item_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -29,7 +29,7 @@ class _ItemsListWidgetState extends State<ItemsListWidget> {
       itemBuilder: (context, index) {
         final item = widget.items[index];
 
-        return ItemListElementWidget(
+        return ItemListTile(
           item: item,
           onTap: () => context.goNamed(
             ItemDetailPageWidget.routeName,

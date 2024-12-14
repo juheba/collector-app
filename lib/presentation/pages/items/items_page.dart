@@ -1,9 +1,9 @@
 import 'package:collector/data/persistence/database_service.dart';
 import 'package:collector/generated/l10n.dart';
-import 'package:collector/middleware/cubit/item/item_list_cubit.dart';
-import 'package:collector/page/scaffold_page.dart';
-import 'package:collector/page/shared/empty_state_widget.dart';
-import 'package:collector/page/shared/item_list.dart';
+import 'package:collector/presentation/pages/items/state_management/item_list_cubit.dart';
+import 'package:collector/presentation/pages/scaffold_page.dart';
+import 'package:collector/presentation/pages/shared/item_list.dart';
+import 'package:collector/presentation/widgets/empty_state_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

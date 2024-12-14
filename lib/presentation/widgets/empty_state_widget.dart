@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class EmptyStateWidget extends StatelessWidget {
-  const EmptyStateWidget({required this.message, super.key});
+  const EmptyStateWidget({
+    required this.message,
+    super.key,
+  });
 
+  /// The message to be displayed
   final String message;
 
   @override
