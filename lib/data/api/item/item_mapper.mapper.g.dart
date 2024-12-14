@@ -10,17 +10,16 @@ class ItemMapperImpl extends ItemMapper {
   ItemMapperImpl() : super();
 
   @override
-  ItemModel mapExernalToItemModel(Item external) {
+  ItemModel mapExternalToItemModel(Item external) {
     final itemmodel = ItemModel(
       id: external.itemId,
       title: external.title,
-      type: ItemMapper.mapExernalToItemType(external),
+      type: ItemMapper.mapExternalToItemType(external),
       description: external.description,
       isLendable: external.isLendable,
-      ownershipStatus:
-          mapExernalToItemOwnershipStatus(external.ownershipStatus),
-      status: mapExernalToItemStatus(external.status),
-      attachment: ItemMapper.mapExernalToAttachmentModel(external),
+      ownershipStatus: mapExternalToItemOwnershipStatus(external.ownershipStatus),
+      status: mapExternalToItemStatus(external.status),
+      attachment: ItemMapper.mapExternalToAttachmentModel(external),
     );
     return itemmodel;
   }

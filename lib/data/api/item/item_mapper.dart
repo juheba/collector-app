@@ -14,24 +14,24 @@ part 'item_mapper.mapper.g.dart';
 @Mapper()
 abstract class ItemMapper {
   @IgnoreMapping()
-  List<ItemModel> mapExernalToListItemModel(List<Item> external) {
-    return external.map(mapExernalToItemModel).toList();
+  List<ItemModel> mapExternalToListItemModel(List<Item> external) {
+    return external.map(mapExternalToItemModel).toList();
   }
 
   late ItemStatus status;
 
   @Mapping(source: 'itemId', target: 'id')
-  @Mapping(source: mapExernalToAttachmentModel, target: 'attachment')
-  @Mapping(source: mapExernalToItemType, target: 'type')
-  ItemModel mapExernalToItemModel(Item external);
+  @Mapping(source: mapExternalToAttachmentModel, target: 'attachment')
+  @Mapping(source: mapExternalToItemType, target: 'type')
+  ItemModel mapExternalToItemModel(Item external);
 
   @IgnoreMapping()
-  static AttachmentModel mapExernalToAttachmentModel(Item external) {
+  static AttachmentModel mapExternalToAttachmentModel(Item external) {
     return AttachmentModel(attachmentUrl: external.attachmentUrl);
   }
 
   @IgnoreMapping()
-  static ItemType mapExernalToItemType(Item external) => external.itemType == null
+  static ItemType mapExternalToItemType(Item external) => external.itemType == null
       ? ItemType.undefined
       : switch (external.itemType) {
           'BOOK' => ItemType.book,
@@ -41,7 +41,7 @@ abstract class ItemMapper {
         };
 
   @IgnoreMapping()
-  ItemOwnershipStatus mapExernalToItemOwnershipStatus(ItemOwnershipStatusEnum external) => switch (external) {
+  ItemOwnershipStatus mapExternalToItemOwnershipStatus(ItemOwnershipStatusEnum external) => switch (external) {
         ItemOwnershipStatusEnum.WISHLIST => ItemOwnershipStatus.wishlist,
         ItemOwnershipStatusEnum.OWNER => ItemOwnershipStatus.owner,
         ItemOwnershipStatusEnum.BORROWER => ItemOwnershipStatus.borrower,
@@ -49,7 +49,7 @@ abstract class ItemMapper {
       };
 
   @IgnoreMapping()
-  ItemStatus mapExernalToItemStatus(ItemStatusEnum external) => switch (external) {
+  ItemStatus mapExternalToItemStatus(ItemStatusEnum external) => switch (external) {
         ItemStatusEnum.TODO => ItemStatus.todo,
         ItemStatusEnum.PROCESSING => ItemStatus.processing,
         ItemStatusEnum.DONE => ItemStatus.done,

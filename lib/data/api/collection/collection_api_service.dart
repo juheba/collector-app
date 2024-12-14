@@ -28,7 +28,7 @@ class CollectionApiService {
         return [];
       }
 
-      return CollectionMapperImpl().mapExernalToListCollectionModel(
+      return CollectionMapperImpl().mapExternalToListCollectionModel(
         collectionsResponse.collections.toList(),
       );
     } catch (e) {
@@ -46,7 +46,7 @@ class CollectionApiService {
         return null;
       }
 
-      return CollectionMapperImpl().mapExernalToCollectionModel(
+      return CollectionMapperImpl().mapExternalToCollectionModel(
         collectionResponse.collection,
       );
     } catch (e) {
@@ -64,7 +64,7 @@ class CollectionApiService {
         return [];
       }
 
-      return ItemMapperImpl().mapExernalToListItemModel(
+      return ItemMapperImpl().mapExternalToListItemModel(
         collectionItemsResponse.items.toList(),
       );
     } catch (e) {

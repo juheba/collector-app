@@ -10,7 +10,7 @@ class AttachmentMapperImpl extends AttachmentMapper {
   AttachmentMapperImpl() : super();
 
   @override
-  AttachmentModel mapExernalToAttachmentModel(AttachmentURLResponse external) {
+  AttachmentModel mapExternalToAttachmentModel(AttachmentURLResponse external) {
     final attachmentmodel = AttachmentModel(uploadUrl: external.uploadUrl);
     return attachmentmodel;
   }

@@ -6,5 +6,5 @@ part 'attachment_mapper.mapper.g.dart';
 
 @Mapper()
 abstract class AttachmentMapper {
-  AttachmentModel mapExernalToAttachmentModel(AttachmentURLResponse external);
+  AttachmentModel mapExternalToAttachmentModel(AttachmentURLResponse external);
 }

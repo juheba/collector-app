@@ -51,7 +51,7 @@ class AttachmentApiService {
         throw Exception('Failed to create attachments: response is null');
       }
 
-      return AttachmentMapperImpl().mapExernalToAttachmentModel(response);
+      return AttachmentMapperImpl().mapExternalToAttachmentModel(response);
     } catch (e) {
       // TODO(me): ErrorHandling einbauen!
       throw Exception('Failed to create attachments: $e');

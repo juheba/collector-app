@@ -30,7 +30,7 @@ class ItemApiService {
         return null;
       }
 
-      return ItemMapperImpl().mapExernalToItemModel(
+      return ItemMapperImpl().mapExternalToItemModel(
         itemResponse.item,
       );
     } catch (e) {
@@ -47,7 +47,7 @@ class ItemApiService {
         return [];
       }
 
-      return ItemMapperImpl().mapExernalToListItemModel(
+      return ItemMapperImpl().mapExternalToListItemModel(
         itemsResponse.items.toList(),
       );
     } catch (e) {
@@ -72,7 +72,7 @@ class ItemApiService {
         throw Exception('Failed to create item');
       }
 
-      return ItemMapperImpl().mapExernalToItemModel(itemResponse.item);
+      return ItemMapperImpl().mapExternalToItemModel(itemResponse.item);
     } catch (e) {
       // TODO(me): ErrorHandling einbauen!
       throw Exception('Failed to create item: $e');
@@ -95,7 +95,7 @@ class ItemApiService {
         throw Exception('Failed to update item');
       }
 
-      return ItemMapperImpl().mapExernalToItemModel(itemResponse.item);
+      return ItemMapperImpl().mapExternalToItemModel(itemResponse.item);
     } catch (e) {
       // TODO(me): ErrorHandling einbauen!
       throw Exception('Failed to update item: $e');
@@ -119,7 +119,7 @@ class ItemApiService {
         return [];
       }
 
-      return CollectionMapperImpl().mapExernalToListCollectionModel(
+      return CollectionMapperImpl().mapExternalToListCollectionModel(
         collectionItemsResponse.collections.toList(),
       );
     } catch (e) {

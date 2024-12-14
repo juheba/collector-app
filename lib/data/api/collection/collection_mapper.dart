@@ -9,15 +9,15 @@ part 'collection_mapper.mapper.g.dart';
 @Mapper()
 abstract class CollectionMapper {
   @IgnoreMapping()
-  List<CollectionModel> mapExernalToListCollectionModel(List<Collection> external) {
-    return external.map(mapExernalToCollectionModel).toList();
+  List<CollectionModel> mapExternalToListCollectionModel(List<Collection> external) {
+    return external.map(mapExternalToCollectionModel).toList();
   }
 
   @Mapping(source: 'collectionId', target: 'id')
-  CollectionModel mapExernalToCollectionModel(Collection external);
+  CollectionModel mapExternalToCollectionModel(Collection external);
 
   @IgnoreMapping()
-  CollectionVisibility mapExernalToCollectionVisibility(
+  CollectionVisibility mapExternalToCollectionVisibility(
     CollectionVisibilityEnum external,
   ) =>
       switch (external) {
