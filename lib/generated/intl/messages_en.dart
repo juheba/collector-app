@@ -62,6 +62,24 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Can not be borrowed"),
         "item_details_ownership_status": m0,
         "item_details_process": m1,
+        "item_ownership_status_borrower":
+            MessageLookupByLibrary.simpleMessage("Borrower"),
+        "item_ownership_status_owner":
+            MessageLookupByLibrary.simpleMessage("Owner"),
+        "item_ownership_status_undefined":
+            MessageLookupByLibrary.simpleMessage("Unknown"),
+        "item_ownership_status_wishlist":
+            MessageLookupByLibrary.simpleMessage("Wishlist"),
+        "item_status_done": MessageLookupByLibrary.simpleMessage("Done"),
+        "item_status_in_progress":
+            MessageLookupByLibrary.simpleMessage("In progress"),
+        "item_status_todo": MessageLookupByLibrary.simpleMessage("ToDo"),
+        "item_status_undefined":
+            MessageLookupByLibrary.simpleMessage("Unknown"),
+        "item_type_book": MessageLookupByLibrary.simpleMessage("Book"),
+        "item_type_game": MessageLookupByLibrary.simpleMessage("Game"),
+        "item_type_movie": MessageLookupByLibrary.simpleMessage("Movie"),
+        "item_type_undefined": MessageLookupByLibrary.simpleMessage("Others"),
         "items_page_empty_state":
             MessageLookupByLibrary.simpleMessage("No items found."),
         "items_page_title": MessageLookupByLibrary.simpleMessage("Items"),

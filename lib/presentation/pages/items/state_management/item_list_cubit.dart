@@ -1,6 +1,6 @@
 import 'package:collector/data/api/item/item_api_service.dart';
 import 'package:collector/data/persistence/database_service.dart';
-import 'package:collector/model/item_model.dart';
+import 'package:collector/models/item_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

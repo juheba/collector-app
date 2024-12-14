@@ -2,8 +2,8 @@ import 'package:collector/data/api/aws_collector_service.dart';
 import 'package:collector/data/api/collection/collection_mapper.dart';
 import 'package:collector/data/api/item/item_mapper.dart';
 import 'package:collector/generated/openapi/collector-api/api/collection_api.dart';
-import 'package:collector/model/collection_model.dart';
-import 'package:collector/model/item_model.dart';
+import 'package:collector/models/collection_model.dart';
+import 'package:collector/models/item_model.dart';
 
 class CollectionApiService {
   factory CollectionApiService() => _instance;

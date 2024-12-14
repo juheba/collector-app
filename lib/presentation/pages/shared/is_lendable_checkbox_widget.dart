@@ -1,4 +1,4 @@
-import 'package:collector/model/item_model.dart';
+import 'package:collector/models/item_model.dart';
 import 'package:flutter/material.dart';
 
 class IsLendableCheckbox extends StatefulWidget {
@@ -19,12 +19,14 @@ class IsLendableCheckbox extends StatefulWidget {
 }
 
 class _IsLendableCheckboxState extends State<IsLendableCheckbox> {
-  bool isChecked = defaultIsLendable;
+  late bool isChecked;
+
+  static const bool _defaultIsLendable = false;
 
   @override
   void initState() {
     super.initState();
-    isChecked = widget.isSelected ?? defaultIsLendable;
+    isChecked = widget.isSelected ?? _defaultIsLendable;
   }
 
   @override

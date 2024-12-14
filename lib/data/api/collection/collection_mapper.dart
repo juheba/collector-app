@@ -1,6 +1,6 @@
 import 'package:collector/generated/openapi/collector-api/model/collection.dart';
 import 'package:collector/generated/openapi/collector-api/model/collection_visibility_enum.dart';
-import 'package:collector/model/collection_model.dart';
+import 'package:collector/models/collection_model.dart';
 import 'package:smartstruct/smartstruct.dart';
 
 part 'collection_mapper.mapper.g.dart';

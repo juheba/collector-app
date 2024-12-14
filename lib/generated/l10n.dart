@@ -379,6 +379,126 @@ class L10n {
       args: [],
     );
   }
+
+  /// `Book`
+  String get item_type_book {
+    return Intl.message(
+      'Book',
+      name: 'item_type_book',
+      desc: 'Label: Book',
+      args: [],
+    );
+  }
+
+  /// `Game`
+  String get item_type_game {
+    return Intl.message(
+      'Game',
+      name: 'item_type_game',
+      desc: 'Label: Game',
+      args: [],
+    );
+  }
+
+  /// `Movie`
+  String get item_type_movie {
+    return Intl.message(
+      'Movie',
+      name: 'item_type_movie',
+      desc: 'Label: Movie',
+      args: [],
+    );
+  }
+
+  /// `Others`
+  String get item_type_undefined {
+    return Intl.message(
+      'Others',
+      name: 'item_type_undefined',
+      desc: 'Label: Undefined',
+      args: [],
+    );
+  }
+
+  /// `ToDo`
+  String get item_status_todo {
+    return Intl.message(
+      'ToDo',
+      name: 'item_status_todo',
+      desc: 'Label: ToDo',
+      args: [],
+    );
+  }
+
+  /// `In progress`
+  String get item_status_in_progress {
+    return Intl.message(
+      'In progress',
+      name: 'item_status_in_progress',
+      desc: 'Label: In progress',
+      args: [],
+    );
+  }
+
+  /// `Done`
+  String get item_status_done {
+    return Intl.message(
+      'Done',
+      name: 'item_status_done',
+      desc: 'Label: Done',
+      args: [],
+    );
+  }
+
+  /// `Unknown`
+  String get item_status_undefined {
+    return Intl.message(
+      'Unknown',
+      name: 'item_status_undefined',
+      desc: 'Label: Undefined',
+      args: [],
+    );
+  }
+
+  /// `Wishlist`
+  String get item_ownership_status_wishlist {
+    return Intl.message(
+      'Wishlist',
+      name: 'item_ownership_status_wishlist',
+      desc: 'Label: Wishlist',
+      args: [],
+    );
+  }
+
+  /// `Owner`
+  String get item_ownership_status_owner {
+    return Intl.message(
+      'Owner',
+      name: 'item_ownership_status_owner',
+      desc: 'Label: Owner',
+      args: [],
+    );
+  }
+
+  /// `Borrower`
+  String get item_ownership_status_borrower {
+    return Intl.message(
+      'Borrower',
+      name: 'item_ownership_status_borrower',
+      desc: 'Label: Borrower',
+      args: [],
+    );
+  }
+
+  /// `Unknown`
+  String get item_ownership_status_undefined {
+    return Intl.message(
+      'Unknown',
+      name: 'item_ownership_status_undefined',
+      desc: 'Label: Undefined',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<L10n> {

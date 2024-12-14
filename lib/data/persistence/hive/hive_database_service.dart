@@ -1,5 +1,5 @@
 import 'package:collector/data/persistence/database_service.dart';
-import 'package:collector/model/item_model.dart';
+import 'package:collector/data/persistence/entities/entities.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive/hive.dart';

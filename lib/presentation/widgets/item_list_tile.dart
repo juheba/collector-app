@@ -1,4 +1,5 @@
-import 'package:collector/model/item_model.dart';
+import 'package:collector/models/item_model.dart';
+import 'package:collector/presentation/utils/item_type_utils.dart';
 import 'package:flutter/material.dart';
 
 class ItemListTile extends StatelessWidget {
@@ -67,7 +68,7 @@ class ItemListTile extends StatelessWidget {
               )
             : null,
         trailing: Text(
-          item.type?.name ?? '',
+          item.type?.displayName(context) ?? '',
           style: const TextStyle(color: Colors.grey),
         ),
       ),

@@ -5,8 +5,8 @@ import 'package:collector/generated/openapi/collector-api/api/collection_api.dar
 import 'package:collector/generated/openapi/collector-api/api/item_api.dart';
 import 'package:collector/generated/openapi/collector-api/model/create_item_request.dart';
 import 'package:collector/generated/openapi/collector-api/model/update_item_request.dart';
-import 'package:collector/model/collection_model.dart';
-import 'package:collector/model/item_model.dart';
+import 'package:collector/models/collection_model.dart';
+import 'package:collector/models/item_model.dart';
 
 class ItemApiService {
   factory ItemApiService() => _instance;

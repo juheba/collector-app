@@ -1,7 +1,7 @@
 import 'package:collector/data/persistence/hive/hive_database_service.dart';
 import 'package:collector/data/persistence/sqflight/sqflite_database_service.dart';
-import 'package:collector/model/collection_model.dart';
-import 'package:collector/model/item_model.dart';
+import 'package:collector/models/collection_model.dart';
+import 'package:collector/models/item_model.dart';
 import 'package:flutter/foundation.dart';
 
 abstract class DatabaseService {

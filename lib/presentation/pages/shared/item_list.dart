@@ -1,4 +1,4 @@
-import 'package:collector/model/item_model.dart';
+import 'package:collector/models/item_model.dart';
 import 'package:collector/presentation/pages/items/item_detail_page.dart';
 import 'package:collector/presentation/pages/items/items_page.dart';
 import 'package:collector/presentation/widgets/item_list_tile.dart';

@@ -102,6 +102,54 @@
       }
     }
   },
+  "item_ownership_status_borrower": "Borrower",
+  "@item_ownership_status_borrower": {
+    "description": "Label: Borrower"
+  },
+  "item_ownership_status_owner": "Owner",
+  "@item_ownership_status_owner": {
+    "description": "Label: Owner"
+  },
+  "item_ownership_status_undefined": "Unknown",
+  "@item_ownership_status_undefined": {
+    "description": "Label: Undefined"
+  },
+  "item_ownership_status_wishlist": "Wishlist",
+  "@item_ownership_status_wishlist": {
+    "description": "Label: Wishlist"
+  },
+  "item_status_done": "Fertig",
+  "@item_status_done": {
+    "description": "Label: Done"
+  },
+  "item_status_in_progress": "In progress",
+  "@item_status_in_progress": {
+    "description": "Label: In progress"
+  },
+  "item_status_todo": "ToDo",
+  "@item_status_todo": {
+    "description": "Label: ToDo"
+  },
+  "item_status_undefined": "Unbekannt",
+  "@item_status_undefined": {
+    "description": "Label: Undefined"
+  },
+  "item_type_book": "Buch",
+  "@item_type_book": {
+    "description": "Label: Book"
+  },
+  "item_type_game": "Spiel",
+  "@item_type_game": {
+    "description": "Label: Game"
+  },
+  "item_type_movie": "Film",
+  "@item_type_movie": {
+    "description": "Label: Movie"
+  },
+  "item_type_undefined": "Sonstiges",
+  "@item_type_undefined": {
+    "description": "Label: Undefined"
+  },
   "items_page_empty_state": "Keine Gegenstände vorhanden.",
   "@items_page_empty_state": {
     "description": "Message: There are no items available"

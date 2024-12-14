@@ -4,7 +4,7 @@ import 'package:collector/generated/openapi/collector-api/api/attachment_api.dar
 import 'package:collector/generated/openapi/collector-api/model/create_item_attachment_request.dart';
 import 'package:collector/generated/openapi/collector-api/model/create_location_attachment_request.dart';
 import 'package:collector/generated/openapi/collector-api/model/generate_upload_url_request.dart';
-import 'package:collector/model/attachment_model.dart';
+import 'package:collector/models/attachment_model.dart';
 import 'package:one_of/one_of.dart';
 
 class AttachmentApiService {

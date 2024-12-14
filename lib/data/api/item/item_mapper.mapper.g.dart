@@ -12,9 +12,9 @@ class ItemMapperImpl extends ItemMapper {
   @override
   ItemModel mapExernalToItemModel(Item external) {
     final itemmodel = ItemModel(
+      id: external.itemId,
       title: external.title,
       type: ItemMapper.mapExernalToItemType(external),
-      id: external.itemId,
       description: external.description,
       isLendable: external.isLendable,
       ownershipStatus:

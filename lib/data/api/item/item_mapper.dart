@@ -5,9 +5,7 @@ import 'package:collector/generated/openapi/collector-api/model/item.dart';
 import 'package:collector/generated/openapi/collector-api/model/item_ownership_status_enum.dart';
 import 'package:collector/generated/openapi/collector-api/model/item_status_enum.dart';
 import 'package:collector/generated/openapi/collector-api/model/update_item_request.dart';
-import 'package:collector/model/attachment_model.dart';
-import 'package:collector/model/collection_model.dart';
-import 'package:collector/model/item_model.dart';
+import 'package:collector/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:smartstruct/smartstruct.dart';
 
@@ -35,23 +33,50 @@ abstract class ItemMapper {
   @IgnoreMapping()
   static ItemType mapExernalToItemType(Item external) => external.itemType == null
       ? ItemType.undefined
-      : ItemType.values.firstWhere(
-          (type) => type.name == external.itemType,
-          orElse: () => ItemType.undefined,
-        );
+      : switch (external.itemType) {
+          'BOOK' => ItemType.book,
+          'MOVIE' => ItemType.movie,
+          'GAME' => ItemType.game,
+          _ => ItemType.undefined,
+        };
 
   @IgnoreMapping()
-  ItemOwnershipStatus mapExernalToItemOwnershipStatus(ItemOwnershipStatusEnum external) =>
-      ItemOwnershipStatus.values.byName(external.name.toLowerCase());
+  ItemOwnershipStatus mapExernalToItemOwnershipStatus(ItemOwnershipStatusEnum external) => switch (external) {
+        ItemOwnershipStatusEnum.WISHLIST => ItemOwnershipStatus.wishlist,
+        ItemOwnershipStatusEnum.OWNER => ItemOwnershipStatus.owner,
+        ItemOwnershipStatusEnum.BORROWER => ItemOwnershipStatus.borrower,
+        ItemOwnershipStatusEnum() => ItemOwnershipStatus.unknown,
+      };
 
   @IgnoreMapping()
-  ItemStatus mapExernalToItemStatus(ItemStatusEnum external) => ItemStatus.values.byName(external.name.toLowerCase());
+  ItemStatus mapExernalToItemStatus(ItemStatusEnum external) => switch (external) {
+        ItemStatusEnum.TODO => ItemStatus.todo,
+        ItemStatusEnum.PROCESSING => ItemStatus.processing,
+        ItemStatusEnum.DONE => ItemStatus.done,
+        ItemStatusEnum() => ItemStatus.unknown,
+      };
 
   @IgnoreMapping()
-  ItemOwnershipStatusEnum mapItemOwnershipStatusToExternal(ItemOwnershipStatus internal) =>
-      ItemOwnershipStatusEnum.values.firstWhere((element) => element.name == internal.name);
+  ItemOwnershipStatusEnum mapItemOwnershipStatusToExternal(ItemOwnershipStatus internal) => switch (internal) {
+        ItemOwnershipStatus.wishlist => ItemOwnershipStatusEnum.WISHLIST,
+        ItemOwnershipStatus.owner => ItemOwnershipStatusEnum.OWNER,
+        ItemOwnershipStatus.borrower => ItemOwnershipStatusEnum.BORROWER,
+        ItemOwnershipStatus.unknown => ItemOwnershipStatusEnum.WISHLIST,
+      };
 
   @IgnoreMapping()
-  ItemStatusEnum mapItemStatusToExternal(ItemStatus internal) =>
-      ItemStatusEnum.values.firstWhere((element) => element.name == internal.name);
+  ItemStatusEnum mapItemStatusToExternal(ItemStatus internal) => switch (internal) {
+        ItemStatus.todo => ItemStatusEnum.TODO,
+        ItemStatus.processing => ItemStatusEnum.PROCESSING,
+        ItemStatus.done => ItemStatusEnum.DONE,
+        ItemStatus.unknown => ItemStatusEnum.TODO,
+      };
+
+  @IgnoreMapping()
+  String mapItemTypeToExternal(ItemType internal) => switch (internal) {
+        ItemType.book => 'BOOK',
+        ItemType.movie => 'MOVIE',
+        ItemType.game => 'GAME',
+        ItemType.undefined => 'OTHERS',
+      };
 }

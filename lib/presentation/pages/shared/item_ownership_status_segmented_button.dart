@@ -1,14 +1,16 @@
-import 'package:collector/model/item_model.dart';
+import 'package:collector/models/item_model.dart';
+import 'package:collector/models/item_ownership_status.dart';
+import 'package:collector/presentation/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class OwnershipStatusSingleChoiceSegmentedButton extends StatefulWidget {
   const OwnershipStatusSingleChoiceSegmentedButton({
     required this.statusChanged,
+    required this.selected,
     super.key,
-    this.selected,
   });
 
-  final ItemOwnershipStatus? selected;
+  final ItemOwnershipStatus selected;
   final void Function(ItemOwnershipStatus status) statusChanged;
 
   @override
@@ -21,13 +23,7 @@ class _OwnershipStatusSingleChoiceSegmentedButtonState extends State<OwnershipSt
   @override
   void initState() {
     super.initState();
-    selectedStatus = widget.selected ?? defaultItemOwnershipStatus;
-  }
-
-  void resetState() {
-    setState(() {
-      selectedStatus = defaultItemOwnershipStatus;
-    });
+    selectedStatus = widget.selected;
   }
 
   @override
@@ -37,7 +33,7 @@ class _OwnershipStatusSingleChoiceSegmentedButtonState extends State<OwnershipSt
           .map(
             (status) => ButtonSegment(
               value: status,
-              label: Text(status.name),
+              label: Text(status.displayName(context)),
               icon: Icon(
                 status.icon,
                 color: status.color,

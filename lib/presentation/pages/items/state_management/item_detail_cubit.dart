@@ -5,9 +5,10 @@ import 'package:collector/data/api/item/item_api_service.dart';
 import 'package:collector/data/api/s3_rest_api_service.dart';
 import 'package:collector/data/persistence/database_service.dart';
 import 'package:collector/generated/openapi/collector-api/model/collection.dart';
-import 'package:collector/model/attachment_model.dart';
-import 'package:collector/model/collection_model.dart';
-import 'package:collector/model/item_model.dart';
+import 'package:collector/models/attachment_model.dart';
+import 'package:collector/models/collection_model.dart';
+import 'package:collector/models/item_model.dart';
+import 'package:collector/models/models.dart';
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -112,8 +113,7 @@ class ItemDetailCubit extends Cubit<ItemDetailState> {
     ItemStatus? status,
     bool? isLendable,
   }) async {
-    final item = state.editItem;
-    item?.update(
+    final item = state.editItem?.copyWith(
       title: title,
       description: description,
       ownershipStatus: ownershipStatus,

@@ -1,9 +1,10 @@
 import 'dart:typed_data';
 
 import 'package:collector/generated/l10n.dart';
+import 'package:collector/models/item_model.dart';
+import 'package:collector/models/item_ownership_status.dart';
+import 'package:collector/models/item_status.dart';
 import 'package:collector/presentation/pages/items/state_management/item_detail_cubit.dart';
-import 'package:collector/presentation/pages/items/state_management/item_list_cubit.dart';
-import 'package:collector/model/item_model.dart';
 import 'package:collector/presentation/pages/shared/is_lendable_checkbox_widget.dart';
 import 'package:collector/presentation/pages/shared/item_ownership_status_segmented_button.dart';
 import 'package:collector/presentation/pages/shared/item_status_segmented_button.dart';
@@ -118,7 +119,7 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
               style: headlineStyle,
             ),
             OwnershipStatusSingleChoiceSegmentedButton(
-              selected: context.read<ItemDetailCubit>().state.item?.ownershipStatus,
+              selected: context.read<ItemDetailCubit>().state.item?.ownershipStatus ?? ItemOwnershipStatus.wishlist,
               statusChanged: (status) => context.read<ItemDetailCubit>().updateItem(ownershipStatus: status),
             ),
             spacingBox,
@@ -127,7 +128,7 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
               style: headlineStyle,
             ),
             ItemStatusSingleChoiceSegmentedButton(
-              selectedStatus: context.read<ItemDetailCubit>().state.item?.status,
+              selectedStatus: context.read<ItemDetailCubit>().state.item?.status ?? ItemStatus.todo,
               statusChanged: (status) => context.read<ItemDetailCubit>().updateItem(status: status),
             ),
             spacingBox,
@@ -233,7 +234,7 @@ class _ChooseImage extends StatelessWidget {
                 padding: const EdgeInsets.all(8),
                 child: uploadButton,
               ),
-            )
+            ),
           ],
         ),
       ),
