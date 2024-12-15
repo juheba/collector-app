@@ -7,6 +7,8 @@ import 'package:collector/generated/openapi/collector-api/model/create_item_requ
 import 'package:collector/generated/openapi/collector-api/model/update_item_request.dart';
 import 'package:collector/models/collection_model.dart';
 import 'package:collector/models/item_model.dart';
+import 'package:collector/utils/failures.dart';
+import 'package:result_type/result_type.dart';
 
 class ItemApiService {
   factory ItemApiService() => _instance;
@@ -18,45 +20,51 @@ class ItemApiService {
 
   late final ItemApi _itemApi;
 
-  Future<List<ItemModel>> getAllItems() async {
+  Future<Result<List<ItemModel>, CollectorFailure>> getAllItems() async {
     return getItems();
   }
 
-  Future<ItemModel?> getItemById(String itemId) async {
+  Future<Result<ItemModel?, CollectorFailure>> getItemById(String itemId) async {
     try {
       final itemResponse = (await _itemApi.getItem(itemId: itemId)).data;
 
       if (itemResponse == null) {
-        return null;
+        return Success(null);
       }
 
-      return ItemMapperImpl().mapExternalToItemModel(
-        itemResponse.item,
+      return Success(
+        ItemMapperImpl().mapExternalToItemModel(itemResponse.item),
       );
     } catch (e) {
       // TODO(me): ErrorHandling einbauen!
-      throw Exception('Failed to fetch collections: $e');
+      return Failure(
+        UnknownFailure(message: 'Failed to fetch collections: $e'),
+      );
     }
   }
 
-  Future<List<ItemModel>> getItems({num? limit, String? nextKey}) async {
+  Future<Result<List<ItemModel>, CollectorFailure>> getItems({num? limit, String? nextKey}) async {
     try {
       final itemsResponse = (await _itemApi.getItems(limit: limit, nextKey: nextKey)).data;
 
       if (itemsResponse == null) {
-        return [];
+        return Success(const []);
       }
 
-      return ItemMapperImpl().mapExternalToListItemModel(
-        itemsResponse.items.toList(),
+      return Success(
+        ItemMapperImpl().mapExternalToListItemModel(
+          itemsResponse.items.toList(),
+        ),
       );
     } catch (e) {
       // TODO(me): ErrorHandling einbauen!
-      throw Exception('Failed to fetch collections: $e');
+      return Failure(
+        UnknownFailure(message: 'Failed to fetch collections: $e'),
+      );
     }
   }
 
-  Future<ItemModel> createItem(ItemModel item) async {
+  Future<Result<ItemModel, CollectorFailure>> createItem(ItemModel item) async {
     try {
       final builder = CreateItemRequestBuilder()
         ..title = item.title
@@ -69,17 +77,23 @@ class ItemApiService {
       final itemResponse = (await _itemApi.createItem(createItemRequest: builder.build())).data;
 
       if (itemResponse == null) {
-        throw Exception('Failed to create item');
+        return Failure(
+          const InvalidResponseFailure(message: 'Failed to create item'),
+        );
       }
 
-      return ItemMapperImpl().mapExternalToItemModel(itemResponse.item);
+      return Success(
+        ItemMapperImpl().mapExternalToItemModel(itemResponse.item),
+      );
     } catch (e) {
       // TODO(me): ErrorHandling einbauen!
-      throw Exception('Failed to create item: $e');
+      return Failure(
+        UnknownFailure(message: 'Failed to create item: $e'),
+      );
     }
   }
 
-  Future<ItemModel> updateItem(ItemModel item) async {
+  Future<Result<ItemModel, CollectorFailure>> updateItem(ItemModel item) async {
     try {
       final builder = UpdateItemRequestBuilder()
         ..title = item.title
@@ -92,39 +106,52 @@ class ItemApiService {
       final itemResponse = (await _itemApi.updateItem(itemId: item.id, updateItemRequest: builder.build())).data;
 
       if (itemResponse == null) {
-        throw Exception('Failed to update item');
+        return Failure(
+          const InvalidResponseFailure(message: 'Failed to update item'),
+        );
       }
 
-      return ItemMapperImpl().mapExternalToItemModel(itemResponse.item);
+      return Success(
+        ItemMapperImpl().mapExternalToItemModel(itemResponse.item),
+      );
     } catch (e) {
       // TODO(me): ErrorHandling einbauen!
-      throw Exception('Failed to update item: $e');
+      return Failure(
+        UnknownFailure(message: 'Failed to update item: $e'),
+      );
     }
   }
 
-  Future<void> deleteItem(String itemId) async {
+  Future<Result<void, CollectorFailure>> deleteItem(String itemId) async {
     try {
       await _itemApi.deleteItem(itemId: itemId);
+      return Success(null);
     } catch (e) {
       // TODO(me): ErrorHandling einbauen!
-      throw Exception('Failed to delete item: $e');
+      return Failure(
+        UnknownFailure(message: 'Failed to delete item: $e'),
+      );
     }
   }
 
-  Future<List<CollectionModel>> getAllCollectionsOfItem(String itemId) async {
+  Future<Result<List<CollectionModel>, CollectorFailure>> getAllCollectionsOfItem(String itemId) async {
     try {
       final collectionItemsResponse = (await _itemApi.getItemCollections(itemId: itemId)).data;
 
       if (collectionItemsResponse == null) {
-        return [];
+        return Success(const []);
       }
 
-      return CollectionMapperImpl().mapExternalToListCollectionModel(
-        collectionItemsResponse.collections.toList(),
+      return Success(
+        CollectionMapperImpl().mapExternalToListCollectionModel(
+          collectionItemsResponse.collections.toList(),
+        ),
       );
     } catch (e) {
       // TODO(me): ErrorHandling einbauen!
-      throw Exception('Failed to fetch collections of item: $e');
+      return Failure(
+        UnknownFailure(message: 'Failed to fetch collections of item: $e'),
+      );
     }
   }
 }

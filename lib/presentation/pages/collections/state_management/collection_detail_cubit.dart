@@ -15,36 +15,57 @@ class CollectionDetailCubit extends Cubit<CollectionDetailState> {
   final DatabaseService databaseService;
 
   Future<void> loadCollection(String id) async {
-    try {
-      final collection = await CollectionApiService().getCollectionById(id);
-      //final collections_db = await databaseService.loadCollection(id);
+    final collectionResult = await CollectionApiService().getCollectionById(id);
+    //final collections_db = await databaseService.loadCollection(id);
 
-      List<ItemModel> collectionItems;
-      if (collection == null) {
-        collectionItems = [];
-      } else {
-        collectionItems = (await CollectionApiService().getAllItemsOfCollection(collection.id)).toList();
-      }
-      emit(
-        state.copyWith(
-          status: CollectionDetailStatus.loaded,
-          collection: collection,
-          items: collectionItems,
-          editCollection: collection,
-        ),
-      );
-    } catch (e) {
-      // Handle errors or emit error state
-      emit(
+    collectionResult.result(
+      (collection) async {
+        if (collection == null) {
+          emit(
+            state.copyWith(
+              status: CollectionDetailStatus.loaded,
+              collection: collection,
+              items: [],
+              editCollection: collection,
+            ),
+          );
+        } else {
+          emit(
+            state.copyWith(
+              collection: collection,
+              editCollection: collection,
+            ),
+          );
+          await _loadItems(collection);
+        }
+      },
+      (error) => emit(
         state.copyWith(
           status: CollectionDetailStatus.failure,
-          errorMessage: e.toString(),
+          errorMessage: error.toString(),
         ),
-      );
-    }
+      ),
+    );
+  }
+
+  Future<void> _loadItems(CollectionModel collection) async {
+    final itemsResult = await CollectionApiService().getAllItemsOfCollection(collection.id);
+    itemsResult.result(
+      (items) => emit(
+        state.copyWith(
+          status: CollectionDetailStatus.loaded,
+          items: items,
+        ),
+      ),
+      (error) => state.copyWith(
+        status: CollectionDetailStatus.failure,
+        errorMessage: error.toString(),
+      ),
+    );
   }
 
   Future<void> saveCollection(CollectionModel collection) async {
+    // TODO(me): Save on server
     await databaseService.saveCollection(collection.id, collection);
   }
 

@@ -15,19 +15,20 @@ class CollectionListCubit extends Cubit<CollectionState> {
   }
 
   Future<void> loadCollections() async {
-    try {
-      final collections = await CollectionApiService().getAllCollections();
-      //final collections = (await databaseService.loadAllCollections()).values.toList();
-      emit(
+    final result = await CollectionApiService().getAllCollections();
+    //final collections = (await databaseService.loadAllCollections()).values.toList();
+
+    result.result(
+      (collections) => emit(
         state.copyWith(
           status: CollectionListStatus.loaded,
           collections: collections,
         ),
-      );
-    } catch (e) {
-      // Handle errors or emit error state
-      emit(state.copyWith(status: CollectionListStatus.failure));
-    }
+      ),
+      (error) => emit(
+        state.copyWith(status: CollectionListStatus.failure),
+      ),
+    );
   }
 
   Future<void> toggleSelectionMode() async {

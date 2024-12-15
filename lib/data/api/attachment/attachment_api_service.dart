@@ -5,7 +5,9 @@ import 'package:collector/generated/openapi/collector-api/model/create_item_atta
 import 'package:collector/generated/openapi/collector-api/model/create_location_attachment_request.dart';
 import 'package:collector/generated/openapi/collector-api/model/generate_upload_url_request.dart';
 import 'package:collector/models/attachment_model.dart';
+import 'package:collector/utils/failures.dart';
 import 'package:one_of/one_of.dart';
+import 'package:result_type/result_type.dart';
 
 class AttachmentApiService {
   factory AttachmentApiService() => _instance;
@@ -17,7 +19,7 @@ class AttachmentApiService {
 
   late final AttachmentApi _attachmentApi;
 
-  Future<AttachmentModel> generateItemUploadUrl(String itemId) async {
+  Future<Result<AttachmentModel, CollectorFailure>> generateItemUploadUrl(String itemId) async {
     return _generateUploadUrl(
       GenerateUploadUrlRequest(
         (builder) => builder
@@ -30,7 +32,7 @@ class AttachmentApiService {
     );
   }
 
-  Future<AttachmentModel> generateLocationUploadUrl(String locationId) async {
+  Future<Result<AttachmentModel, CollectorFailure>> generateLocationUploadUrl(String locationId) async {
     return _generateUploadUrl(
       GenerateUploadUrlRequest(
         (builder) => builder
@@ -43,18 +45,24 @@ class AttachmentApiService {
     );
   }
 
-  Future<AttachmentModel> _generateUploadUrl(GenerateUploadUrlRequest request) async {
+  Future<Result<AttachmentModel, CollectorFailure>> _generateUploadUrl(GenerateUploadUrlRequest request) async {
     try {
       final response = (await _attachmentApi.generateUploadUrl(generateUploadUrlRequest: request)).data;
 
       if (response == null) {
-        throw Exception('Failed to create attachments: response is null');
+        return Failure(
+          const InvalidResponseFailure(message: 'Failed to create attachments: response is null'),
+        );
       }
 
-      return AttachmentMapperImpl().mapExternalToAttachmentModel(response);
+      return Success(
+        AttachmentMapperImpl().mapExternalToAttachmentModel(response),
+      );
     } catch (e) {
       // TODO(me): ErrorHandling einbauen!
-      throw Exception('Failed to create attachments: $e');
+      return Failure(
+        UnknownFailure(message: 'Failed to create attachments: $e'),
+      );
     }
   }
 }

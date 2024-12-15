@@ -6,8 +6,6 @@ import 'package:collector/data/api/s3_rest_api_service.dart';
 import 'package:collector/data/persistence/database_service.dart';
 import 'package:collector/generated/openapi/collector-api/model/collection.dart';
 import 'package:collector/models/attachment_model.dart';
-import 'package:collector/models/collection_model.dart';
-import 'package:collector/models/item_model.dart';
 import 'package:collector/models/models.dart';
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
@@ -21,25 +19,24 @@ class ItemDetailCubit extends Cubit<ItemDetailState> {
   final DatabaseService databaseService;
 
   Future<void> loadItem(String id) async {
-    try {
-      final item = await ItemApiService().getItemById(id);
-      //final item = await databaseService.loadItem(id);
-      emit(
+    final itemResult = await ItemApiService().getItemById(id);
+    //final item = await databaseService.loadItem(id);
+
+    itemResult.result(
+      (item) => emit(
         state.copyWith(
           status: ItemDetailStatus.loaded,
           item: item,
           editItem: item,
         ),
-      );
-    } catch (e) {
-      // Handle errors or emit error state
-      emit(
+      ),
+      (error) => emit(
         state.copyWith(
           status: ItemDetailStatus.failure,
-          errorMessage: e.toString(),
+          errorMessage: error.toString(),
         ),
-      );
-    }
+      ),
+    );
   }
 
   Future<void> selectImage() async {
@@ -58,34 +55,34 @@ class ItemDetailCubit extends Cubit<ItemDetailState> {
     //await databaseService.saveItem(item.id, item);
     //await loadItem(item.id);
 
-    try {
-      final ItemModel updatedItem;
-      if (item.id.isEmpty) {
-        updatedItem = await ItemApiService().createItem(item);
-      } else {
-        updatedItem = await ItemApiService().updateItem(item);
-      }
-      if (state.image != null) {
-        final attach = await AttachmentApiService().generateItemUploadUrl(updatedItem.id);
-        await S3RestApiService().uploadAttachment(attach, state.image!);
-      }
+    final updateResult =
+        item.id.isEmpty ? await ItemApiService().createItem(item) : await ItemApiService().updateItem(item);
 
-      emit(
-        state.copyWith(
-          status: ItemDetailStatus.newly,
-          item: updatedItem,
-          editItem: updatedItem,
-        ),
-      );
-    } catch (e) {
-      // Handle errors or emit error state
-      emit(
+    // ignore: cascade_invocations
+    updateResult.result(
+      (updatedItem) async {
+        if (state.image != null) {
+          final attachResult = await AttachmentApiService().generateItemUploadUrl(updatedItem.id);
+          if (attachResult.isSuccess) {
+            await S3RestApiService().uploadAttachment(attachResult.success, state.image!);
+          }
+        }
+
+        emit(
+          state.copyWith(
+            status: ItemDetailStatus.newly,
+            item: updatedItem,
+            editItem: updatedItem,
+          ),
+        );
+      },
+      (error) => emit(
         state.copyWith(
           status: ItemDetailStatus.failure,
-          errorMessage: e.toString(),
+          errorMessage: error.toString(),
         ),
-      );
-    }
+      ),
+    );
   }
 
   Future<void> startEditing(ItemModel? item) async {

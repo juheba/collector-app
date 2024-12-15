@@ -54,6 +54,7 @@ dependencies:
   one_of_serializer: ">=1.5.0 <2.0.0"
   path_provider: ^2.1.3 # Needed for file paths with Hive and sqflite
 
+  result_type: ^0.2.0
   shared_preferences: ^2.2.3
   smartstruct: ^1.4.0 # Mapper
   sqflite: ^2.3.3

@@ -16,19 +16,22 @@ class ItemListCubit extends Cubit<ItemState> {
   }
 
   Future<void> loadItems() async {
-    try {
-      final items = await ItemApiService().getAllItems();
-      //final items = await databaseService.loadAllItems().toList();
-      emit(
+    final result = await ItemApiService().getAllItems();
+    //final items = await databaseService.loadAllItems().toList();
+
+    result.result(
+      (items) => emit(
         state.copyWith(
           status: ItemListStatus.loaded,
           items: items,
         ),
-      );
-    } catch (e) {
-      // Handle errors or emit error state
-      emit(state.copyWith(status: ItemListStatus.failure));
-    }
+      ),
+      (error) =>
+          // Handle errors or emit error state
+          emit(
+        state.copyWith(status: ItemListStatus.failure),
+      ),
+    );
   }
 
   Future<void> toggleSelectionMode() async {
