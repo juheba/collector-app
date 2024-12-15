@@ -2,6 +2,9 @@ import 'package:collector/data/api/aws_collector_service.dart';
 import 'package:collector/data/api/collection/collection_mapper.dart';
 import 'package:collector/data/api/item/item_mapper.dart';
 import 'package:collector/generated/openapi/collector-api/api/collection_api.dart';
+import 'package:collector/generated/openapi/collector-api/model/collection.dart';
+import 'package:collector/generated/openapi/collector-api/model/create_collection_request.dart';
+import 'package:collector/generated/openapi/collector-api/model/update_collection_request.dart';
 import 'package:collector/models/collection_model.dart';
 import 'package:collector/models/item_model.dart';
 import 'package:collector/utils/failures.dart';
@@ -83,6 +86,78 @@ class CollectionApiService {
       // TODO(me): ErrorHandling einbauen!
       return Failure(
         UnknownFailure(message: 'Failed to fetch items of collection: $e'),
+      );
+    }
+  }
+
+  Future<Result<CollectionModel, CollectorFailure>> createCollection(CollectionModel collection) async {
+    try {
+      final builder = CreateCollectionRequestBuilder()
+        ..name = collection.name
+        ..description = collection.description
+        ..visibility = CollectionMapperImpl().mapCollectionVisibilityToExternal(collection.visibility);
+
+      final collectionResponse = (await _collectionApi.createCollection(createCollectionRequest: builder.build())).data;
+
+      if (collectionResponse == null) {
+        return Failure(
+          const InvalidResponseFailure(message: 'Failed to create collection'),
+        );
+      } else {
+        return Success(
+          CollectionMapperImpl().mapExternalToCollectionModel(
+            collectionResponse.collection,
+          ),
+        );
+      }
+    } catch (e) {
+      // TODO(me): ErrorHandling einbauen!
+      return Failure(
+        UnknownFailure(message: 'Failed to create collection: $e'),
+      );
+    }
+  }
+
+  Future<Result<CollectionModel, CollectorFailure>> updateCollection(CollectionModel collection) async {
+    try {
+      final builder = UpdateCollectionRequestBuilder()
+        ..name = collection.name
+        ..description = collection.description
+        ..visibility = CollectionMapperImpl().mapCollectionVisibilityToExternal(collection.visibility);
+
+      final collectionResponse = (await _collectionApi.updateCollection(
+        collectionId: collection.id,
+        updateCollectionRequest: builder.build(),
+      ))
+          .data;
+
+      if (collectionResponse == null) {
+        return Failure(
+          const InvalidResponseFailure(message: 'Failed to update collection'),
+        );
+      } else {
+        return Success(
+          CollectionMapperImpl().mapExternalToCollectionModel(
+            collectionResponse.collection,
+          ),
+        );
+      }
+    } catch (e) {
+      // TODO(me): ErrorHandling einbauen!
+      return Failure(
+        UnknownFailure(message: 'Failed to update collection: $e'),
+      );
+    }
+  }
+
+  Future<Result<void, CollectorFailure>> deleteCollection(String collectionId) async {
+    try {
+      await _collectionApi.deleteCollection(collectionId: collectionId);
+      return Success(null);
+    } catch (e) {
+      // TODO(me): ErrorHandling einbauen!
+      return Failure(
+        UnknownFailure(message: 'Failed to delete collection: $e'),
       );
     }
   }

@@ -25,4 +25,10 @@ abstract class CollectionMapper {
         CollectionVisibilityEnum.PUBLIC => CollectionVisibility.public,
         _ => CollectionVisibility.private,
       };
+
+  @IgnoreMapping()
+  CollectionVisibilityEnum mapCollectionVisibilityToExternal(CollectionVisibility internal) => switch (internal) {
+        CollectionVisibility.private => CollectionVisibilityEnum.PRIVATE,
+        CollectionVisibility.public => CollectionVisibilityEnum.PUBLIC,
+      };
 }

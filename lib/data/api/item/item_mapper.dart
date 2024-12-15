@@ -77,6 +77,6 @@ abstract class ItemMapper {
         ItemType.book => 'BOOK',
         ItemType.movie => 'MOVIE',
         ItemType.game => 'GAME',
-        ItemType.undefined => 'OTHERS',
+        ItemType.undefined => 'UNDEFINED',
       };
 }
