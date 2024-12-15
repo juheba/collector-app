@@ -6,6 +6,7 @@ import 'package:collector/presentation/pages/items/state_management/item_detail_
 import 'package:collector/presentation/pages/scaffold_page.dart';
 import 'package:collector/presentation/pages/shared/item_editor.dart';
 import 'package:collector/presentation/utils/utils.dart';
+import 'package:collector/presentation/widgets/information_table.dart';
 import 'package:collector/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -71,48 +72,45 @@ class _Loaded extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Card(
-              elevation: 5,
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: Row(
-                  children: [
-                    Icon(
-                      item.type?.icon,
-                      size: 50,
-                      color: item.type?.color,
-                    ),
-                    const SizedBox(
-                      width: 12,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(l10n.item_details_ownership_status(item.ownershipStatus.name)),
-                        Text(l10n.item_details_process(item.status.name)),
-                        if (item.isLendable)
-                          Text(
-                            l10n.item_details_can_be_borrowed,
-                            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                                  color: Colors.green,
-                                ),
-                          )
-                        else
-                          Text(
-                            l10n.item_details_can_not_be_borrowed,
-                            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                                  color: Colors.grey,
-                                ),
-                          ),
-                      ],
-                    ),
-                  ],
+            InformationTable(
+              rows: [
+                (
+                  l10n.editor_item_ownership_status_title,
+                  _InformationTableRow(
+                    icon: item.ownershipStatus.icon,
+                    color: item.ownershipStatus.color,
+                    data: item.ownershipStatus.displayName(context),
+                  ),
                 ),
-              ),
+                (
+                  "Item Type",
+                  _InformationTableRow(
+                    icon: item.type?.icon,
+                    color: item.type?.color,
+                    data: item.type?.displayName(context) ?? '',
+                  ),
+                ),
+                (
+                  l10n.editor_item_progress_title,
+                  _InformationTableRow(
+                    icon: item.status.icon,
+                    color: item.status.color,
+                    data: item.status.displayName(context),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(
-              height: margin,
+              height: 8,
+            ),
+            Text(
+              item.isLendable ? l10n.item_details_can_be_borrowed : l10n.item_details_can_not_be_borrowed,
+              style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    color: item.isLendable ? Colors.green : Colors.grey,
+                  ),
+            ),
+            const SizedBox(
+              height: 16,
             ),
             Text(
               item.description ?? '',
@@ -141,6 +139,29 @@ class _Editor extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: ItemEditorForm(item: item),
+    );
+  }
+}
+
+class _InformationTableRow extends StatelessWidget {
+  const _InformationTableRow({
+    this.icon,
+    this.color,
+    required this.data,
+  });
+
+  final IconData? icon;
+  final Color? color;
+  final String data;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(icon, color: color),
+        const SizedBox(width: 8),
+        Text(data),
+      ],
     );
   }
 }
