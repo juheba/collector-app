@@ -197,5 +197,13 @@
   "user_profile_page_title": "User profile",
   "@user_profile_page_title": {
     "description": "Label: Title of the user profile page"
-  }
+  },
+  "new_collection_page_title": "New collection",
+  "notification_collection_saved": "Collection saved.",
+  "editor_collection_description": "Description",
+  "editor_collection_description_hint": "Enter description",
+  "editor_collection_visibility_label": "Visibility",
+  "editor_collection_name": "Name",
+  "editor_collection_name_error": "Error: Name is required",
+  "editor_collection_name_hint": "Enter name"
 }

@@ -1,30 +1,30 @@
-part of 'collection_detail_cubit.dart';
+part of 'collection_editor_cubit.dart';
 
-enum CollectionDetailStatus { initial, loaded, failure }
+enum CollectionEditorStatus { initial, loaded, newly, edited, failure }
 
-class CollectionDetailState extends Equatable {
-  const CollectionDetailState({
-    this.status = CollectionDetailStatus.initial,
+class CollectionEditorState extends Equatable {
+  const CollectionEditorState({
+    this.status = CollectionEditorStatus.initial,
     this.collection,
-    this.items,
     this.editCollection,
+    this.items,
     this.errorMessage,
   });
 
-  final CollectionDetailStatus status;
+  final CollectionEditorStatus status;
   final CollectionModel? collection;
   final List<ItemModel>? items;
   final String? errorMessage;
   final CollectionModel? editCollection;
 
-  CollectionDetailState copyWith({
-    CollectionDetailStatus? status,
+  CollectionEditorState copyWith({
+    CollectionEditorStatus? status,
     CollectionModel? collection,
     List<ItemModel>? items,
     String? errorMessage,
     CollectionModel? editCollection,
   }) =>
-      CollectionDetailState(
+      CollectionEditorState(
         status: status ?? this.status,
         collection: collection ?? this.collection,
         items: items ?? this.items,
@@ -33,5 +33,11 @@ class CollectionDetailState extends Equatable {
       );
 
   @override
-  List<dynamic> get props => [status, collection, items, errorMessage, editCollection];
+  List<dynamic> get props => [
+        status,
+        collection,
+        editCollection,
+        items,
+        errorMessage,
+      ];
 }

@@ -1,6 +1,11 @@
 # HELP?!
 * Generate Hive Adapter Classes and Smartstruct Mapper with: `dart run build_runner build`
 * To generate collector-api, visit the collector-contract Repository.
+* To generate l10n files: `flutter pub global run intl_utils:generate`
+
+## Getting started
+* `dart run build_runner build`
+* `dart pub global activate intl_utils` activates l10n utilities
 
 # Flutter Sample App
 

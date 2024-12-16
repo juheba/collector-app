@@ -64,43 +64,6 @@ class CollectionDetailCubit extends Cubit<CollectionDetailState> {
     );
   }
 
-  Future<void> saveCollection(CollectionModel collection) async {
-    // TODO(me): Save on server
-    await databaseService.saveCollection(collection.id, collection);
-  }
-
-  Future<void> startEditing(CollectionModel? collection) async {
-    emit(
-      state.copyWith(
-        status: collection != null ? CollectionDetailStatus.loaded : CollectionDetailStatus.newly,
-        collection: collection,
-        editCollection: collection ?? CollectionModel.blank(),
-      ),
-    );
-  }
-
-  Future<void> updateCollection({
-    String? name,
-    String? description,
-    CollectionVisibility? collectionVisibility,
-  }) async {
-    final collection = state.editCollection?.copyWith(
-      name: name,
-      description: description,
-      visibility: collectionVisibility,
-    );
-    emit(
-      state.copyWith(
-        status: CollectionDetailStatus.edited,
-        editCollection: collection,
-      ),
-    );
-  }
-
-  Future<void> submitForm() async {
-    await saveCollection(state.editCollection!);
-  }
-
   Future<void> initForm() async {
     emit(state.copyWith(editCollection: CollectionModel.blank()));
   }

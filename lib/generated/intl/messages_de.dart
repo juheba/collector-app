@@ -41,6 +41,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "common_action_delete": MessageLookupByLibrary.simpleMessage("Löschen"),
         "common_action_save": MessageLookupByLibrary.simpleMessage("Speichern"),
         "common_log_out": MessageLookupByLibrary.simpleMessage("Ausloggen"),
+        "editor_collection_description":
+            MessageLookupByLibrary.simpleMessage("Beschreibung"),
+        "editor_collection_description_hint":
+            MessageLookupByLibrary.simpleMessage("Beschreibung eingeben"),
+        "editor_collection_name": MessageLookupByLibrary.simpleMessage("Name"),
+        "editor_collection_name_error":
+            MessageLookupByLibrary.simpleMessage("Name wird benötigt."),
+        "editor_collection_name_hint":
+            MessageLookupByLibrary.simpleMessage("Name eingeben"),
+        "editor_collection_visibility_label":
+            MessageLookupByLibrary.simpleMessage("Sichtbarkeit"),
         "editor_item_can_borrow_title":
             MessageLookupByLibrary.simpleMessage("Ist ausleihbar?"),
         "editor_item_change_image_title":
@@ -92,8 +103,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "items_page_title": MessageLookupByLibrary.simpleMessage("Gegenstände"),
         "login_page_login_button":
             MessageLookupByLibrary.simpleMessage("Login"),
+        "new_collection_page_title":
+            MessageLookupByLibrary.simpleMessage("Neue Sammlung"),
         "new_item_page_title":
             MessageLookupByLibrary.simpleMessage("Neuer Gegenstand"),
+        "notification_collection_saved":
+            MessageLookupByLibrary.simpleMessage("Sammlung gespeichert."),
         "notification_item_saved":
             MessageLookupByLibrary.simpleMessage("Gegenstand gespeichert."),
         "user_profile_copy_token":

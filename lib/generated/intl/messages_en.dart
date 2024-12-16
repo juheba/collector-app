@@ -40,6 +40,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "common_action_delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "common_action_save": MessageLookupByLibrary.simpleMessage("Save"),
         "common_log_out": MessageLookupByLibrary.simpleMessage("Log out"),
+        "editor_collection_description":
+            MessageLookupByLibrary.simpleMessage("Description"),
+        "editor_collection_description_hint":
+            MessageLookupByLibrary.simpleMessage("Enter description"),
+        "editor_collection_name": MessageLookupByLibrary.simpleMessage("Name"),
+        "editor_collection_name_error":
+            MessageLookupByLibrary.simpleMessage("Error: Name is required"),
+        "editor_collection_name_hint":
+            MessageLookupByLibrary.simpleMessage("Enter name"),
+        "editor_collection_visibility_label":
+            MessageLookupByLibrary.simpleMessage("Visibility"),
         "editor_item_can_borrow_title":
             MessageLookupByLibrary.simpleMessage("Can be borrowed?"),
         "editor_item_change_image_title":
@@ -89,7 +100,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "items_page_title": MessageLookupByLibrary.simpleMessage("Items"),
         "login_page_login_button":
             MessageLookupByLibrary.simpleMessage("Login"),
+        "new_collection_page_title":
+            MessageLookupByLibrary.simpleMessage("New collection"),
         "new_item_page_title": MessageLookupByLibrary.simpleMessage("New item"),
+        "notification_collection_saved":
+            MessageLookupByLibrary.simpleMessage("Collection saved."),
         "notification_item_saved":
             MessageLookupByLibrary.simpleMessage("Item saved."),
         "user_profile_copy_token":

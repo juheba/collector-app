@@ -197,5 +197,13 @@
   "collection_visibility_private": "Privat",
   "@collection_visibility_private": {
     "description": "Label: Private"
-  }
+  },
+  "new_collection_page_title": "Neue Sammlung",
+  "notification_collection_saved": "Sammlung gespeichert.",
+  "editor_collection_description": "Beschreibung",
+  "editor_collection_description_hint": "Beschreibung eingeben",
+  "editor_collection_visibility_label": "Sichtbarkeit",
+  "editor_collection_name": "Name",
+  "editor_collection_name_error": "Name wird benötigt.",
+  "editor_collection_name_hint": "Name eingeben"
 }

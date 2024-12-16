@@ -519,6 +519,86 @@ class L10n {
       args: [],
     );
   }
+
+  /// `New collection`
+  String get new_collection_page_title {
+    return Intl.message(
+      'New collection',
+      name: 'new_collection_page_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Collection saved.`
+  String get notification_collection_saved {
+    return Intl.message(
+      'Collection saved.',
+      name: 'notification_collection_saved',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get editor_collection_description {
+    return Intl.message(
+      'Description',
+      name: 'editor_collection_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter description`
+  String get editor_collection_description_hint {
+    return Intl.message(
+      'Enter description',
+      name: 'editor_collection_description_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Visibility`
+  String get editor_collection_visibility_label {
+    return Intl.message(
+      'Visibility',
+      name: 'editor_collection_visibility_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get editor_collection_name {
+    return Intl.message(
+      'Name',
+      name: 'editor_collection_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error: Name is required`
+  String get editor_collection_name_error {
+    return Intl.message(
+      'Error: Name is required',
+      name: 'editor_collection_name_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter name`
+  String get editor_collection_name_hint {
+    return Intl.message(
+      'Enter name',
+      name: 'editor_collection_name_hint',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<L10n> {
