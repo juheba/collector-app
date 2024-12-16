@@ -68,7 +68,7 @@ class ItemApiService {
     try {
       final builder = CreateItemRequestBuilder()
         ..title = item.title
-        ..itemType = item.type?.name ?? ''
+        ..itemType = item.type?.name
         ..description = item.description
         ..isLendable = item.isLendable
         ..ownershipStatus = ItemMapperImpl().mapItemOwnershipStatusToExternal(item.ownershipStatus)
@@ -97,7 +97,7 @@ class ItemApiService {
     try {
       final builder = UpdateItemRequestBuilder()
         ..title = item.title
-        ..itemType = item.type?.name ?? ''
+        ..itemType = item.type?.name
         ..description = item.description
         ..isLendable = item.isLendable
         ..ownershipStatus = ItemMapperImpl().mapItemOwnershipStatusToExternal(item.ownershipStatus)

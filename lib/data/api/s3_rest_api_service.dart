@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:collector/data/api/interceptors/logging_interceptor.dart';
 import 'package:collector/models/attachment_model.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,8 @@ class S3RestApiService {
         receiveTimeout: const Duration(milliseconds: 3000),
       ),
     );
+
+    _dio.interceptors.add(LoggingInterceptor());
   }
 
   late Dio _dio;
