@@ -98,6 +98,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "items_page_empty_state":
             MessageLookupByLibrary.simpleMessage("No items found."),
         "items_page_title": MessageLookupByLibrary.simpleMessage("Items"),
+        "locations_page_empty_state":
+            MessageLookupByLibrary.simpleMessage("No locations found."),
+        "locations_page_title":
+            MessageLookupByLibrary.simpleMessage("Location"),
         "login_page_login_button":
             MessageLookupByLibrary.simpleMessage("Login"),
         "new_collection_page_title":

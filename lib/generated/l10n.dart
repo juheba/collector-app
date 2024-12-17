@@ -599,6 +599,26 @@ class L10n {
       args: [],
     );
   }
+
+  /// `Location`
+  String get locations_page_title {
+    return Intl.message(
+      'Location',
+      name: 'locations_page_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No locations found.`
+  String get locations_page_empty_state {
+    return Intl.message(
+      'No locations found.',
+      name: 'locations_page_empty_state',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<L10n> {

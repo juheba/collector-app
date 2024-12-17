@@ -26,6 +26,7 @@ import 'package:collector/generated/openapi/collector-api/model/create_item_requ
 import 'package:collector/generated/openapi/collector-api/model/create_location_attachment_request.dart';
 import 'package:collector/generated/openapi/collector-api/model/create_location_request.dart';
 import 'package:collector/generated/openapi/collector-api/model/error_response.dart';
+import 'package:collector/generated/openapi/collector-api/model/error_type_enum.dart';
 import 'package:collector/generated/openapi/collector-api/model/generate_upload_url_request.dart';
 import 'package:collector/generated/openapi/collector-api/model/item.dart';
 import 'package:collector/generated/openapi/collector-api/model/item_collections_response.dart';
@@ -58,6 +59,7 @@ part 'serializers.g.dart';
   CreateLocationAttachmentRequest,
   CreateLocationRequest,
   ErrorResponse,
+  ErrorTypeEnum,
   GenerateUploadUrlRequest,
   Item,
   ItemCollectionsResponse,
