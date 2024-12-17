@@ -25,6 +25,7 @@ class _ItemsListWidgetState extends State<ItemsListWidget> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      shrinkWrap: true, // Prevents ListView from expanding infinitely
       itemCount: widget.items.length,
       itemBuilder: (context, index) {
         final item = widget.items[index];

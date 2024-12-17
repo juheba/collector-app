@@ -64,6 +64,88 @@ class CollectionDetailCubit extends Cubit<CollectionDetailState> {
     );
   }
 
+  Future<void> saveCollection(CollectionModel collection) async {
+    final updateResult = collection.id.isEmpty
+        ? await CollectionApiService().createCollection(collection)
+        : await CollectionApiService().updateCollection(collection);
+
+    // ignore: cascade_invocations
+    updateResult.result(
+      (updatedCollection) async {
+        emit(
+          state.copyWith(
+            status: CollectionDetailStatus.loaded,
+            collection: updatedCollection,
+            editCollection: updatedCollection,
+          ),
+        );
+      },
+      (error) => emit(
+        state.copyWith(
+          status: CollectionDetailStatus.failure,
+          errorMessage: error.toString(),
+        ),
+      ),
+    );
+  }
+
+  Future<void> startEditing(CollectionModel? collection) async {
+    emit(
+      state.copyWith(
+        status: collection != null ? CollectionDetailStatus.edited : CollectionDetailStatus.newly,
+        collection: collection,
+        editCollection: collection ?? CollectionModel.blank(),
+      ),
+    );
+  }
+
+  Future<void> cancelEditing() async {
+    emit(
+      state.copyWith(
+        status: CollectionDetailStatus.loaded,
+      ),
+    );
+  }
+
+  Future<void> updateCollection({
+    String? name,
+    String? description,
+    CollectionVisibility? visibility,
+  }) async {
+    final collection = state.editCollection?.copyWith(
+      name: name,
+      description: description,
+      visibility: visibility,
+    );
+    emit(
+      state.copyWith(
+        status: CollectionDetailStatus.edited,
+        editCollection: collection,
+      ),
+    );
+  }
+
+  Future<void> delete() async {
+    try {
+      await CollectionApiService().deleteCollection(state.collection!.id);
+      emit(
+        state.copyWith(
+          status: CollectionDetailStatus.deleted,
+        ),
+      );
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: CollectionDetailStatus.failure,
+        ),
+      );
+    }
+  }
+
+  Future<void> submitForm() async {
+    await saveCollection(state.editCollection!);
+  }
+
   Future<void> initForm() async {
     emit(state.copyWith(editCollection: CollectionModel.blank()));
   }

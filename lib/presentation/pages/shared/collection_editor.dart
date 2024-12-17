@@ -1,7 +1,7 @@
 import 'package:collector/generated/l10n.dart';
 import 'package:collector/models/collection_model.dart';
 import 'package:collector/models/collection_visibility.dart';
-import 'package:collector/presentation/pages/collections/state_management/collection_editor_cubit.dart';
+import 'package:collector/presentation/pages/collections/state_management/collection_detail_cubit.dart';
 import 'package:collector/presentation/pages/shared/collection_visibility_segmented_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,15 +27,15 @@ class _CollectionEditorFormState extends State<CollectionEditorForm> {
     isNew = widget.collection == null;
 
     nameTextEditingController =
-        TextEditingController(text: context.read<CollectionEditorCubit>().state.collection?.name);
+        TextEditingController(text: context.read<CollectionDetailCubit>().state.collection?.name);
     nameTextEditingController.addListener(() {
-      context.read<CollectionEditorCubit>().updateCollection(name: nameTextEditingController.text);
+      context.read<CollectionDetailCubit>().updateCollection(name: nameTextEditingController.text);
     });
 
     descriptionTextEditingController =
-        TextEditingController(text: context.read<CollectionEditorCubit>().state.collection?.description);
+        TextEditingController(text: context.read<CollectionDetailCubit>().state.collection?.description);
     descriptionTextEditingController.addListener(() {
-      context.read<CollectionEditorCubit>().updateCollection(description: descriptionTextEditingController.text);
+      context.read<CollectionDetailCubit>().updateCollection(description: descriptionTextEditingController.text);
     });
   }
 
@@ -58,7 +58,7 @@ class _CollectionEditorFormState extends State<CollectionEditorForm> {
   void resetForm() {
     if (isNew) {
       widget.collection = null;
-      context.read<CollectionEditorCubit>().startEditing(widget.collection);
+      context.read<CollectionDetailCubit>().startEditing(widget.collection);
       nameTextEditingController.clear();
       descriptionTextEditingController.clear();
     }
@@ -110,10 +110,9 @@ class _CollectionEditorFormState extends State<CollectionEditorForm> {
               style: headlineStyle,
             ),
             CollectionVisibilitySingleChoiceSegmentedButton(
-              selected:
-                  context.read<CollectionEditorCubit>().state.collection?.visibility ?? CollectionVisibility.private,
+              selected: context.read<CollectionDetailCubit>().state.collection?.visibility ?? defaultVisibility,
               visibilityChanged: (visibility) =>
-                  context.read<CollectionEditorCubit>().updateCollection(visibility: visibility),
+                  context.read<CollectionDetailCubit>().updateCollection(visibility: visibility),
             ),
             spacingBox,
             Row(
@@ -124,14 +123,14 @@ class _CollectionEditorFormState extends State<CollectionEditorForm> {
                     style: theme.outlinedButtonTheme.style?.copyWith(
                       foregroundColor: WidgetStatePropertyAll(theme.colorScheme.secondary),
                     ),
-                    onPressed: () => context.read<CollectionEditorCubit>().delete(),
+                    onPressed: () => context.read<CollectionDetailCubit>().delete(),
                     child: Text(l10n.common_action_delete),
                   ),
                   const SizedBox(
                     width: 12,
                   ),
                   OutlinedButton(
-                    onPressed: () => context.read<CollectionEditorCubit>().cancelEditing(),
+                    onPressed: () => context.read<CollectionDetailCubit>().cancelEditing(),
                     child: Text(l10n.common_action_cancel),
                   ),
                   const SizedBox(
@@ -141,7 +140,7 @@ class _CollectionEditorFormState extends State<CollectionEditorForm> {
                 FilledButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      context.read<CollectionEditorCubit>().submitForm();
+                      context.read<CollectionDetailCubit>().submitForm();
                       showSnack(context);
                       resetForm();
                     }

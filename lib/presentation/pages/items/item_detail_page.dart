@@ -100,18 +100,14 @@ class _Loaded extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 8,
-            ),
+            spacingBox,
             Text(
               item.isLendable ? l10n.item_details_can_be_borrowed : l10n.item_details_can_not_be_borrowed,
               style: Theme.of(context).textTheme.labelMedium?.copyWith(
                     color: item.isLendable ? Colors.green : Colors.grey,
                   ),
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            spacingBox,
             Text(
               item.description ?? '',
               overflow: TextOverflow.visible,

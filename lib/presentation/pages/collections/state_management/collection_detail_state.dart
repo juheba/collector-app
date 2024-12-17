@@ -1,6 +1,6 @@
 part of 'collection_detail_cubit.dart';
 
-enum CollectionDetailStatus { initial, loaded, failure }
+enum CollectionDetailStatus { initial, loaded, newly, edited, failure, deleted }
 
 class CollectionDetailState extends Equatable {
   const CollectionDetailState({

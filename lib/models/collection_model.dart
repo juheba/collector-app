@@ -1,7 +1,7 @@
 import 'package:collector/models/collection_visibility.dart';
 import 'package:uuid/uuid.dart';
 
-const defaultVisibility = CollectionVisibility.public;
+const defaultVisibility = CollectionVisibility.private;
 
 class CollectionModel {
   CollectionModel({
