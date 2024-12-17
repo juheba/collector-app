@@ -125,21 +125,24 @@ class ItemDetailCubit extends Cubit<ItemDetailState> {
     );
   }
 
-  Future<bool> delete() async {
+  Future<void> delete() async {
     /*final key = state.item?.key as String?;
     if (key != null) {
       await databaseService.deleteItem(key);
     }*/
     try {
       await ItemApiService().deleteItem(state.item!.id);
-      return true;
+      emit(
+        state.copyWith(
+          status: ItemDetailStatus.deleted,
+        ),
+      );
     } catch (e) {
       emit(
         state.copyWith(
           status: ItemDetailStatus.failure,
         ),
       );
-      return false;
     }
   }
 

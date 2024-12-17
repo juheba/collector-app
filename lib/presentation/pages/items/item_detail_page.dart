@@ -38,6 +38,7 @@ class ItemDetailPageWidget extends StatelessWidget {
               ItemDetailStatus.loaded => _Loaded(item: state.item!),
               ItemDetailStatus.newly => _Editor(item: state.item!),
               ItemDetailStatus.edited => _Editor(item: state.item!),
+              ItemDetailStatus.deleted => _handleDeletedState(context),
               ItemDetailStatus.failure => Text(state.errorMessage ?? 'Fehler')
             },
             floatingActionButton: state.status == ItemDetailStatus.loaded
@@ -51,6 +52,11 @@ class ItemDetailPageWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _handleDeletedState(BuildContext context) {
+  Future.microtask(() => context.go(ItemsPageWidget.routePath));
+  return const SizedBox.shrink(); // Empty widget while navigating
 }
 
 class _Loaded extends StatelessWidget {

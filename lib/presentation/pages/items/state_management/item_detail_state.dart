@@ -1,6 +1,6 @@
 part of 'item_detail_cubit.dart';
 
-enum ItemDetailStatus { initial, loaded, newly, edited, failure }
+enum ItemDetailStatus { initial, loaded, newly, edited, deleted, failure }
 
 class ItemDetailState extends Equatable {
   const ItemDetailState({
