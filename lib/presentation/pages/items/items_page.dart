@@ -1,11 +1,13 @@
 import 'package:collector/data/persistence/database_service.dart';
 import 'package:collector/generated/l10n.dart';
+import 'package:collector/presentation/pages/items/new_item_page.dart';
 import 'package:collector/presentation/pages/items/state_management/item_list_cubit.dart';
 import 'package:collector/presentation/pages/scaffold_page.dart';
 import 'package:collector/presentation/pages/shared/item_list.dart';
 import 'package:collector/presentation/widgets/empty_state_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class ItemsPageWidget extends StatelessWidget {
   const ItemsPageWidget({super.key});
@@ -40,6 +42,10 @@ class ItemsPageWidget extends StatelessWidget {
                 : EmptyStateWidget(message: l10n.items_page_empty_state),
             ItemListStatus.failure => const Text('Upsi')
           },
+          floatingActionButton: FloatingActionButton(
+            onPressed: () => context.goNamed(NewItemPageWidget.routeName),
+            child: const Icon(Icons.add),
+          ),
         ),
       ),
     );

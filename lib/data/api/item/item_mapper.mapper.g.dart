@@ -17,7 +17,8 @@ class ItemMapperImpl extends ItemMapper {
       type: ItemMapper.mapExternalToItemType(external),
       description: external.description,
       isLendable: external.isLendable,
-      ownershipStatus: mapExternalToItemOwnershipStatus(external.ownershipStatus),
+      ownershipStatus:
+          mapExternalToItemOwnershipStatus(external.ownershipStatus),
       status: mapExternalToItemStatus(external.status),
       attachment: ItemMapper.mapExternalToAttachmentModel(external),
     );

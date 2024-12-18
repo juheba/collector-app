@@ -31,12 +31,12 @@ class ScaffoldWithNavbar extends StatelessWidget {
             label: l10n.collections_page_title,
           ),
           NavigationDestination(
-            icon: const Icon(Icons.add_circle_outlined),
-            label: l10n.new_item_page_title,
-          ),
-          NavigationDestination(
             icon: const Icon(Icons.view_list_rounded),
             label: l10n.items_page_title,
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.location_on),
+            label: l10n.locations_page_title,
           ),
           NavigationDestination(
             icon: const Icon(Icons.account_circle),

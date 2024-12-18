@@ -12,8 +12,8 @@ class CollectionMapperImpl extends CollectionMapper {
   @override
   CollectionModel mapExternalToCollectionModel(Collection external) {
     final collectionmodel = CollectionModel(
-      name: external.name,
       id: external.collectionId,
+      name: external.name,
       description: external.description,
       visibility: mapExternalToCollectionVisibility(external.visibility),
     );

@@ -7,6 +7,7 @@ import 'package:collector/presentation/pages/home_page.dart';
 import 'package:collector/presentation/pages/items/item_detail_page.dart';
 import 'package:collector/presentation/pages/items/items_page.dart';
 import 'package:collector/presentation/pages/items/new_item_page.dart';
+import 'package:collector/presentation/pages/location/locations_page.dart';
 import 'package:collector/presentation/pages/login_page.dart';
 import 'package:collector/presentation/pages/profile/user_profile_page.dart';
 import 'package:collector/presentation/widgets/scaffold_with_nav_bar.dart';
@@ -94,15 +95,6 @@ class CollectorGoRouter {
             StatefulShellBranch(
               routes: <RouteBase>[
                 GoRoute(
-                  name: NewItemPageWidget.routeName,
-                  path: NewItemPageWidget.routePath,
-                  builder: (context, state) => const NewItemPageWidget(),
-                ),
-              ],
-            ),
-            StatefulShellBranch(
-              routes: <RouteBase>[
-                GoRoute(
                   name: ItemsPageWidget.routeName,
                   path: ItemsPageWidget.routePath,
                   builder: (context, state) => const ItemsPageWidget(),
@@ -114,7 +106,35 @@ class CollectorGoRouter {
                         id: state.pathParameters['id']!,
                       ),
                     ),
+                    GoRoute(
+                      name: NewItemPageWidget.routeName,
+                      path: NewItemPageWidget.routePath,
+                      builder: (context, state) => const NewItemPageWidget(),
+                    ),
                   ],
+                ),
+              ],
+            ),
+            StatefulShellBranch(
+              routes: <RouteBase>[
+                GoRoute(
+                  name: LocationsPageWidget.routeName,
+                  path: LocationsPageWidget.routePath,
+                  builder: (context, state) => const LocationsPageWidget(),
+                  /*routes: <RouteBase>[
+                    GoRoute(
+                      name: ItemDetailPageWidget.routeName,
+                      path: ItemDetailPageWidget.routePath,
+                      builder: (context, state) => ItemDetailPageWidget(
+                        id: state.pathParameters['id']!,
+                      ),
+                    ),
+                    GoRoute(
+                      name: NewItemPageWidget.routeName,
+                      path: NewItemPageWidget.routePath,
+                      builder: (context, state) => const NewItemPageWidget(),
+                    ),
+                  ],*/
                 ),
               ],
             ),

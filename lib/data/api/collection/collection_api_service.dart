@@ -2,7 +2,6 @@ import 'package:collector/data/api/aws_collector_service.dart';
 import 'package:collector/data/api/collection/collection_mapper.dart';
 import 'package:collector/data/api/item/item_mapper.dart';
 import 'package:collector/generated/openapi/collector-api/api/collection_api.dart';
-import 'package:collector/generated/openapi/collector-api/model/collection.dart';
 import 'package:collector/generated/openapi/collector-api/model/create_collection_request.dart';
 import 'package:collector/generated/openapi/collector-api/model/update_collection_request.dart';
 import 'package:collector/models/collection_model.dart';

@@ -1,12 +1,7 @@
-import 'package:collector/generated/openapi/collector-api/model/collection.dart';
-import 'package:collector/generated/openapi/collector-api/model/collection_visibility_enum.dart';
-import 'package:collector/generated/openapi/collector-api/model/create_item_request.dart';
 import 'package:collector/generated/openapi/collector-api/model/item.dart';
 import 'package:collector/generated/openapi/collector-api/model/item_ownership_status_enum.dart';
 import 'package:collector/generated/openapi/collector-api/model/item_status_enum.dart';
-import 'package:collector/generated/openapi/collector-api/model/update_item_request.dart';
 import 'package:collector/models/models.dart';
-import 'package:flutter/material.dart';
 import 'package:smartstruct/smartstruct.dart';
 
 part 'item_mapper.mapper.g.dart';

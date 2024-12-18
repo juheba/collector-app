@@ -205,5 +205,7 @@
   "editor_collection_visibility_label": "Visibility",
   "editor_collection_name": "Name",
   "editor_collection_name_error": "Error: Name is required",
-  "editor_collection_name_hint": "Enter name"
+  "editor_collection_name_hint": "Enter name",
+  "locations_page_title": "Location",
+  "locations_page_empty_state": "No locations found."
 }

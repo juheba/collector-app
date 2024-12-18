@@ -205,5 +205,7 @@
   "editor_collection_visibility_label": "Sichtbarkeit",
   "editor_collection_name": "Name",
   "editor_collection_name_error": "Name wird benötigt.",
-  "editor_collection_name_hint": "Name eingeben"
+  "editor_collection_name_hint": "Name eingeben",
+  "locations_page_title": "Orte",
+  "locations_page_empty_state": "Keine Orte vorhanden."
 }
