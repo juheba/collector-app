@@ -207,5 +207,15 @@
   "editor_collection_name_error": "Name wird benötigt.",
   "editor_collection_name_hint": "Name eingeben",
   "locations_page_title": "Orte",
-  "locations_page_empty_state": "Keine Orte vorhanden."
+  "locations_page_empty_state": "Keine Orte vorhanden.",
+  "new_location_page_title": "Neuer Ort",
+  "notification_location_saved": "Ort gespeichert.",
+  "notification_location_deleted": "Ort gelöscht.",
+  "editor_location_description": "Beschreibung",
+  "editor_location_description_hint": "Beschreibung eingeben",
+  "editor_location_name": "Name",
+  "editor_location_name_error": "Name wird benötigt.",
+  "editor_location_name_hint": "Name eingeben",
+  "editor_location_upload_image_label": "Bild auswählen",
+  "editor_location_change_image_label": "Bild ändern"
 }

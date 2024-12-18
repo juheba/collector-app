@@ -70,6 +70,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter title"),
         "editor_item_upload_image_title":
             MessageLookupByLibrary.simpleMessage("Upload image"),
+        "editor_location_change_image_label":
+            MessageLookupByLibrary.simpleMessage("Change image"),
+        "editor_location_description":
+            MessageLookupByLibrary.simpleMessage("Description"),
+        "editor_location_description_hint":
+            MessageLookupByLibrary.simpleMessage("Enter description"),
+        "editor_location_name": MessageLookupByLibrary.simpleMessage("Name"),
+        "editor_location_name_error":
+            MessageLookupByLibrary.simpleMessage("Error: Name is required"),
+        "editor_location_name_hint":
+            MessageLookupByLibrary.simpleMessage("Enter name"),
+        "editor_location_upload_image_label":
+            MessageLookupByLibrary.simpleMessage("Upload image"),
         "home_page_title": MessageLookupByLibrary.simpleMessage("Home"),
         "item_details_can_be_borrowed":
             MessageLookupByLibrary.simpleMessage("Can be borrowed"),
@@ -107,10 +120,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "new_collection_page_title":
             MessageLookupByLibrary.simpleMessage("New collection"),
         "new_item_page_title": MessageLookupByLibrary.simpleMessage("New item"),
+        "new_location_page_title":
+            MessageLookupByLibrary.simpleMessage("New location"),
         "notification_collection_saved":
             MessageLookupByLibrary.simpleMessage("Collection saved."),
         "notification_item_saved":
             MessageLookupByLibrary.simpleMessage("Item saved."),
+        "notification_location_deleted":
+            MessageLookupByLibrary.simpleMessage("Location deleted."),
+        "notification_location_saved":
+            MessageLookupByLibrary.simpleMessage("Location saved."),
         "user_profile_copy_token":
             MessageLookupByLibrary.simpleMessage("Copy token"),
         "user_profile_email": MessageLookupByLibrary.simpleMessage("Email"),

@@ -7,7 +7,9 @@ import 'package:collector/presentation/pages/home_page.dart';
 import 'package:collector/presentation/pages/items/item_detail_page.dart';
 import 'package:collector/presentation/pages/items/items_page.dart';
 import 'package:collector/presentation/pages/items/new_item_page.dart';
+import 'package:collector/presentation/pages/location/location_detail_page.dart';
 import 'package:collector/presentation/pages/location/locations_page.dart';
+import 'package:collector/presentation/pages/location/new_location_page.dart';
 import 'package:collector/presentation/pages/login_page.dart';
 import 'package:collector/presentation/pages/profile/user_profile_page.dart';
 import 'package:collector/presentation/widgets/scaffold_with_nav_bar.dart';
@@ -121,20 +123,20 @@ class CollectorGoRouter {
                   name: LocationsPageWidget.routeName,
                   path: LocationsPageWidget.routePath,
                   builder: (context, state) => const LocationsPageWidget(),
-                  /*routes: <RouteBase>[
+                  routes: <RouteBase>[
                     GoRoute(
-                      name: ItemDetailPageWidget.routeName,
-                      path: ItemDetailPageWidget.routePath,
-                      builder: (context, state) => ItemDetailPageWidget(
+                      name: LocationDetailPageWidget.routeName,
+                      path: LocationDetailPageWidget.routePath,
+                      builder: (context, state) => LocationDetailPageWidget(
                         id: state.pathParameters['id']!,
                       ),
                     ),
                     GoRoute(
-                      name: NewItemPageWidget.routeName,
-                      path: NewItemPageWidget.routePath,
-                      builder: (context, state) => const NewItemPageWidget(),
+                      name: NewLocationPageWidget.routeName,
+                      path: NewLocationPageWidget.routePath,
+                      builder: (context, state) => const NewLocationPageWidget(),
                     ),
-                  ],*/
+                  ],
                 ),
               ],
             ),

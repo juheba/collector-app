@@ -207,5 +207,15 @@
   "editor_collection_name_error": "Error: Name is required",
   "editor_collection_name_hint": "Enter name",
   "locations_page_title": "Location",
-  "locations_page_empty_state": "No locations found."
+  "locations_page_empty_state": "No locations found.",
+  "new_location_page_title": "New location",
+  "notification_location_saved": "Location saved.",
+  "notification_location_deleted": "Location deleted.",
+  "editor_location_description": "Description",
+  "editor_location_description_hint": "Enter description",
+  "editor_location_name": "Name",
+  "editor_location_name_error": "Error: Name is required",
+  "editor_location_name_hint": "Enter name",
+  "editor_location_upload_image_label": "Upload image",
+  "editor_location_change_image_label": "Change image"
 }

@@ -2,6 +2,7 @@ import 'package:collector/data/persistence/database_service.dart';
 import 'package:collector/generated/l10n.dart';
 import 'package:collector/presentation/pages/items/new_item_page.dart';
 import 'package:collector/presentation/pages/items/state_management/item_list_cubit.dart';
+import 'package:collector/presentation/pages/location/new_location_page.dart';
 import 'package:collector/presentation/pages/location/state_management/location_list_cubit.dart';
 import 'package:collector/presentation/pages/scaffold_page.dart';
 import 'package:collector/presentation/pages/shared/item_list.dart';
@@ -38,10 +39,10 @@ class LocationsPageWidget extends StatelessWidget {
                 : EmptyStateWidget(message: l10n.locations_page_empty_state),
             LocationListStatus.failure => const Text('Upsi')
           },
-          /*floatingActionButton: FloatingActionButton(
+          floatingActionButton: FloatingActionButton(
             onPressed: () => context.goNamed(NewLocationPageWidget.routeName),
             child: const Icon(Icons.add),
-          ),*/
+          ),
         ),
       ),
     );

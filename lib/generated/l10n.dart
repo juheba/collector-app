@@ -619,6 +619,106 @@ class L10n {
       args: [],
     );
   }
+
+  /// `New location`
+  String get new_location_page_title {
+    return Intl.message(
+      'New location',
+      name: 'new_location_page_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Location saved.`
+  String get notification_location_saved {
+    return Intl.message(
+      'Location saved.',
+      name: 'notification_location_saved',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Location deleted.`
+  String get notification_location_deleted {
+    return Intl.message(
+      'Location deleted.',
+      name: 'notification_location_deleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get editor_location_description {
+    return Intl.message(
+      'Description',
+      name: 'editor_location_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter description`
+  String get editor_location_description_hint {
+    return Intl.message(
+      'Enter description',
+      name: 'editor_location_description_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get editor_location_name {
+    return Intl.message(
+      'Name',
+      name: 'editor_location_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error: Name is required`
+  String get editor_location_name_error {
+    return Intl.message(
+      'Error: Name is required',
+      name: 'editor_location_name_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter name`
+  String get editor_location_name_hint {
+    return Intl.message(
+      'Enter name',
+      name: 'editor_location_name_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload image`
+  String get editor_location_upload_image_label {
+    return Intl.message(
+      'Upload image',
+      name: 'editor_location_upload_image_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change image`
+  String get editor_location_change_image_label {
+    return Intl.message(
+      'Change image',
+      name: 'editor_location_change_image_label',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<L10n> {
