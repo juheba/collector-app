@@ -5,8 +5,8 @@ import 'package:collector/presentation/pages/collections/collections_page.dart';
 import 'package:collector/presentation/pages/collections/new_collection_page.dart';
 import 'package:collector/presentation/pages/home_page.dart';
 import 'package:collector/presentation/pages/items/item_detail_page.dart';
+import 'package:collector/presentation/pages/items/item_editor_page.dart';
 import 'package:collector/presentation/pages/items/items_page.dart';
-import 'package:collector/presentation/pages/items/new_item_page.dart';
 import 'package:collector/presentation/pages/location/location_detail_page.dart';
 import 'package:collector/presentation/pages/location/location_editor_page.dart';
 import 'package:collector/presentation/pages/location/locations_page.dart';
@@ -102,16 +102,28 @@ class CollectorGoRouter {
                   builder: (context, state) => const ItemsPageWidget(),
                   routes: <RouteBase>[
                     GoRoute(
+                      // Create Item
+                      name: ItemEditorPageWidget.routeNameNew,
+                      path: ItemEditorPageWidget.routePath,
+                      builder: (context, state) => const ItemEditorPageWidget(),
+                    ),
+                    GoRoute(
+                      // Show Item
                       name: ItemDetailPageWidget.routeName,
                       path: ItemDetailPageWidget.routePath,
                       builder: (context, state) => ItemDetailPageWidget(
                         id: state.pathParameters['id']!,
                       ),
-                    ),
-                    GoRoute(
-                      name: NewItemPageWidget.routeName,
-                      path: NewItemPageWidget.routePath,
-                      builder: (context, state) => const NewItemPageWidget(),
+                      routes: <RouteBase>[
+                        GoRoute(
+                          // Edit Item
+                          name: ItemEditorPageWidget.routeNameEdit,
+                          path: ItemEditorPageWidget.routePath,
+                          builder: (context, state) => ItemEditorPageWidget(
+                            id: state.pathParameters['id'],
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

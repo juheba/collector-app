@@ -170,6 +170,8 @@
   "@notification_item_saved": {
     "description": "Notification: Item saved successfully"
   },
+  "notification_item_skip_save": "Gegenstand hat keine Änderungen.",
+  "notification_item_deleted": "Gegenstand gelöscht.",
   "user_profile_copy_token": "Token kopieren",
   "@user_profile_copy_token": {
     "description": "Action: Copy token to clipboard"

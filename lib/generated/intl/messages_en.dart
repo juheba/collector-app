@@ -124,8 +124,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("New location"),
         "notification_collection_saved":
             MessageLookupByLibrary.simpleMessage("Collection saved."),
+        "notification_item_deleted":
+            MessageLookupByLibrary.simpleMessage("Item deleted."),
         "notification_item_saved":
             MessageLookupByLibrary.simpleMessage("Item saved."),
+        "notification_item_skip_save":
+            MessageLookupByLibrary.simpleMessage("Item has no changes."),
         "notification_location_deleted":
             MessageLookupByLibrary.simpleMessage("Location deleted."),
         "notification_location_saved":

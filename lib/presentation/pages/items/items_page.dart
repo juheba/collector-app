@@ -1,6 +1,6 @@
 import 'package:collector/data/persistence/database_service.dart';
 import 'package:collector/generated/l10n.dart';
-import 'package:collector/presentation/pages/items/new_item_page.dart';
+import 'package:collector/presentation/pages/items/item_editor_page.dart';
 import 'package:collector/presentation/pages/items/state_management/item_list_cubit.dart';
 import 'package:collector/presentation/pages/scaffold_page.dart';
 import 'package:collector/presentation/pages/shared/item_list.dart';
@@ -43,7 +43,7 @@ class ItemsPageWidget extends StatelessWidget {
             ItemListStatus.failure => const Text('Upsi')
           },
           floatingActionButton: FloatingActionButton(
-            onPressed: () => context.goNamed(NewItemPageWidget.routeName),
+            onPressed: () => context.goNamed(ItemEditorPageWidget.routeNameNew),
             child: const Icon(Icons.add),
           ),
         ),

@@ -1,10 +1,11 @@
 import 'package:collector/data/persistence/database_service.dart';
 import 'package:collector/generated/l10n.dart';
 import 'package:collector/models/item_model.dart';
+import 'package:collector/presentation/pages/items/item_editor_form.dart';
+import 'package:collector/presentation/pages/items/item_editor_page.dart';
 import 'package:collector/presentation/pages/items/items_page.dart';
 import 'package:collector/presentation/pages/items/state_management/item_detail_cubit.dart';
 import 'package:collector/presentation/pages/scaffold_page.dart';
-import 'package:collector/presentation/pages/shared/item_editor.dart';
 import 'package:collector/presentation/utils/utils.dart';
 import 'package:collector/presentation/widgets/information_table.dart';
 import 'package:collector/utils/constants.dart';
@@ -36,14 +37,14 @@ class ItemDetailPageWidget extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 ),
               ItemDetailStatus.loaded => _Loaded(item: state.item!),
-              ItemDetailStatus.newly => _Editor(item: state.item!),
-              ItemDetailStatus.edited => _Editor(item: state.item!),
-              ItemDetailStatus.deleted => _handleDeletedState(context),
               ItemDetailStatus.failure => Text(state.errorMessage ?? 'Fehler')
             },
             floatingActionButton: state.status == ItemDetailStatus.loaded
                 ? FloatingActionButton(
-                    onPressed: () => context.read<ItemDetailCubit>().startEditing(state.item),
+                    onPressed: () => context.goNamed(
+                      ItemEditorPageWidget.routeNameEdit,
+                      pathParameters: {'id': id},
+                    ),
                     child: const Icon(Icons.edit),
                   )
                 : null,
@@ -52,11 +53,6 @@ class ItemDetailPageWidget extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget _handleDeletedState(BuildContext context) {
-  Future.microtask(() => context.go(ItemsPageWidget.routePath));
-  return const SizedBox.shrink(); // Empty widget while navigating
 }
 
 class _Loaded extends StatelessWidget {
@@ -128,19 +124,6 @@ class _Loaded extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _Editor extends StatelessWidget {
-  const _Editor({required this.item});
-
-  final ItemModel item;
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: ItemEditorForm(item: item),
     );
   }
 }

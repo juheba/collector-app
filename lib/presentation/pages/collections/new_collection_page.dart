@@ -3,7 +3,6 @@ import 'package:collector/generated/l10n.dart';
 import 'package:collector/presentation/pages/collections/state_management/collection_detail_cubit.dart';
 import 'package:collector/presentation/pages/scaffold_page.dart';
 import 'package:collector/presentation/pages/shared/Collection_editor.dart';
-import 'package:collector/presentation/pages/shared/item_editor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

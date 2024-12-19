@@ -470,6 +470,26 @@ class L10n {
     );
   }
 
+  /// `Item has no changes.`
+  String get notification_item_skip_save {
+    return Intl.message(
+      'Item has no changes.',
+      name: 'notification_item_skip_save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Item deleted.`
+  String get notification_item_deleted {
+    return Intl.message(
+      'Item deleted.',
+      name: 'notification_item_deleted',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Copy token`
   String get user_profile_copy_token {
     return Intl.message(

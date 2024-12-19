@@ -4,7 +4,7 @@ import 'package:collector/generated/l10n.dart';
 import 'package:collector/models/item_model.dart';
 import 'package:collector/models/item_ownership_status.dart';
 import 'package:collector/models/item_status.dart';
-import 'package:collector/presentation/pages/items/state_management/item_detail_cubit.dart';
+import 'package:collector/presentation/pages/items/state_management/item_editor_cubit.dart';
 import 'package:collector/presentation/pages/shared/is_lendable_checkbox_widget.dart';
 import 'package:collector/presentation/pages/shared/item_ownership_status_segmented_button.dart';
 import 'package:collector/presentation/pages/shared/item_status_segmented_button.dart';
@@ -12,8 +12,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ItemEditorForm extends StatefulWidget {
-  ItemEditorForm({this.item, super.key});
-  ItemModel? item;
+  const ItemEditorForm({required this.item, this.image, super.key});
+
+  final ItemModel item;
+  final Uint8List? image;
 
   @override
   State<ItemEditorForm> createState() => _ItemEditorFormState();
@@ -24,31 +26,19 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
   late TextEditingController titleTextEditingController;
   late TextEditingController descriptionTextEditingController;
 
-  late bool isNew;
-
   @override
   void initState() {
     super.initState();
-    isNew = widget.item == null;
 
-    titleTextEditingController = TextEditingController(text: context.read<ItemDetailCubit>().state.item?.title);
+    titleTextEditingController = TextEditingController(text: widget.item.title);
     titleTextEditingController.addListener(() {
-      context.read<ItemDetailCubit>().updateItem(title: titleTextEditingController.text);
+      context.read<ItemEditorCubit>().updateItem(title: titleTextEditingController.text);
     });
 
-    descriptionTextEditingController =
-        TextEditingController(text: context.read<ItemDetailCubit>().state.item?.description);
+    descriptionTextEditingController = TextEditingController(text: widget.item.description);
     descriptionTextEditingController.addListener(() {
-      context.read<ItemDetailCubit>().updateItem(description: descriptionTextEditingController.text);
+      context.read<ItemEditorCubit>().updateItem(description: descriptionTextEditingController.text);
     });
-  }
-
-  void showSnack(BuildContext context) {
-    final snackBar = SnackBar(
-      content: Text(L10n.of(context).notification_item_saved),
-    );
-
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   @override
@@ -60,9 +50,8 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
   }
 
   void resetForm() {
-    if (isNew) {
-      widget.item = null;
-      context.read<ItemDetailCubit>().startEditing(widget.item);
+    if (context.read<ItemEditorCubit>().state.item == null) {
+      context.read<ItemEditorCubit>().startEditing();
       titleTextEditingController.clear();
       descriptionTextEditingController.clear();
     }
@@ -110,8 +99,8 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
             ),
             spacingBox,
             _ChooseImage(
-              imageData: context.read<ItemDetailCubit>().state.image,
-              imageUrl: context.read<ItemDetailCubit>().state.item?.attachment?.attachmentUrl,
+              imageData: widget.image,
+              imageUrl: widget.item.attachment?.attachmentUrl,
             ),
             spacingBox,
             Text(
@@ -119,8 +108,8 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
               style: headlineStyle,
             ),
             OwnershipStatusSingleChoiceSegmentedButton(
-              selected: context.read<ItemDetailCubit>().state.item?.ownershipStatus ?? ItemOwnershipStatus.wishlist,
-              statusChanged: (status) => context.read<ItemDetailCubit>().updateItem(ownershipStatus: status),
+              selected: context.read<ItemEditorCubit>().state.item?.ownershipStatus ?? ItemOwnershipStatus.wishlist,
+              statusChanged: (status) => context.read<ItemEditorCubit>().updateItem(ownershipStatus: status),
             ),
             spacingBox,
             Text(
@@ -128,16 +117,16 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
               style: headlineStyle,
             ),
             ItemStatusSingleChoiceSegmentedButton(
-              selectedStatus: context.read<ItemDetailCubit>().state.item?.status ?? ItemStatus.todo,
-              statusChanged: (status) => context.read<ItemDetailCubit>().updateItem(status: status),
+              selectedStatus: context.read<ItemEditorCubit>().state.item?.status ?? ItemStatus.todo,
+              statusChanged: (status) => context.read<ItemEditorCubit>().updateItem(status: status),
             ),
             spacingBox,
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IsLendableCheckbox(
-                  isSelected: context.read<ItemDetailCubit>().state.item?.isLendable,
-                  onChanged: ({required status}) => context.read<ItemDetailCubit>().updateItem(isLendable: status),
+                  isSelected: context.read<ItemEditorCubit>().state.item?.isLendable,
+                  onChanged: ({required status}) => context.read<ItemEditorCubit>().updateItem(isLendable: status),
                 ),
                 Text(
                   l10n.editor_item_can_borrow_title,
@@ -149,19 +138,19 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                if (!isNew) ...[
+                if (!context.read<ItemEditorCubit>().state.isNew) ...[
                   OutlinedButton(
                     style: theme.outlinedButtonTheme.style?.copyWith(
                       foregroundColor: WidgetStatePropertyAll(theme.colorScheme.secondary),
                     ),
-                    onPressed: () => context.read<ItemDetailCubit>().delete(),
+                    onPressed: () => context.read<ItemEditorCubit>().deleteItem(),
                     child: Text(l10n.common_action_delete),
                   ),
                   const SizedBox(
                     width: 12,
                   ),
                   OutlinedButton(
-                    onPressed: () => context.read<ItemDetailCubit>().cancelEditing(),
+                    onPressed: () => context.read<ItemEditorCubit>().cancelEditing(),
                     child: Text(l10n.common_action_cancel),
                   ),
                   const SizedBox(
@@ -171,12 +160,12 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
                 FilledButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      context.read<ItemDetailCubit>().submitForm();
-                      showSnack(context);
+                      context.read<ItemEditorCubit>().submitForm();
                       resetForm();
                     }
                   },
-                  child: Text(isNew ? l10n.common_action_add : l10n.common_action_save),
+                  child: Text(
+                      context.read<ItemEditorCubit>().state.isNew ? l10n.common_action_add : l10n.common_action_save),
                 ),
               ],
             ),
@@ -198,11 +187,11 @@ class _ChooseImage extends StatelessWidget {
     final hasNoImage = imageUrl == null && imageData == null;
     final uploadButton = hasNoImage
         ? OutlinedButton(
-            onPressed: () => context.read<ItemDetailCubit>().selectImage(),
+            onPressed: () => context.read<ItemEditorCubit>().selectImage(),
             child: Text(L10n.of(context).editor_item_upload_image_title),
           )
         : ElevatedButton(
-            onPressed: () => context.read<ItemDetailCubit>().selectImage(),
+            onPressed: () => context.read<ItemEditorCubit>().selectImage(),
             child: Text(L10n.of(context).editor_item_change_image_title),
           );
 
@@ -222,11 +211,9 @@ class _ChooseImage extends StatelessWidget {
             else if (imageUrl != null)
               Image.network(imageUrl!)
             else
-              const Expanded(
-                child: Icon(
-                  Icons.upload_file,
-                  size: 48,
-                ),
+              const Icon(
+                Icons.upload_file,
+                size: 48,
               ),
             Align(
               alignment: Alignment.bottomCenter,
