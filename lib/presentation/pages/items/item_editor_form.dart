@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:collector/generated/l10n.dart';
+import 'package:collector/models/collection_model.dart';
 import 'package:collector/models/item_model.dart';
 import 'package:collector/models/item_ownership_status.dart';
 import 'package:collector/models/item_status.dart';
@@ -10,6 +11,8 @@ import 'package:collector/presentation/pages/shared/item_ownership_status_segmen
 import 'package:collector/presentation/pages/shared/item_status_segmented_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
+import 'package:multi_select_flutter/util/multi_select_item.dart';
 
 class ItemEditorForm extends StatefulWidget {
   const ItemEditorForm({required this.item, this.image, super.key});
@@ -121,25 +124,41 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
               statusChanged: (status) => context.read<ItemEditorCubit>().updateItem(status: status),
             ),
             spacingBox,
-            BlocBuilder<ItemEditorCubit, ItemEditorState>(
-              builder: (context, state) {
-                return DropdownButtonFormField<String>(
-                  value: state.editItem?.locationId,
-                  decoration: InputDecoration(
-                    labelText: l10n.location_label,
-                    border: const OutlineInputBorder(),
-                  ),
-                  items: state.availableLocations?.map((location) {
-                    return DropdownMenuItem<String>(
-                      value: location.id,
-                      child: Text(location.name),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    context.read<ItemEditorCubit>().updateItem(locationId: value);
-                  },
+            DropdownButtonFormField<String>(
+              value: context.read<ItemEditorCubit>().state.editItem?.locationId,
+              decoration: InputDecoration(
+                labelText: l10n.location_label,
+                border: const OutlineInputBorder(),
+              ),
+              items: context.read<ItemEditorCubit>().state.availableLocations?.map((location) {
+                return DropdownMenuItem<String>(
+                  value: location.id,
+                  child: Text(location.name),
                 );
+              }).toList(),
+              onChanged: (value) {
+                context.read<ItemEditorCubit>().updateItem(locationId: value);
               },
+            ),
+            spacingBox,
+            MultiSelectDialogField<CollectionModel>(
+              items: context.read<ItemEditorCubit>().state.availableCollections?.map((collection) {
+                    return MultiSelectItem<CollectionModel>(collection, collection.name);
+                  }).toList() ??
+                  [],
+              initialValue: context.read<ItemEditorCubit>().state.currentCollections ?? [],
+              title: Text(l10n.editor_item_collections_label),
+              buttonText: Text(l10n.editor_item_select_collections),
+              onConfirm: (values) {
+                context.read<ItemEditorCubit>().updateCollections(collections: values);
+              },
+              searchable: true,
+              separateSelectedItems: true,
+              itemsTextStyle: TextStyle(color: Theme.of(context).colorScheme.onSurface), // Customize item text color
+              selectedItemsTextStyle:
+                  TextStyle(color: Theme.of(context).colorScheme.primary), // Customize selected item text color
+              checkColor: Theme.of(context).colorScheme.primary, // Customize the color of the checkboxes
+              selectedColor: Theme.of(context).colorScheme.secondary, // Customize the color of the selected checkboxes
             ),
             spacingBox,
             Row(

@@ -148,14 +148,14 @@ class ItemEditorCubit extends Cubit<ItemEditorState>
   }
 
   Future<void> saveChanges() async {
-    final updateResult = state.isNew
-        ? await ItemApiService().createItem(state.editItem!)
-        : await ItemApiService().updateItem(state.editItem!);
-
     if (state.status != ItemEditorStatus.edited) {
       emitPresentation(EditorPresentationEventSkipSave());
       return;
     }
+
+    final updateResult = state.isNew
+        ? await ItemApiService().createItem(state.editItem!)
+        : await ItemApiService().updateItem(state.editItem!);
 
     // ignore: cascade_invocations
     updateResult.result(
@@ -179,6 +179,24 @@ class ItemEditorCubit extends Cubit<ItemEditorState>
         EditorPresentationEventFailure(errorMessage: error.toString()),
       ),
     );
+
+    await _saveCollectionsChanges();
+  }
+
+  Future<bool> _saveCollectionsChanges() async {
+    if (state.hasCollectionsChanged == false) {
+      return true;
+    }
+
+    try {
+      await ItemApiService().updateCollectionsOfItem(state.editItem!.id, state.currentCollections!);
+      return true;
+    } catch (e) {
+      emitPresentation(
+        EditorPresentationEventFailure(errorMessage: e.toString()),
+      );
+    }
+    return false;
   }
 
   Future<void> updateItem({
@@ -201,6 +219,18 @@ class ItemEditorCubit extends Cubit<ItemEditorState>
       state.copyWith(
         status: ItemEditorStatus.edited,
         editItem: item,
+      ),
+    );
+  }
+
+  Future<void> updateCollections({
+    required List<CollectionModel> collections,
+  }) async {
+    emit(
+      state.copyWith(
+        status: ItemEditorStatus.edited,
+        currentCollections: collections,
+        hasCollectionsChanged: true,
       ),
     );
   }

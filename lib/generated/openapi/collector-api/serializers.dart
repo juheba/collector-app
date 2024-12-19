@@ -38,8 +38,8 @@ import 'package:collector/generated/openapi/collector-api/model/location.dart';
 import 'package:collector/generated/openapi/collector-api/model/location_response.dart';
 import 'package:collector/generated/openapi/collector-api/model/locations_response.dart';
 import 'package:collector/generated/openapi/collector-api/model/update_collection_items_request.dart';
-import 'package:collector/generated/openapi/collector-api/model/update_collection_items_request_any_of.dart';
-import 'package:collector/generated/openapi/collector-api/model/update_collection_items_request_any_of1.dart';
+import 'package:collector/generated/openapi/collector-api/model/update_collection_items_request_one_of.dart';
+import 'package:collector/generated/openapi/collector-api/model/update_collection_items_request_one_of1.dart';
 import 'package:collector/generated/openapi/collector-api/model/update_collection_request.dart';
 import 'package:collector/generated/openapi/collector-api/model/update_item_request.dart';
 import 'package:collector/generated/openapi/collector-api/model/update_location_request.dart';
@@ -71,8 +71,8 @@ part 'serializers.g.dart';
   LocationResponse,
   LocationsResponse,
   UpdateCollectionItemsRequest,
-  UpdateCollectionItemsRequestAnyOf,
-  UpdateCollectionItemsRequestAnyOf1,
+  UpdateCollectionItemsRequestOneOf,
+  UpdateCollectionItemsRequestOneOf1,
   UpdateCollectionRequest,
   UpdateItemRequest,
   UpdateLocationRequest,

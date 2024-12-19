@@ -5,7 +5,13 @@
     "description": "Label: Name of the application"
   },
   "yes": "Ja",
+  "@yes": {
+    "description": "Label for a button to confirm an action"
+  },
   "no": "Nein",
+  "@no": {
+    "description": "Label for a button to decline an action"
+  },
   "collections_page_empty_state": "Keine Sammlungen vorhanden.",
   "@collections_page_empty_state": {
     "description": "Message: There are no collections available"
@@ -153,6 +159,17 @@
     "description": "Label: Undefined"
   },
   "editor_item_type_title": "Typ",
+  "@editor_item_type_title": {
+    "description": "Label: Type of the item"
+  },
+  "editor_item_collections_label": "Sammlungen",
+  "@editor_item_collections_label": {
+    "description": "Label: Collections"
+  },
+  "editor_item_select_collections": "Sammlungen zuweisen",
+  "@editor_item_select_collections": {
+    "description": "Label: Assign collections"
+  },
   "items_page_empty_state": "Keine Gegenstände vorhanden.",
   "@items_page_empty_state": {
     "description": "Message: There are no items available"
@@ -162,6 +179,9 @@
     "description": "Label: Title of the items page"
   },
   "item_details_collections": "Ist in den Sammlungen",
+  "@item_details_collections": {
+    "description": "Label: Item is in collections"
+  },
   "login_page_login_button": "Login",
   "@login_page_login_button": {
     "description": "Label: Title of the login button"
@@ -175,7 +195,13 @@
     "description": "Notification: Item saved successfully"
   },
   "notification_item_skip_save": "Gegenstand hat keine Änderungen.",
+  "@notification_item_skip_save": {
+    "description": "Notification: Item has no changes"
+  },
   "notification_item_deleted": "Gegenstand gelöscht.",
+  "@notification_item_deleted": {
+    "description": "Notification: Item deleted successfully"
+  },
   "user_profile_copy_token": "Token kopieren",
   "@user_profile_copy_token": {
     "description": "Action: Copy token to clipboard"
@@ -205,25 +231,91 @@
     "description": "Label: Private"
   },
   "new_collection_page_title": "Neue Sammlung",
+  "@new_collection_page_title": {
+    "description": "Label: Title of the new collection page"
+  },
   "notification_collection_saved": "Sammlung gespeichert.",
+  "@notification_collection_saved": {
+    "description": "Notification: Collection saved successfully"
+  },
   "editor_collection_description": "Beschreibung",
+  "@editor_collection_description": {
+    "description": "Label: Description of the collection"
+  },
   "editor_collection_description_hint": "Beschreibung eingeben",
+  "@editor_collection_description_hint": {
+    "description": "Hint: Enter description of the collection"
+  },
   "editor_collection_visibility_label": "Sichtbarkeit",
+  "@editor_collection_visibility_label": {
+    "description": "Label: Visibility of the collection"
+  },
   "editor_collection_name": "Name",
+  "@editor_collection_name": {
+    "description": "Label: Name of the collection"
+  },
   "editor_collection_name_error": "Name wird benötigt.",
+  "@editor_collection_name_error": {
+    "description": "Error: Name is required"
+  },
   "editor_collection_name_hint": "Name eingeben",
+  "@editor_collection_name_hint": {
+    "description": "Hint: Enter name of the collection"
+  },
   "location_label": "Ort",
+  "@location_label": {
+    "description": "Label: Location"
+  },
   "locations_page_title": "Orte",
+  "@locations_page_title": {
+    "description": "Label: Title of the locations page"
+  },
   "locations_page_empty_state": "Keine Orte vorhanden.",
+  "@locations_page_empty_state": {
+    "description": "Message: There are no locations available"
+  },
   "new_location_page_title": "Neuer Ort",
+  "@new_location_page_title": {
+    "description": "Label: Title of the new location page"
+  },
   "notification_location_saved": "Ort gespeichert.",
+  "@notification_location_saved": {
+    "description": "Notification: Location saved successfully"
+  },
   "notification_location_skip_save": "Ort hat keine Änderungen.",
+  "@notification_location_skip_save": {
+    "description": "Notification: Location has no changes"
+  },
   "notification_location_deleted": "Ort gelöscht.",
+  "@notification_location_deleted": {
+    "description": "Notification: Location deleted successfully"
+  },
   "editor_location_description": "Beschreibung",
+  "@editor_location_description": {
+    "description": "Label: Description of the location"
+  },
   "editor_location_description_hint": "Beschreibung eingeben",
+  "@editor_location_description_hint": {
+    "description": "Hint: Enter description of the location"
+  },
   "editor_location_name": "Name",
+  "@editor_location_name": {
+    "description": "Label: Name of the location"
+  },
   "editor_location_name_error": "Name wird benötigt.",
+  "@editor_location_name_error": {
+    "description": "Error: Name is required"
+  },
   "editor_location_name_hint": "Name eingeben",
+  "@editor_location_name_hint": {
+    "description": "Hint: Enter name of the location"
+  },
   "editor_location_upload_image_label": "Bild auswählen",
-  "editor_location_change_image_label": "Bild ändern"
+  "@editor_location_upload_image_label": {
+    "description": "Label: Upload image for location"
+  },
+  "editor_location_change_image_label": "Bild ändern",
+  "@editor_location_change_image_label": {
+    "description": "Label: Change image for location"
+  }
 }

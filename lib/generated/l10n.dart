@@ -450,6 +450,26 @@ class L10n {
     );
   }
 
+  /// `Collections`
+  String get editor_item_collections_label {
+    return Intl.message(
+      'Collections',
+      name: 'editor_item_collections_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Assign to collections`
+  String get editor_item_select_collections {
+    return Intl.message(
+      'Assign to collections',
+      name: 'editor_item_select_collections',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `No items found.`
   String get items_page_empty_state {
     return Intl.message(

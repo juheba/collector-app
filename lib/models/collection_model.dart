@@ -44,4 +44,11 @@ class CollectionModel {
         description: description ?? this.description,
         visibility: visibility ?? this.visibility,
       );
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is CollectionModel && runtimeType == other.runtimeType && name == other.name;
+
+  @override
+  int get hashCode => name.hashCode;
 }

@@ -1,13 +1,16 @@
+import 'package:built_collection/src/list.dart';
 import 'package:collector/data/api/aws_collector_service.dart';
 import 'package:collector/data/api/collection/collection_mapper.dart';
 import 'package:collector/data/api/item/item_mapper.dart';
-import 'package:collector/generated/openapi/collector-api/api/collection_api.dart';
 import 'package:collector/generated/openapi/collector-api/api/item_api.dart';
 import 'package:collector/generated/openapi/collector-api/model/create_item_request.dart';
+import 'package:collector/generated/openapi/collector-api/model/update_collection_items_request.dart';
+import 'package:collector/generated/openapi/collector-api/model/update_collection_items_request_one_of1.dart';
 import 'package:collector/generated/openapi/collector-api/model/update_item_request.dart';
 import 'package:collector/models/collection_model.dart';
 import 'package:collector/models/item_model.dart';
 import 'package:collector/utils/failures.dart';
+import 'package:one_of/one_of.dart';
 import 'package:result_type/result_type.dart';
 
 class ItemApiService {
@@ -153,6 +156,35 @@ class ItemApiService {
       // TODO(me): ErrorHandling einbauen!
       return Failure(
         UnknownFailure(message: 'Failed to fetch collections of item: $e'),
+      );
+    }
+  }
+
+  Future<Result<void, CollectorFailure>> updateCollectionsOfItem(
+    String itemId,
+    List<CollectionModel> collections,
+  ) async {
+    try {
+      final collectionIds = collections.map((collection) => collection.id).toList();
+
+      final updateOneOf1 = UpdateCollectionItemsRequestOneOf1(
+        (builder) => builder..collectionIds = ListBuilder<String>(collectionIds),
+      );
+
+      final updateCollectionItemsRequest = UpdateCollectionItemsRequest(
+        (builder) => builder..oneOf = OneOf.fromValue1(value: updateOneOf1),
+      );
+
+      await _itemApi.updateItemCollections(
+        itemId: itemId,
+        updateCollectionItemsRequest: updateCollectionItemsRequest,
+      );
+
+      return Success(null);
+    } catch (e) {
+      // TODO(me): ErrorHandling einbauen!
+      return Failure(
+        UnknownFailure(message: 'Failed to update item collections: $e'),
       );
     }
   }

@@ -55,6 +55,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Can be borrowed?"),
         "editor_item_change_image_title":
             MessageLookupByLibrary.simpleMessage("Change image"),
+        "editor_item_collections_label":
+            MessageLookupByLibrary.simpleMessage("Collections"),
         "editor_item_description":
             MessageLookupByLibrary.simpleMessage("Description"),
         "editor_item_description_hint":
@@ -63,6 +65,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ownership status"),
         "editor_item_progress_title":
             MessageLookupByLibrary.simpleMessage("Progress status"),
+        "editor_item_select_collections":
+            MessageLookupByLibrary.simpleMessage("Assign to collections"),
         "editor_item_title": MessageLookupByLibrary.simpleMessage("Title"),
         "editor_item_title_error":
             MessageLookupByLibrary.simpleMessage("Title is required"),

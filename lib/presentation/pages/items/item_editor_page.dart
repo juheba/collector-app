@@ -67,7 +67,7 @@ class ItemEditorPageWidget extends StatelessWidget {
 
   void _handleSavedState(BuildContext context) {
     showSnack(context, L10n.of(context).notification_item_saved);
-    context.go(ItemsPageWidget.routePath);
+    context.pop();
   }
 
   void _handleSkipedState(BuildContext context) {
@@ -76,16 +76,7 @@ class ItemEditorPageWidget extends StatelessWidget {
   }
 
   void _handleCancleState(BuildContext context, {required bool isNew, String? id}) {
-    if (isNew) {
-      context.goNamed(
-        ItemsPageWidget.routeName,
-      );
-    } else {
-      context.goNamed(
-        ItemDetailPageWidget.routeName,
-        pathParameters: {'id': id ?? ''},
-      );
-    }
+    context.pop();
   }
 
   void _handleDeletedState(BuildContext context) {
