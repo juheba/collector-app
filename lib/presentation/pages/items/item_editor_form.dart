@@ -121,6 +121,27 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
               statusChanged: (status) => context.read<ItemEditorCubit>().updateItem(status: status),
             ),
             spacingBox,
+            BlocBuilder<ItemEditorCubit, ItemEditorState>(
+              builder: (context, state) {
+                return DropdownButtonFormField<String>(
+                  value: state.editItem?.locationId,
+                  decoration: InputDecoration(
+                    labelText: l10n.location_label,
+                    border: const OutlineInputBorder(),
+                  ),
+                  items: state.availableLocations?.map((location) {
+                    return DropdownMenuItem<String>(
+                      value: location.id,
+                      child: Text(location.name),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    context.read<ItemEditorCubit>().updateItem(locationId: value);
+                  },
+                );
+              },
+            ),
+            spacingBox,
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

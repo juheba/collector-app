@@ -11,9 +11,11 @@ class ItemEditorState extends Equatable {
     this.status = ItemEditorStatus.initial,
     this.isNew = true,
     this.item,
-    this.collections,
-    this.editCollections,
     this.editItem,
+    this.currentCollections,
+    this.availableCollections,
+    this.currentLocation,
+    this.availableLocations,
     this.errorMessage,
     this.image,
   });
@@ -21,26 +23,36 @@ class ItemEditorState extends Equatable {
   final ItemEditorStatus status;
   final bool isNew;
   final ItemModel? item;
-  final List<CollectionModel>? collections;
-  final String? errorMessage;
   final ItemModel? editItem;
-  final List<CollectionModel>? editCollections;
+  final List<CollectionModel>? currentCollections;
+  final List<CollectionModel>? availableCollections;
+  final LocationModel? currentLocation;
+  final List<LocationModel>? availableLocations;
+  final String? errorMessage;
   final Uint8List? image;
 
   ItemEditorState copyWith({
     ItemEditorStatus? status,
     bool? isNew,
     ItemModel? item,
-    String? errorMessage,
     ItemModel? editItem,
+    List<CollectionModel>? currentCollections,
+    List<CollectionModel>? availableCollections,
+    LocationModel? currentLocation,
+    List<LocationModel>? availableLocations,
+    String? errorMessage,
     Uint8List? image,
   }) =>
       ItemEditorState(
         status: status ?? this.status,
         isNew: isNew ?? this.isNew,
         item: item ?? this.item,
-        errorMessage: errorMessage ?? this.errorMessage,
         editItem: editItem ?? this.editItem,
+        currentCollections: currentCollections ?? this.currentCollections,
+        availableCollections: availableCollections ?? this.availableCollections,
+        currentLocation: currentLocation ?? this.currentLocation,
+        availableLocations: availableLocations ?? this.availableLocations,
+        errorMessage: errorMessage ?? this.errorMessage,
         image: image ?? this.image,
       );
 
@@ -49,10 +61,12 @@ class ItemEditorState extends Equatable {
         status,
         isNew,
         item,
-        collections,
-        errorMessage,
         editItem,
-        editCollections,
+        currentCollections,
+        availableCollections,
+        currentLocation,
+        availableLocations,
+        errorMessage,
         image,
       ];
 }

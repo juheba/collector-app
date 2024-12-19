@@ -70,6 +70,7 @@ class ItemApiService {
         ..title = item.title
         ..itemType = item.type?.name
         ..description = item.description
+        ..locationId = item.locationId
         ..isLendable = item.isLendable
         ..ownershipStatus = ItemMapperImpl().mapItemOwnershipStatusToExternal(item.ownershipStatus)
         ..status = ItemMapperImpl().mapItemStatusToExternal(item.status);
@@ -99,6 +100,7 @@ class ItemApiService {
         ..title = item.title
         ..itemType = item.type?.name
         ..description = item.description
+        ..locationId = item.locationId
         ..isLendable = item.isLendable
         ..ownershipStatus = ItemMapperImpl().mapItemOwnershipStatusToExternal(item.ownershipStatus)
         ..status = ItemMapperImpl().mapItemStatusToExternal(item.status);

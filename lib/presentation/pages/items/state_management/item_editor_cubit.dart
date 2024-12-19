@@ -2,12 +2,15 @@ import 'dart:typed_data';
 
 import 'package:bloc_presentation/bloc_presentation.dart';
 import 'package:collector/data/api/attachment/attachment_api_service.dart';
+import 'package:collector/data/api/collection/collection_api_service.dart';
 import 'package:collector/data/api/item/item_api_service.dart';
+import 'package:collector/data/api/location/location_api_service.dart';
 import 'package:collector/data/api/s3_rest_api_service.dart';
 import 'package:collector/models/collection_model.dart';
 import 'package:collector/models/item_model.dart';
 import 'package:collector/models/item_ownership_status.dart';
 import 'package:collector/models/item_status.dart';
+import 'package:collector/models/location_model.dart';
 import 'package:collector/presentation/pages/shared/editor_presentation_event.dart';
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
@@ -20,11 +23,15 @@ class ItemEditorCubit extends Cubit<ItemEditorState>
   ItemEditorCubit() : super(const ItemEditorState());
 
   Future<void> initEditorContext(String? id) async {
-    emit(
-      const ItemEditorState(),
-    );
+    await _loadAvailableCollections();
+    await _loadAvailableLocations();
     if (id != null && id.isNotEmpty) {
       await loadItem(id);
+      await _loadCollections(id);
+
+      if (state.item!.locationId != null) {
+        await _loadLocation(state.item!.locationId!);
+      }
     }
     await startEditing();
   }
@@ -33,12 +40,73 @@ class ItemEditorCubit extends Cubit<ItemEditorState>
     final itemResult = await ItemApiService().getItemById(id);
 
     itemResult.result(
-      (item) => emit(
+      (item) async {
+        emit(
+          state.copyWith(
+            isNew: false,
+            item: item,
+            editItem: item,
+          ),
+        );
+      },
+      (error) => emitPresentation(
+        EditorPresentationEventFailure(errorMessage: error.toString()),
+      ),
+    );
+  }
+
+  Future<void> _loadCollections(String id) async {
+    final collectionsResult = await ItemApiService().getAllCollectionsOfItem(id);
+
+    collectionsResult.result(
+      (collections) => emit(
         state.copyWith(
-          status: ItemEditorStatus.loaded,
-          isNew: false,
-          item: item,
-          editItem: item,
+          currentCollections: collections,
+        ),
+      ),
+      (error) => emitPresentation(
+        EditorPresentationEventFailure(errorMessage: error.toString()),
+      ),
+    );
+  }
+
+  Future<void> _loadAvailableCollections() async {
+    final collectionsResult = await CollectionApiService().getAllCollections();
+
+    collectionsResult.result(
+      (collections) => emit(
+        state.copyWith(
+          availableCollections: collections,
+        ),
+      ),
+      (error) => emitPresentation(
+        EditorPresentationEventFailure(errorMessage: error.toString()),
+      ),
+    );
+  }
+
+  Future<void> _loadLocation(String id) async {
+    final locationResult = await LocationApiService().getLocationById(id);
+
+    locationResult.result(
+      (location) => emit(
+        state.copyWith(
+          currentLocation: location,
+        ),
+      ),
+      (error) => emitPresentation(
+        EditorPresentationEventFailure(errorMessage: error.toString()),
+      ),
+    );
+  }
+
+  Future<void> _loadAvailableLocations() async {
+    final locationResult = await LocationApiService().getAllLocations();
+
+    locationResult.result(
+      (locations) => emit(
+        state.copyWith(
+          availableLocations: locations,
         ),
       ),
       (error) => emitPresentation(
@@ -118,6 +186,7 @@ class ItemEditorCubit extends Cubit<ItemEditorState>
     String? description,
     ItemOwnershipStatus? ownershipStatus,
     ItemStatus? status,
+    String? locationId,
     bool? isLendable,
   }) async {
     final item = state.editItem?.copyWith(
@@ -125,6 +194,7 @@ class ItemEditorCubit extends Cubit<ItemEditorState>
       description: description,
       ownershipStatus: ownershipStatus,
       status: status,
+      locationId: locationId,
       isLendable: isLendable,
     );
     emit(

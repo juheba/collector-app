@@ -1,21 +1,19 @@
 import 'dart:typed_data';
 
-import 'package:collector/data/api/attachment/attachment_api_service.dart';
+import 'package:bloc_presentation/bloc_presentation.dart';
 import 'package:collector/data/api/item/item_api_service.dart';
 import 'package:collector/data/api/location/location_api_service.dart';
-import 'package:collector/data/api/s3_rest_api_service.dart';
 import 'package:collector/data/persistence/database_service.dart';
-import 'package:collector/generated/openapi/collector-api/model/collection.dart';
-import 'package:collector/models/attachment_model.dart';
 import 'package:collector/models/location_model.dart';
 import 'package:collector/models/models.dart';
+import 'package:collector/presentation/pages/shared/editor_presentation_event.dart';
 import 'package:equatable/equatable.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'item_detail_state.dart';
 
-class ItemDetailCubit extends Cubit<ItemDetailState> {
+class ItemDetailCubit extends Cubit<ItemDetailState>
+    with BlocPresentationMixin<ItemDetailState, EditorPresentationEvent> {
   ItemDetailCubit(this.databaseService) : super(const ItemDetailState());
 
   final DatabaseService databaseService;
@@ -26,9 +24,8 @@ class ItemDetailCubit extends Cubit<ItemDetailState> {
 
     itemResult.result(
       (item) async {
-        if (item?.locationId != null) {
-          await _loadCollections(id);
-        }
+        await _loadCollections(id);
+
         if (item?.locationId != null) {
           await _loadLocation(item!.locationId!);
         }
@@ -39,11 +36,8 @@ class ItemDetailCubit extends Cubit<ItemDetailState> {
           ),
         );
       },
-      (error) => emit(
-        state.copyWith(
-          status: ItemDetailStatus.failure,
-          errorMessage: error.toString(),
-        ),
+      (error) => emitPresentation(
+        EditorPresentationEventFailure(errorMessage: error.toString()),
       ),
     );
   }
@@ -57,11 +51,8 @@ class ItemDetailCubit extends Cubit<ItemDetailState> {
           collections: collections,
         ),
       ),
-      (error) => emit(
-        state.copyWith(
-          status: ItemDetailStatus.failure,
-          errorMessage: error.toString(),
-        ),
+      (error) => emitPresentation(
+        EditorPresentationEventFailure(errorMessage: error.toString()),
       ),
     );
   }
@@ -75,11 +66,8 @@ class ItemDetailCubit extends Cubit<ItemDetailState> {
           location: location,
         ),
       ),
-      (error) => emit(
-        state.copyWith(
-          status: ItemDetailStatus.failure,
-          errorMessage: error.toString(),
-        ),
+      (error) => emitPresentation(
+        EditorPresentationEventFailure(errorMessage: error.toString()),
       ),
     );
   }

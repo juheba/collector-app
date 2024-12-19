@@ -58,12 +58,6 @@ class ItemEditorPageWidget extends StatelessWidget {
                 ItemEditorStatus.loaded => _Editor(state.editItem!, state.image),
                 ItemEditorStatus.edited => _Editor(state.editItem!, state.image),
               },
-              floatingActionButton: state.status == ItemEditorStatus.loaded
-                  ? FloatingActionButton(
-                      onPressed: () => context.read<ItemEditorCubit>().startEditing(),
-                      child: const Icon(Icons.edit),
-                    )
-                  : null,
             );
           },
         ),

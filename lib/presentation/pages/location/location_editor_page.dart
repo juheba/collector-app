@@ -58,12 +58,6 @@ class LocationEditorPageWidget extends StatelessWidget {
                 LocationEditorStatus.loaded => _Editor(state.editLocation!, state.image),
                 LocationEditorStatus.edited => _Editor(state.editLocation!, state.image),
               },
-              floatingActionButton: state.status == LocationEditorStatus.loaded
-                  ? FloatingActionButton(
-                      onPressed: () => context.read<LocationEditorCubit>().startEditing(),
-                      child: const Icon(Icons.edit),
-                    )
-                  : null,
             );
           },
         ),
