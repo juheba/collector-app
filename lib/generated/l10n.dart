@@ -60,6 +60,26 @@ class L10n {
     );
   }
 
+  /// `Yes`
+  String get yes {
+    return Intl.message(
+      'Yes',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No`
+  String get no {
+    return Intl.message(
+      'No',
+      name: 'no',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Privat`
   String get collection_visibility_private {
     return Intl.message(
@@ -420,6 +440,16 @@ class L10n {
     );
   }
 
+  /// `Type`
+  String get editor_item_type_title {
+    return Intl.message(
+      'Type',
+      name: 'editor_item_type_title',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `No items found.`
   String get items_page_empty_state {
     return Intl.message(
@@ -436,6 +466,16 @@ class L10n {
       'Items',
       name: 'items_page_title',
       desc: 'Label: Title of the items page',
+      args: [],
+    );
+  }
+
+  /// `Is part of collections`
+  String get item_details_collections {
+    return Intl.message(
+      'Is part of collections',
+      name: 'item_details_collections',
+      desc: '',
       args: [],
     );
   }
@@ -621,9 +661,19 @@ class L10n {
   }
 
   /// `Location`
-  String get locations_page_title {
+  String get location_label {
     return Intl.message(
       'Location',
+      name: 'location_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Locations`
+  String get locations_page_title {
+    return Intl.message(
+      'Locations',
       name: 'locations_page_title',
       desc: '',
       args: [],

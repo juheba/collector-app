@@ -68,6 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Title is required"),
         "editor_item_title_hint":
             MessageLookupByLibrary.simpleMessage("Enter title"),
+        "editor_item_type_title": MessageLookupByLibrary.simpleMessage("Type"),
         "editor_item_upload_image_title":
             MessageLookupByLibrary.simpleMessage("Upload image"),
         "editor_location_change_image_label":
@@ -88,6 +89,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Can be borrowed"),
         "item_details_can_not_be_borrowed":
             MessageLookupByLibrary.simpleMessage("Can not be borrowed"),
+        "item_details_collections":
+            MessageLookupByLibrary.simpleMessage("Is part of collections"),
         "item_details_ownership_status": m0,
         "item_details_process": m1,
         "item_ownership_status_borrower":
@@ -111,10 +114,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "items_page_empty_state":
             MessageLookupByLibrary.simpleMessage("No items found."),
         "items_page_title": MessageLookupByLibrary.simpleMessage("Items"),
+        "location_label": MessageLookupByLibrary.simpleMessage("Location"),
         "locations_page_empty_state":
             MessageLookupByLibrary.simpleMessage("No locations found."),
         "locations_page_title":
-            MessageLookupByLibrary.simpleMessage("Location"),
+            MessageLookupByLibrary.simpleMessage("Locations"),
         "login_page_login_button":
             MessageLookupByLibrary.simpleMessage("Login"),
         "new_collection_page_title":
@@ -122,6 +126,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "new_item_page_title": MessageLookupByLibrary.simpleMessage("New item"),
         "new_location_page_title":
             MessageLookupByLibrary.simpleMessage("New location"),
+        "no": MessageLookupByLibrary.simpleMessage("No"),
         "notification_collection_saved":
             MessageLookupByLibrary.simpleMessage("Collection saved."),
         "notification_item_deleted":
@@ -142,6 +147,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "user_profile_id": MessageLookupByLibrary.simpleMessage("User ID"),
         "user_profile_name": MessageLookupByLibrary.simpleMessage("Username"),
         "user_profile_page_title":
-            MessageLookupByLibrary.simpleMessage("User profile")
+            MessageLookupByLibrary.simpleMessage("User profile"),
+        "yes": MessageLookupByLibrary.simpleMessage("Yes")
       };
 }

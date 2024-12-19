@@ -15,6 +15,7 @@ class ItemModel {
     required this.ownershipStatus,
     required this.status,
     required this.attachment,
+    required this.locationId,
   });
 
   factory ItemModel.blank() => ItemModel(
@@ -26,6 +27,7 @@ class ItemModel {
         ownershipStatus: ItemOwnershipStatus.wishlist,
         status: ItemStatus.todo,
         attachment: null,
+        locationId: null,
       );
 
   final String id;
@@ -36,6 +38,7 @@ class ItemModel {
   final ItemOwnershipStatus ownershipStatus;
   final ItemStatus status;
   final AttachmentModel? attachment;
+  final String? locationId;
 
   ItemModel copyWith({
     String? title,
@@ -45,6 +48,7 @@ class ItemModel {
     ItemStatus? status,
     bool? isLendable,
     AttachmentModel? attachment,
+    String? locationId,
   }) =>
       ItemModel(
         id: id,
@@ -55,5 +59,6 @@ class ItemModel {
         ownershipStatus: ownershipStatus ?? this.ownershipStatus,
         status: status ?? this.status,
         attachment: attachment ?? this.attachment,
+        locationId: locationId ?? this.locationId,
       );
 }

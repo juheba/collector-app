@@ -4,6 +4,8 @@
   "@app_name": {
     "description": "Label: Name of the application"
   },
+  "yes": "Yes",
+  "no": "No",
   "collection_visibility_private": "Privat",
   "@collection_visibility_private": {
     "description": "Label: Private"
@@ -158,6 +160,7 @@
   "@item_type_undefined": {
     "description": "Label: Undefined"
   },
+  "editor_item_type_title": "Type",
   "items_page_empty_state": "No items found.",
   "@items_page_empty_state": {
     "description": "Message: There are no items available"
@@ -166,6 +169,7 @@
   "@items_page_title": {
     "description": "Label: Title of the items page"
   },
+  "item_details_collections": "Is part of collections",
   "login_page_login_button": "Login",
   "@login_page_login_button": {
     "description": "Label: Title of the login button"
@@ -208,7 +212,8 @@
   "editor_collection_name": "Name",
   "editor_collection_name_error": "Error: Name is required",
   "editor_collection_name_hint": "Enter name",
-  "locations_page_title": "Location",
+  "location_label": "Location",
+  "locations_page_title": "Locations",
   "locations_page_empty_state": "No locations found.",
   "new_location_page_title": "New location",
   "notification_location_saved": "Location saved.",

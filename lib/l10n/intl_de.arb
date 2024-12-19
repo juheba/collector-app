@@ -4,6 +4,8 @@
   "@app_name": {
     "description": "Label: Name of the application"
   },
+  "yes": "Ja",
+  "no": "Nein",
   "collections_page_empty_state": "Keine Sammlungen vorhanden.",
   "@collections_page_empty_state": {
     "description": "Message: There are no collections available"
@@ -150,6 +152,7 @@
   "@item_type_undefined": {
     "description": "Label: Undefined"
   },
+  "editor_item_type_title": "Typ",
   "items_page_empty_state": "Keine Gegenstände vorhanden.",
   "@items_page_empty_state": {
     "description": "Message: There are no items available"
@@ -158,6 +161,7 @@
   "@items_page_title": {
     "description": "Label: Title of the items page"
   },
+  "item_details_collections": "Ist in den Sammlungen",
   "login_page_login_button": "Login",
   "@login_page_login_button": {
     "description": "Label: Title of the login button"
@@ -208,6 +212,7 @@
   "editor_collection_name": "Name",
   "editor_collection_name_error": "Name wird benötigt.",
   "editor_collection_name_hint": "Name eingeben",
+  "location_label": "Ort",
   "locations_page_title": "Orte",
   "locations_page_empty_state": "Keine Orte vorhanden.",
   "new_location_page_title": "Neuer Ort",

@@ -69,6 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Titel wird benötigt."),
         "editor_item_title_hint":
             MessageLookupByLibrary.simpleMessage("Titel eingeben"),
+        "editor_item_type_title": MessageLookupByLibrary.simpleMessage("Typ"),
         "editor_item_upload_image_title":
             MessageLookupByLibrary.simpleMessage("Bild auswählen"),
         "editor_location_change_image_label":
@@ -90,6 +91,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "item_details_can_not_be_borrowed":
             MessageLookupByLibrary.simpleMessage(
                 "Kann nicht ausgeliehen werden"),
+        "item_details_collections":
+            MessageLookupByLibrary.simpleMessage("Ist in den Sammlungen"),
         "item_details_ownership_status": m0,
         "item_details_process": m1,
         "item_ownership_status_borrower":
@@ -114,6 +117,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "items_page_empty_state": MessageLookupByLibrary.simpleMessage(
             "Keine Gegenstände vorhanden."),
         "items_page_title": MessageLookupByLibrary.simpleMessage("Gegenstände"),
+        "location_label": MessageLookupByLibrary.simpleMessage("Ort"),
         "locations_page_empty_state":
             MessageLookupByLibrary.simpleMessage("Keine Orte vorhanden."),
         "locations_page_title": MessageLookupByLibrary.simpleMessage("Orte"),
@@ -125,6 +129,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Neuer Gegenstand"),
         "new_location_page_title":
             MessageLookupByLibrary.simpleMessage("Neuer Ort"),
+        "no": MessageLookupByLibrary.simpleMessage("Nein"),
         "notification_collection_saved":
             MessageLookupByLibrary.simpleMessage("Sammlung gespeichert."),
         "notification_item_deleted":
@@ -146,6 +151,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "user_profile_name":
             MessageLookupByLibrary.simpleMessage("Benutzername"),
         "user_profile_page_title":
-            MessageLookupByLibrary.simpleMessage("Nutzerprofil")
+            MessageLookupByLibrary.simpleMessage("Nutzerprofil"),
+        "yes": MessageLookupByLibrary.simpleMessage("Ja")
       };
 }

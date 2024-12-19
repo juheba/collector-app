@@ -7,7 +7,7 @@ class ItemDetailState extends Equatable {
     this.status = ItemDetailStatus.initial,
     this.item,
     this.collections,
-    this.editItem,
+    this.location,
     this.errorMessage,
     this.image,
   });
@@ -15,24 +15,24 @@ class ItemDetailState extends Equatable {
   final ItemDetailStatus status;
   final ItemModel? item;
   final List<CollectionModel>? collections;
+  final LocationModel? location;
   final String? errorMessage;
-  final ItemModel? editItem;
   final Uint8List? image;
 
   ItemDetailState copyWith({
     ItemDetailStatus? status,
     ItemModel? item,
     List<CollectionModel>? collections,
+    LocationModel? location,
     String? errorMessage,
-    ItemModel? editItem,
     Uint8List? image,
   }) =>
       ItemDetailState(
         status: status ?? this.status,
         item: item ?? this.item,
         collections: collections ?? this.collections,
+        location: location ?? this.location,
         errorMessage: errorMessage ?? this.errorMessage,
-        editItem: editItem ?? this.editItem,
         image: image ?? this.image,
       );
 
@@ -41,8 +41,8 @@ class ItemDetailState extends Equatable {
         status,
         item,
         collections,
+        location,
         errorMessage,
-        editItem,
         image,
       ];
 }
