@@ -165,7 +165,8 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
                     }
                   },
                   child: Text(
-                      context.read<ItemEditorCubit>().state.isNew ? l10n.common_action_add : l10n.common_action_save),
+                    context.read<ItemEditorCubit>().state.isNew ? l10n.common_action_add : l10n.common_action_save,
+                  ),
                 ),
               ],
             ),

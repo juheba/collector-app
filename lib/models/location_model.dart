@@ -12,7 +12,6 @@ class LocationModel {
         id: '',
         name: '',
         description: '',
-        attachment: null,
       );
 
   final String id;

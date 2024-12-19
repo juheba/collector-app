@@ -22,8 +22,6 @@ class LocationsListWidget extends StatefulWidget {
 }
 
 class _LocationsListWidgetState extends State<LocationsListWidget> {
-  final _selectedLocations = List<LocationModel>.empty(growable: true);
-
   @override
   Widget build(BuildContext context) {
     return ListView.builder(

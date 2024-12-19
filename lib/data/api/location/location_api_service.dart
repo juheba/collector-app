@@ -96,7 +96,7 @@ class LocationApiService {
         ..description = location.description;
 
       final locationResponse =
-          (await _locationApi.updateLocation(locationId: location.id!, updateLocationRequest: builder.build())).data;
+          (await _locationApi.updateLocation(locationId: location.id, updateLocationRequest: builder.build())).data;
 
       if (locationResponse == null) {
         return Failure(

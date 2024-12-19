@@ -6,9 +6,9 @@ class MockCollections {
 
   static List<CollectionModel> getCollections() {
     return [
-      CollectionModel(id: 'collection-1', name: 'Favorite Games'),
-      CollectionModel(id: 'collection-2', name: 'Epic Movies'),
-      CollectionModel(id: 'collection-3', name: 'Inspirational Reads', visibility: CollectionVisibility.private),
+      CollectionModel(id: 'collection-1', name: 'Favorite Games', visibility: CollectionVisibility.public),
+      CollectionModel(id: 'collection-2', name: 'Epic Movies', visibility: CollectionVisibility.public),
+      CollectionModel(id: 'collection-3', name: 'Inspirational Reads'),
     ];
   }
 }

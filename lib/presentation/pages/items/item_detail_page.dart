@@ -85,7 +85,7 @@ class _Loaded extends StatelessWidget {
                   ),
                 ),
                 (
-                  "Item Type",
+                  'Item Type',
                   _InformationTableRow(
                     icon: item.type?.icon,
                     color: item.type?.color,
@@ -130,9 +130,9 @@ class _Loaded extends StatelessWidget {
 
 class _InformationTableRow extends StatelessWidget {
   const _InformationTableRow({
+    required this.data,
     this.icon,
     this.color,
-    required this.data,
   });
 
   final IconData? icon;

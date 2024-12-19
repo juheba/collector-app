@@ -140,9 +140,9 @@ class _Editor extends StatelessWidget {
 
 class _InformationTableRow extends StatelessWidget {
   const _InformationTableRow({
+    required this.data,
     this.icon,
     this.color,
-    required this.data,
   });
 
   final IconData? icon;
