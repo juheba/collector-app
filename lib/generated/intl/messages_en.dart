@@ -130,6 +130,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Location deleted."),
         "notification_location_saved":
             MessageLookupByLibrary.simpleMessage("Location saved."),
+        "notification_location_skip_save":
+            MessageLookupByLibrary.simpleMessage("Location has no changes."),
         "user_profile_copy_token":
             MessageLookupByLibrary.simpleMessage("Copy token"),
         "user_profile_email": MessageLookupByLibrary.simpleMessage("Email"),

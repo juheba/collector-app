@@ -1,31 +1,39 @@
-part of 'location_detail_cubit.dart';
+part of 'location_editor_cubit.dart';
 
-enum LocationDetailStatus { initial, loaded, failure }
+enum LocationEditorStatus {
+  initial,
+  loaded,
+  edited,
+}
 
-class LocationDetailState extends Equatable {
-  const LocationDetailState({
-    this.status = LocationDetailStatus.initial,
+class LocationEditorState extends Equatable {
+  const LocationEditorState({
+    this.status = LocationEditorStatus.initial,
+    this.isNew = true,
     this.location,
     this.editLocation,
     this.errorMessage,
     this.image,
   });
 
-  final LocationDetailStatus status;
+  final LocationEditorStatus status;
+  final bool isNew;
   final LocationModel? location;
   final String? errorMessage;
   final LocationModel? editLocation;
   final Uint8List? image;
 
-  LocationDetailState copyWith({
-    LocationDetailStatus? status,
+  LocationEditorState copyWith({
+    LocationEditorStatus? status,
+    bool? isNew,
     LocationModel? location,
     String? errorMessage,
     LocationModel? editLocation,
     Uint8List? image,
   }) =>
-      LocationDetailState(
+      LocationEditorState(
         status: status ?? this.status,
+        isNew: isNew ?? this.isNew,
         location: location ?? this.location,
         errorMessage: errorMessage ?? this.errorMessage,
         editLocation: editLocation ?? this.editLocation,
@@ -35,6 +43,7 @@ class LocationDetailState extends Equatable {
   @override
   List<dynamic> get props => [
         status,
+        isNew,
         location,
         errorMessage,
         editLocation,

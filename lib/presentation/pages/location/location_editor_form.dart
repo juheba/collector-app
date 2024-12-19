@@ -1,21 +1,16 @@
 import 'dart:typed_data';
 
 import 'package:collector/generated/l10n.dart';
-import 'package:collector/models/item_model.dart';
-import 'package:collector/models/item_ownership_status.dart';
-import 'package:collector/models/item_status.dart';
 import 'package:collector/models/location_model.dart';
-import 'package:collector/presentation/pages/items/state_management/item_detail_cubit.dart';
-import 'package:collector/presentation/pages/location/state_management/location_detail_cubit.dart';
-import 'package:collector/presentation/pages/shared/is_lendable_checkbox_widget.dart';
-import 'package:collector/presentation/pages/shared/item_ownership_status_segmented_button.dart';
-import 'package:collector/presentation/pages/shared/item_status_segmented_button.dart';
+import 'package:collector/presentation/pages/location/state_management/location_editor_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LocationEditorForm extends StatefulWidget {
-  LocationEditorForm({this.location, super.key});
-  LocationModel? location;
+  const LocationEditorForm({required this.location, this.image, super.key});
+
+  final LocationModel location;
+  final Uint8List? image;
 
   @override
   State<LocationEditorForm> createState() => _LocationEditorFormState();
@@ -26,31 +21,19 @@ class _LocationEditorFormState extends State<LocationEditorForm> {
   late TextEditingController nameTextEditingController;
   late TextEditingController descriptionTextEditingController;
 
-  late bool isNew;
-
   @override
   void initState() {
     super.initState();
-    isNew = widget.location == null;
 
-    nameTextEditingController = TextEditingController(text: context.read<LocationDetailCubit>().state.location?.name);
+    nameTextEditingController = TextEditingController(text: widget.location.name);
     nameTextEditingController.addListener(() {
-      context.read<LocationDetailCubit>().updateLocation(name: nameTextEditingController.text);
+      context.read<LocationEditorCubit>().updateChange(name: nameTextEditingController.text);
     });
 
-    descriptionTextEditingController =
-        TextEditingController(text: context.read<LocationDetailCubit>().state.location?.description);
+    descriptionTextEditingController = TextEditingController(text: widget.location.description);
     descriptionTextEditingController.addListener(() {
-      context.read<LocationDetailCubit>().updateLocation(description: descriptionTextEditingController.text);
+      context.read<LocationEditorCubit>().updateChange(description: descriptionTextEditingController.text);
     });
-  }
-
-  void showSnack(BuildContext context, String message) {
-    final snackBar = SnackBar(
-      content: Text(message),
-    );
-
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   @override
@@ -62,9 +45,8 @@ class _LocationEditorFormState extends State<LocationEditorForm> {
   }
 
   void resetForm() {
-    if (isNew) {
-      widget.location = null;
-      context.read<LocationDetailCubit>().startEditing(widget.location);
+    if (context.read<LocationEditorCubit>().state.location == null) {
+      context.read<LocationEditorCubit>().startEditing();
       nameTextEditingController.clear();
       descriptionTextEditingController.clear();
     }
@@ -111,30 +93,26 @@ class _LocationEditorFormState extends State<LocationEditorForm> {
             ),
             spacingBox,
             _ChooseImage(
-              imageData: context.read<LocationDetailCubit>().state.image,
-              imageUrl: context.read<LocationDetailCubit>().state.location?.attachment?.attachmentUrl,
+              imageData: widget.image,
+              imageUrl: widget.location.attachment?.attachmentUrl,
             ),
             spacingBox,
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                if (!isNew) ...[
+                if (!context.read<LocationEditorCubit>().state.isNew) ...[
                   OutlinedButton(
                     style: theme.outlinedButtonTheme.style?.copyWith(
                       foregroundColor: WidgetStatePropertyAll(theme.colorScheme.secondary),
                     ),
-                    onPressed: () async {
-                      if (await context.read<LocationDetailCubit>().delete()) {
-                        showSnack(context, L10n.of(context).notification_location_deleted);
-                      }
-                    },
+                    onPressed: () => context.read<LocationEditorCubit>().deleteLocation(),
                     child: Text(l10n.common_action_delete),
                   ),
                   const SizedBox(
                     width: 12,
                   ),
                   OutlinedButton(
-                    onPressed: () => context.read<LocationDetailCubit>().cancelEditing(),
+                    onPressed: () => context.read<LocationEditorCubit>().cancelEditing(),
                     child: Text(l10n.common_action_cancel),
                   ),
                   const SizedBox(
@@ -144,12 +122,13 @@ class _LocationEditorFormState extends State<LocationEditorForm> {
                 FilledButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      context.read<LocationDetailCubit>().submitForm();
-                      showSnack(context, L10n.of(context).notification_location_saved);
+                      context.read<LocationEditorCubit>().submitForm();
                       resetForm();
                     }
                   },
-                  child: Text(isNew ? l10n.common_action_add : l10n.common_action_save),
+                  child: Text(
+                    context.read<LocationEditorCubit>().state.isNew ? l10n.common_action_add : l10n.common_action_save,
+                  ),
                 ),
               ],
             ),
@@ -171,11 +150,11 @@ class _ChooseImage extends StatelessWidget {
     final hasNoImage = imageUrl == null && imageData == null;
     final uploadButton = hasNoImage
         ? OutlinedButton(
-            onPressed: () => context.read<LocationDetailCubit>().selectImage(),
+            onPressed: () => context.read<LocationEditorCubit>().selectImage(),
             child: Text(L10n.of(context).editor_location_upload_image_label),
           )
         : ElevatedButton(
-            onPressed: () => context.read<LocationDetailCubit>().selectImage(),
+            onPressed: () => context.read<LocationEditorCubit>().selectImage(),
             child: Text(L10n.of(context).editor_location_change_image_label),
           );
 
@@ -195,11 +174,9 @@ class _ChooseImage extends StatelessWidget {
             else if (imageUrl != null)
               Image.network(imageUrl!)
             else
-              const Expanded(
-                child: Icon(
-                  Icons.upload_file,
-                  size: 48,
-                ),
+              const Icon(
+                Icons.upload_file,
+                size: 48,
               ),
             Align(
               alignment: Alignment.bottomCenter,

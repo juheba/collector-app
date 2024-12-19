@@ -8,8 +8,8 @@ import 'package:collector/presentation/pages/items/item_detail_page.dart';
 import 'package:collector/presentation/pages/items/items_page.dart';
 import 'package:collector/presentation/pages/items/new_item_page.dart';
 import 'package:collector/presentation/pages/location/location_detail_page.dart';
+import 'package:collector/presentation/pages/location/location_editor_page.dart';
 import 'package:collector/presentation/pages/location/locations_page.dart';
-import 'package:collector/presentation/pages/location/new_location_page.dart';
 import 'package:collector/presentation/pages/login_page.dart';
 import 'package:collector/presentation/pages/profile/user_profile_page.dart';
 import 'package:collector/presentation/widgets/scaffold_with_nav_bar.dart';
@@ -125,16 +125,28 @@ class CollectorGoRouter {
                   builder: (context, state) => const LocationsPageWidget(),
                   routes: <RouteBase>[
                     GoRoute(
+                      // Create Location
+                      name: LocationEditorPageWidget.routeNameNew,
+                      path: LocationEditorPageWidget.routePath,
+                      builder: (context, state) => const LocationEditorPageWidget(),
+                    ),
+                    GoRoute(
+                      // Show Location
                       name: LocationDetailPageWidget.routeName,
                       path: LocationDetailPageWidget.routePath,
                       builder: (context, state) => LocationDetailPageWidget(
                         id: state.pathParameters['id']!,
                       ),
-                    ),
-                    GoRoute(
-                      name: NewLocationPageWidget.routeName,
-                      path: NewLocationPageWidget.routePath,
-                      builder: (context, state) => const NewLocationPageWidget(),
+                      routes: <RouteBase>[
+                        GoRoute(
+                          // Edit Location
+                          name: LocationEditorPageWidget.routeNameEdit,
+                          path: LocationEditorPageWidget.routePath,
+                          builder: (context, state) => LocationEditorPageWidget(
+                            id: state.pathParameters['id'],
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

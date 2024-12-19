@@ -210,6 +210,7 @@
   "locations_page_empty_state": "Keine Orte vorhanden.",
   "new_location_page_title": "Neuer Ort",
   "notification_location_saved": "Ort gespeichert.",
+  "notification_location_skip_save": "Ort hat keine Änderungen.",
   "notification_location_deleted": "Ort gelöscht.",
   "editor_location_description": "Beschreibung",
   "editor_location_description_hint": "Beschreibung eingeben",

@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   auth0_flutter: ^1.7.2
+  bloc_presentation: ^1.0.0
   dio: ^5.4.3+1 # Http network package
   equatable: ^2.0.5 # Objekte vergleichen
 

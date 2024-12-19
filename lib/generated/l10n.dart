@@ -640,6 +640,16 @@ class L10n {
     );
   }
 
+  /// `Location has no changes.`
+  String get notification_location_skip_save {
+    return Intl.message(
+      'Location has no changes.',
+      name: 'notification_location_skip_save',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Location deleted.`
   String get notification_location_deleted {
     return Intl.message(

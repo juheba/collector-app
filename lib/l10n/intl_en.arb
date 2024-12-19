@@ -210,6 +210,7 @@
   "locations_page_empty_state": "No locations found.",
   "new_location_page_title": "New location",
   "notification_location_saved": "Location saved.",
+  "notification_location_skip_save": "Location has no changes.",
   "notification_location_deleted": "Location deleted.",
   "editor_location_description": "Description",
   "editor_location_description_hint": "Enter description",
