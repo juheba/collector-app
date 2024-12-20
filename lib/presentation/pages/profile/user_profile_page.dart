@@ -49,6 +49,8 @@ class UserPageWidget extends StatelessWidget {
                       ],
                     ),
                   ),
+                  // only for deubg purposes
+                  /*
                   const SizedBox(height: 16),
                   Card(
                     child: Column(
@@ -63,7 +65,7 @@ class UserPageWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ),
+                  ),*/
                   const SizedBox(height: 16),
                   Center(
                     child: TextButton(
