@@ -45,12 +45,12 @@ class CollectionModel {
         visibility: visibility ?? this.visibility,
       );
 
-  /** overrides == operator because of an issue in MultiSelectDialog, see https://github.com/CHB61/multi_select_flutter/issues/11#issuecomment-769862675 */
+  /// overrides == operator because of an issue in MultiSelectDialog, see https://github.com/CHB61/multi_select_flutter/issues/11#issuecomment-769862675
   @override
   bool operator ==(Object other) =>
       identical(this, other) || other is CollectionModel && runtimeType == other.runtimeType && name == other.name;
 
-  /** overrides get hashcode because of an issue in MultiSelectDialog, see https://github.com/CHB61/multi_select_flutter/issues/11#issuecomment-769862675 */
+  /// overrides get hashcode because of an issue in MultiSelectDialog, see https://github.com/CHB61/multi_select_flutter/issues/11#issuecomment-769862675
   @override
   int get hashCode => name.hashCode;
 }

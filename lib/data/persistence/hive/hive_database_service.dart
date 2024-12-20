@@ -19,19 +19,19 @@ class HiveDatabaseService extends DatabaseService {
 
   static Future<void> openBoxes() async {
     // Open boxes
-    await Hive.openBox('$boxPrefix${TableNames.item.name}');
-    await Hive.openBox('$boxPrefix${TableNames.collection.name}');
+    await Hive.openBox<dynamic>('$boxPrefix${TableNames.item.name}');
+    await Hive.openBox<dynamic>('$boxPrefix${TableNames.collection.name}');
   }
 
   static Future<void> closeBoxes() async {
     // Close boxes
-    await Hive.box('$boxPrefix${TableNames.item.name}').close();
-    await Hive.box('$boxPrefix${TableNames.collection.name}').close();
+    await Hive.box<dynamic>('$boxPrefix${TableNames.item.name}').close();
+    await Hive.box<dynamic>('$boxPrefix${TableNames.collection.name}').close();
   }
 
   @override
   Future<void> saveData(String tablename, String key, dynamic value) async {
-    final box = Hive.box('$boxPrefix$tablename');
+    final box = Hive.box<dynamic>('$boxPrefix$tablename');
     try {
       await box.put(key, value);
     } catch (e) {
@@ -41,7 +41,7 @@ class HiveDatabaseService extends DatabaseService {
 
   @override
   Future<void> saveAllData(String tablename, Map<String, dynamic> map) async {
-    final box = Hive.box('$boxPrefix$tablename');
+    final box = Hive.box<dynamic>('$boxPrefix$tablename');
     try {
       await box.putAll(map);
     } catch (e) {
@@ -51,27 +51,27 @@ class HiveDatabaseService extends DatabaseService {
 
   @override
   Future<dynamic> loadData(String tablename, Object key) async {
-    final box = Hive.box('$boxPrefix$tablename');
+    final box = Hive.box<dynamic>('$boxPrefix$tablename');
     final item = await box.get(key);
     return item;
   }
 
   @override
   Future<Map<String, dynamic>> loadAllData(String tablename) async {
-    final box = Hive.box('$boxPrefix$tablename');
+    final box = Hive.box<dynamic>('$boxPrefix$tablename');
     final data = box.toMap();
     return Map<String, dynamic>.from(data);
   }
 
   @override
   Future<void> deleteAllData(String tablename) async {
-    final box = Hive.box('$boxPrefix$tablename');
+    final box = Hive.box<dynamic>('$boxPrefix$tablename');
     return box.deleteFromDisk();
   }
 
   @override
   Future<void> deleteData(String tablename, String key) async {
-    final box = Hive.box('$boxPrefix$tablename');
+    final box = Hive.box<dynamic>('$boxPrefix$tablename');
     await box.delete(key);
   }
 }

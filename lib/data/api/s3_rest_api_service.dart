@@ -30,7 +30,7 @@ class S3RestApiService {
     }
 
     try {
-      final response = await _dio.put(
+      final response = await _dio.put<void>(
         attachment.uploadUrl!,
         data: data,
         options: Options(
