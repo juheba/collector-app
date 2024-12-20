@@ -1,12 +1,12 @@
 import 'package:collector/data/persistence/database_service.dart';
 import 'package:collector/generated/l10n.dart';
 import 'package:collector/models/item_model.dart';
-import 'package:collector/presentation/pages/items/item_editor_form.dart';
 import 'package:collector/presentation/pages/items/item_editor_page.dart';
 import 'package:collector/presentation/pages/items/items_page.dart';
 import 'package:collector/presentation/pages/items/state_management/item_detail_cubit.dart';
 import 'package:collector/presentation/pages/location/location_detail_page.dart';
 import 'package:collector/presentation/pages/scaffold_page.dart';
+import 'package:collector/presentation/pages/shared/collection_widget.dart';
 import 'package:collector/presentation/utils/utils.dart';
 import 'package:collector/presentation/widgets/information_table.dart';
 import 'package:collector/utils/constants.dart';

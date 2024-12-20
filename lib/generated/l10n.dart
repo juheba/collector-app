@@ -65,7 +65,7 @@ class L10n {
     return Intl.message(
       'Yes',
       name: 'yes',
-      desc: '',
+      desc: 'Label for a button to confirm an action',
       args: [],
     );
   }
@@ -75,15 +75,15 @@ class L10n {
     return Intl.message(
       'No',
       name: 'no',
-      desc: '',
+      desc: 'Label for a button to decline an action',
       args: [],
     );
   }
 
-  /// `Privat`
+  /// `Private`
   String get collection_visibility_private {
     return Intl.message(
-      'Privat',
+      'Private',
       name: 'collection_visibility_private',
       desc: 'Label: Private',
       args: [],
@@ -445,7 +445,7 @@ class L10n {
     return Intl.message(
       'Type',
       name: 'editor_item_type_title',
-      desc: '',
+      desc: 'Label: Type of the item',
       args: [],
     );
   }
@@ -455,7 +455,7 @@ class L10n {
     return Intl.message(
       'Collections',
       name: 'editor_item_collections_label',
-      desc: '',
+      desc: 'Label: Collections',
       args: [],
     );
   }
@@ -465,7 +465,7 @@ class L10n {
     return Intl.message(
       'Assign to collections',
       name: 'editor_item_select_collections',
-      desc: '',
+      desc: 'Label: Assign collections',
       args: [],
     );
   }
@@ -495,7 +495,7 @@ class L10n {
     return Intl.message(
       'Is part of collections',
       name: 'item_details_collections',
-      desc: '',
+      desc: 'Label: Item is in collections',
       args: [],
     );
   }
@@ -535,7 +535,7 @@ class L10n {
     return Intl.message(
       'Item has no changes.',
       name: 'notification_item_skip_save',
-      desc: '',
+      desc: 'Notification: Item has no changes',
       args: [],
     );
   }
@@ -545,7 +545,7 @@ class L10n {
     return Intl.message(
       'Item deleted.',
       name: 'notification_item_deleted',
-      desc: '',
+      desc: 'Notification: Item deleted successfully',
       args: [],
     );
   }
@@ -605,7 +605,7 @@ class L10n {
     return Intl.message(
       'New collection',
       name: 'new_collection_page_title',
-      desc: '',
+      desc: 'Label: Title of the new collection page',
       args: [],
     );
   }
@@ -615,7 +615,27 @@ class L10n {
     return Intl.message(
       'Collection saved.',
       name: 'notification_collection_saved',
-      desc: '',
+      desc: 'Notification: Collection saved successfully',
+      args: [],
+    );
+  }
+
+  /// `Collection has no changes.`
+  String get notification_collection_skip_save {
+    return Intl.message(
+      'Collection has no changes.',
+      name: 'notification_collection_skip_save',
+      desc: 'Notification: Collection has no changes',
+      args: [],
+    );
+  }
+
+  /// `Collection deleted.`
+  String get notification_collection_deleted {
+    return Intl.message(
+      'Collection deleted.',
+      name: 'notification_collection_deleted',
+      desc: 'Notification: Collection deleted successfully',
       args: [],
     );
   }
@@ -625,7 +645,7 @@ class L10n {
     return Intl.message(
       'Description',
       name: 'editor_collection_description',
-      desc: '',
+      desc: 'Label: Description of the collection',
       args: [],
     );
   }
@@ -635,7 +655,7 @@ class L10n {
     return Intl.message(
       'Enter description',
       name: 'editor_collection_description_hint',
-      desc: '',
+      desc: 'Hint: Enter description of the collection',
       args: [],
     );
   }
@@ -645,7 +665,7 @@ class L10n {
     return Intl.message(
       'Visibility',
       name: 'editor_collection_visibility_label',
-      desc: '',
+      desc: 'Label: Visibility of the collection',
       args: [],
     );
   }
@@ -655,17 +675,17 @@ class L10n {
     return Intl.message(
       'Name',
       name: 'editor_collection_name',
-      desc: '',
+      desc: 'Label: Name of the collection',
       args: [],
     );
   }
 
-  /// `Error: Name is required`
+  /// `Name is required`
   String get editor_collection_name_error {
     return Intl.message(
-      'Error: Name is required',
+      'Name is required',
       name: 'editor_collection_name_error',
-      desc: '',
+      desc: 'Error: Name is required',
       args: [],
     );
   }
@@ -675,7 +695,17 @@ class L10n {
     return Intl.message(
       'Enter name',
       name: 'editor_collection_name_hint',
-      desc: '',
+      desc: 'Hint: Enter name of the collection',
+      args: [],
+    );
+  }
+
+  /// `Contains items`
+  String get collection_details_items {
+    return Intl.message(
+      'Contains items',
+      name: 'collection_details_items',
+      desc: 'Label: Collection contains items',
       args: [],
     );
   }
@@ -685,7 +715,7 @@ class L10n {
     return Intl.message(
       'Location',
       name: 'location_label',
-      desc: '',
+      desc: 'Label: Location',
       args: [],
     );
   }
@@ -695,7 +725,7 @@ class L10n {
     return Intl.message(
       'Locations',
       name: 'locations_page_title',
-      desc: '',
+      desc: 'Label: Title of the locations page',
       args: [],
     );
   }
@@ -705,7 +735,7 @@ class L10n {
     return Intl.message(
       'No locations found.',
       name: 'locations_page_empty_state',
-      desc: '',
+      desc: 'Message: There are no locations available',
       args: [],
     );
   }
@@ -715,7 +745,7 @@ class L10n {
     return Intl.message(
       'New location',
       name: 'new_location_page_title',
-      desc: '',
+      desc: 'Label: Title of the new location page',
       args: [],
     );
   }
@@ -725,7 +755,7 @@ class L10n {
     return Intl.message(
       'Location saved.',
       name: 'notification_location_saved',
-      desc: '',
+      desc: 'Notification: Location saved successfully',
       args: [],
     );
   }
@@ -735,7 +765,7 @@ class L10n {
     return Intl.message(
       'Location has no changes.',
       name: 'notification_location_skip_save',
-      desc: '',
+      desc: 'Notification: Location has no changes',
       args: [],
     );
   }
@@ -745,7 +775,7 @@ class L10n {
     return Intl.message(
       'Location deleted.',
       name: 'notification_location_deleted',
-      desc: '',
+      desc: 'Notification: Location deleted successfully',
       args: [],
     );
   }
@@ -755,7 +785,7 @@ class L10n {
     return Intl.message(
       'Description',
       name: 'editor_location_description',
-      desc: '',
+      desc: 'Label: Description of the location',
       args: [],
     );
   }
@@ -765,7 +795,7 @@ class L10n {
     return Intl.message(
       'Enter description',
       name: 'editor_location_description_hint',
-      desc: '',
+      desc: 'Hint: Enter description of the location',
       args: [],
     );
   }
@@ -775,17 +805,17 @@ class L10n {
     return Intl.message(
       'Name',
       name: 'editor_location_name',
-      desc: '',
+      desc: 'Label: Name of the location',
       args: [],
     );
   }
 
-  /// `Error: Name is required`
+  /// `Name is required`
   String get editor_location_name_error {
     return Intl.message(
-      'Error: Name is required',
+      'Name is required',
       name: 'editor_location_name_error',
-      desc: '',
+      desc: 'Error: Name is required',
       args: [],
     );
   }
@@ -795,7 +825,7 @@ class L10n {
     return Intl.message(
       'Enter name',
       name: 'editor_location_name_hint',
-      desc: '',
+      desc: 'Hint: Enter name of the location',
       args: [],
     );
   }
@@ -805,7 +835,7 @@ class L10n {
     return Intl.message(
       'Upload image',
       name: 'editor_location_upload_image_label',
-      desc: '',
+      desc: 'Label: Upload image for location',
       args: [],
     );
   }
@@ -815,7 +845,7 @@ class L10n {
     return Intl.message(
       'Change image',
       name: 'editor_location_change_image_label',
-      desc: '',
+      desc: 'Label: Change image for location',
       args: [],
     );
   }

@@ -50,7 +50,7 @@ class ItemEditorPageWidget extends StatelessWidget {
               title: state.status == ItemEditorStatus.initial
                   ? '...'
                   : state.item?.title ?? L10n.of(context).new_item_page_title,
-              onNavigateBack: () => context.goNamed(ItemsPageWidget.routeName),
+              onNavigateBack: () => context.pop(),
               body: switch (state.status) {
                 ItemEditorStatus.initial => const Center(
                     child: CircularProgressIndicator(),

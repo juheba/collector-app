@@ -1,12 +1,16 @@
+import 'package:built_collection/src/list.dart';
 import 'package:collector/data/api/aws_collector_service.dart';
 import 'package:collector/data/api/collection/collection_mapper.dart';
 import 'package:collector/data/api/item/item_mapper.dart';
 import 'package:collector/generated/openapi/collector-api/api/collection_api.dart';
 import 'package:collector/generated/openapi/collector-api/model/create_collection_request.dart';
+import 'package:collector/generated/openapi/collector-api/model/update_collection_items_request.dart';
+import 'package:collector/generated/openapi/collector-api/model/update_collection_items_request_one_of.dart';
 import 'package:collector/generated/openapi/collector-api/model/update_collection_request.dart';
 import 'package:collector/models/collection_model.dart';
 import 'package:collector/models/item_model.dart';
 import 'package:collector/utils/failures.dart';
+import 'package:one_of/one_of.dart';
 import 'package:result_type/result_type.dart';
 
 class CollectionApiService {
@@ -63,28 +67,6 @@ class CollectionApiService {
       // TODO(me): ErrorHandling einbauen!
       return Failure(
         UnknownFailure(message: 'Failed to fetch collection: $e'),
-      );
-    }
-  }
-
-  Future<Result<List<ItemModel>, CollectorFailure>> getAllItemsOfCollection(String collectionId) async {
-    try {
-      // Call the API
-      final collectionItemsResponse = (await _collectionApi.getCollectionItems(collectionId: collectionId)).data;
-
-      if (collectionItemsResponse == null) {
-        return Success(const []);
-      }
-
-      return Success(
-        ItemMapperImpl().mapExternalToListItemModel(
-          collectionItemsResponse.items.toList(),
-        ),
-      );
-    } catch (e) {
-      // TODO(me): ErrorHandling einbauen!
-      return Failure(
-        UnknownFailure(message: 'Failed to fetch items of collection: $e'),
       );
     }
   }
@@ -157,6 +139,57 @@ class CollectionApiService {
       // TODO(me): ErrorHandling einbauen!
       return Failure(
         UnknownFailure(message: 'Failed to delete collection: $e'),
+      );
+    }
+  }
+
+  Future<Result<List<ItemModel>, CollectorFailure>> getAllItemsOfCollection(String collectionId) async {
+    try {
+      // Call the API
+      final collectionItemsResponse = (await _collectionApi.getCollectionItems(collectionId: collectionId)).data;
+
+      if (collectionItemsResponse == null) {
+        return Success(const []);
+      }
+
+      return Success(
+        ItemMapperImpl().mapExternalToListItemModel(
+          collectionItemsResponse.items.toList(),
+        ),
+      );
+    } catch (e) {
+      // TODO(me): ErrorHandling einbauen!
+      return Failure(
+        UnknownFailure(message: 'Failed to fetch items of collection: $e'),
+      );
+    }
+  }
+
+  Future<Result<void, CollectorFailure>> updateItemsOfCollection(
+    String collectionId,
+    List<ItemModel> items,
+  ) async {
+    try {
+      final itemIds = items.map((item) => item.id).toList();
+
+      final updateOneOf1 = UpdateCollectionItemsRequestOneOf(
+        (builder) => builder..itemIds = ListBuilder<String>(itemIds),
+      );
+
+      final updateCollectionItemsRequest = UpdateCollectionItemsRequest(
+        (builder) => builder..oneOf = OneOf.fromValue1(value: updateOneOf1),
+      );
+
+      await _collectionApi.updateCollectionItems(
+        collectionId: collectionId,
+        updateCollectionItemsRequest: updateCollectionItemsRequest,
+      );
+
+      return Success(null);
+    } catch (e) {
+      // TODO(me): ErrorHandling einbauen!
+      return Failure(
+        UnknownFailure(message: 'Failed to update item collections: $e'),
       );
     }
   }

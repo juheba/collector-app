@@ -1,8 +1,8 @@
 import 'package:collector/data/persistence/access_user_credentials.dart';
 import 'package:collector/presentation/pages/callback_page.dart';
 import 'package:collector/presentation/pages/collections/collection_detail_page.dart';
+import 'package:collector/presentation/pages/collections/collection_editor_page.dart';
 import 'package:collector/presentation/pages/collections/collections_page.dart';
-import 'package:collector/presentation/pages/collections/new_collection_page.dart';
 import 'package:collector/presentation/pages/home_page.dart';
 import 'package:collector/presentation/pages/items/item_detail_page.dart';
 import 'package:collector/presentation/pages/items/item_editor_page.dart';
@@ -79,16 +79,28 @@ class CollectorGoRouter {
                   builder: (context, state) => const CollectionsPageWidget(),
                   routes: <RouteBase>[
                     GoRoute(
+                      // Create Collection
+                      name: CollectionEditorPageWidget.routeNameNew,
+                      path: CollectionEditorPageWidget.routePath,
+                      builder: (context, state) => const CollectionEditorPageWidget(),
+                    ),
+                    GoRoute(
+                      // Show Collection
                       name: CollectionDetailPageWidget.routeName,
                       path: CollectionDetailPageWidget.routePath,
                       builder: (context, state) => CollectionDetailPageWidget(
                         collectionId: state.pathParameters['id']!,
                       ),
-                    ),
-                    GoRoute(
-                      name: NewCollectionPageWidget.routeName,
-                      path: NewCollectionPageWidget.routePath,
-                      builder: (context, state) => const NewCollectionPageWidget(),
+                      routes: <RouteBase>[
+                        GoRoute(
+                          // Edit Item
+                          name: CollectionEditorPageWidget.routeNameEdit,
+                          path: CollectionEditorPageWidget.routePath,
+                          builder: (context, state) => CollectionEditorPageWidget(
+                            id: state.pathParameters['id'],
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

@@ -53,7 +53,7 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
   }
 
   void resetForm() {
-    if (context.read<ItemEditorCubit>().state.item == null) {
+    if (context.read<ItemEditorCubit>().state.isNew) {
       context.read<ItemEditorCubit>().startEditing();
       titleTextEditingController.clear();
       descriptionTextEditingController.clear();
@@ -154,11 +154,10 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
               },
               searchable: true,
               separateSelectedItems: true,
-              itemsTextStyle: TextStyle(color: Theme.of(context).colorScheme.onSurface), // Customize item text color
-              selectedItemsTextStyle:
-                  TextStyle(color: Theme.of(context).colorScheme.primary), // Customize selected item text color
-              checkColor: Theme.of(context).colorScheme.primary, // Customize the color of the checkboxes
-              selectedColor: Theme.of(context).colorScheme.secondary, // Customize the color of the selected checkboxes
+              itemsTextStyle: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+              selectedItemsTextStyle: TextStyle(color: Theme.of(context).colorScheme.primary),
+              checkColor: Theme.of(context).colorScheme.primary,
+              selectedColor: Theme.of(context).colorScheme.secondary,
             ),
             spacingBox,
             Row(

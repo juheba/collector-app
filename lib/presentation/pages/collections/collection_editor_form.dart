@@ -1,14 +1,15 @@
 import 'package:collector/generated/l10n.dart';
 import 'package:collector/models/collection_model.dart';
-import 'package:collector/models/collection_visibility.dart';
 import 'package:collector/presentation/pages/collections/state_management/collection_detail_cubit.dart';
+import 'package:collector/presentation/pages/collections/state_management/collection_editor_cubit.dart';
 import 'package:collector/presentation/pages/shared/collection_visibility_segmented_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CollectionEditorForm extends StatefulWidget {
-  CollectionEditorForm({this.collection, super.key});
-  CollectionModel? collection;
+  const CollectionEditorForm({required this.collection, super.key});
+
+  final CollectionModel collection;
 
   @override
   State<CollectionEditorForm> createState() => _CollectionEditorFormState();
@@ -19,32 +20,19 @@ class _CollectionEditorFormState extends State<CollectionEditorForm> {
   late TextEditingController nameTextEditingController;
   late TextEditingController descriptionTextEditingController;
 
-  late bool isNew;
-
   @override
   void initState() {
     super.initState();
-    isNew = widget.collection == null;
 
-    nameTextEditingController =
-        TextEditingController(text: context.read<CollectionDetailCubit>().state.collection?.name);
+    nameTextEditingController = TextEditingController(text: widget.collection.name);
     nameTextEditingController.addListener(() {
-      context.read<CollectionDetailCubit>().updateCollection(name: nameTextEditingController.text);
+      context.read<CollectionEditorCubit>().updateCollection(name: nameTextEditingController.text);
     });
 
-    descriptionTextEditingController =
-        TextEditingController(text: context.read<CollectionDetailCubit>().state.collection?.description);
+    descriptionTextEditingController = TextEditingController(text: widget.collection.description);
     descriptionTextEditingController.addListener(() {
-      context.read<CollectionDetailCubit>().updateCollection(description: descriptionTextEditingController.text);
+      context.read<CollectionEditorCubit>().updateCollection(description: descriptionTextEditingController.text);
     });
-  }
-
-  void showSnack(BuildContext context) {
-    final snackBar = SnackBar(
-      content: Text(L10n.of(context).notification_collection_saved),
-    );
-
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   @override
@@ -56,9 +44,8 @@ class _CollectionEditorFormState extends State<CollectionEditorForm> {
   }
 
   void resetForm() {
-    if (isNew) {
-      widget.collection = null;
-      context.read<CollectionDetailCubit>().startEditing(widget.collection);
+    if (context.read<CollectionEditorCubit>().state.isNew) {
+      context.read<CollectionEditorCubit>().startEditing();
       nameTextEditingController.clear();
       descriptionTextEditingController.clear();
     }
@@ -110,27 +97,27 @@ class _CollectionEditorFormState extends State<CollectionEditorForm> {
               style: headlineStyle,
             ),
             CollectionVisibilitySingleChoiceSegmentedButton(
-              selected: context.read<CollectionDetailCubit>().state.collection?.visibility ?? defaultVisibility,
+              selected: context.read<CollectionEditorCubit>().state.collection?.visibility ?? defaultVisibility,
               visibilityChanged: (visibility) =>
-                  context.read<CollectionDetailCubit>().updateCollection(visibility: visibility),
+                  context.read<CollectionEditorCubit>().updateCollection(visibility: visibility),
             ),
             spacingBox,
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                if (!isNew) ...[
+                if (!context.read<CollectionEditorCubit>().state.isNew) ...[
                   OutlinedButton(
                     style: theme.outlinedButtonTheme.style?.copyWith(
                       foregroundColor: WidgetStatePropertyAll(theme.colorScheme.secondary),
                     ),
-                    onPressed: () => context.read<CollectionDetailCubit>().delete(),
+                    onPressed: () => context.read<CollectionEditorCubit>().deleteCollection(),
                     child: Text(l10n.common_action_delete),
                   ),
                   const SizedBox(
                     width: 12,
                   ),
                   OutlinedButton(
-                    onPressed: () => context.read<CollectionDetailCubit>().cancelEditing(),
+                    onPressed: () => context.read<CollectionEditorCubit>().cancelEditing(),
                     child: Text(l10n.common_action_cancel),
                   ),
                   const SizedBox(
@@ -140,12 +127,15 @@ class _CollectionEditorFormState extends State<CollectionEditorForm> {
                 FilledButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      context.read<CollectionDetailCubit>().submitForm();
-                      showSnack(context);
+                      context.read<CollectionEditorCubit>().submitForm();
                       resetForm();
                     }
                   },
-                  child: Text(isNew ? l10n.common_action_add : l10n.common_action_save),
+                  child: Text(
+                    context.read<CollectionEditorCubit>().state.isNew
+                        ? l10n.common_action_add
+                        : l10n.common_action_save,
+                  ),
                 ),
               ],
             ),

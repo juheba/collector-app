@@ -27,6 +27,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "app_name": MessageLookupByLibrary.simpleMessage("Collector-App"),
+        "collection_details_items":
+            MessageLookupByLibrary.simpleMessage("Enthält Gegenstände"),
         "collection_visibility_private":
             MessageLookupByLibrary.simpleMessage("Privat"),
         "collection_visibility_public":
@@ -134,8 +136,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "new_location_page_title":
             MessageLookupByLibrary.simpleMessage("Neuer Ort"),
         "no": MessageLookupByLibrary.simpleMessage("Nein"),
+        "notification_collection_deleted":
+            MessageLookupByLibrary.simpleMessage("Sammlung gelöscht."),
         "notification_collection_saved":
             MessageLookupByLibrary.simpleMessage("Sammlung gespeichert."),
+        "notification_collection_skip_save":
+            MessageLookupByLibrary.simpleMessage(
+                "Sammlung hat keine Änderungen."),
         "notification_item_deleted":
             MessageLookupByLibrary.simpleMessage("Gegenstand gelöscht."),
         "notification_item_saved":

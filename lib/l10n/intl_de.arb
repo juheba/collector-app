@@ -238,6 +238,14 @@
   "@notification_collection_saved": {
     "description": "Notification: Collection saved successfully"
   },
+  "notification_collection_skip_save": "Sammlung hat keine Änderungen.",
+  "@notification_collection_skip_save": {
+    "description": "Notification: Collection has no changes"
+  },
+  "notification_collection_deleted": "Sammlung gelöscht.",
+  "@notification_collection_deleted": {
+    "description": "Notification: Collection deleted successfully"
+  },
   "editor_collection_description": "Beschreibung",
   "@editor_collection_description": {
     "description": "Label: Description of the collection"
@@ -261,6 +269,10 @@
   "editor_collection_name_hint": "Name eingeben",
   "@editor_collection_name_hint": {
     "description": "Hint: Enter name of the collection"
+  },
+  "collection_details_items": "Enthält Gegenstände",
+  "@collection_details_items": {
+    "description": "Label: Collection contains items"
   },
   "location_label": "Ort",
   "@location_label": {

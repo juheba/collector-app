@@ -2,10 +2,9 @@ import 'package:collector/data/persistence/database_service.dart';
 import 'package:collector/generated/l10n.dart';
 import 'package:collector/models/collection_model.dart';
 import 'package:collector/models/item_model.dart';
-import 'package:collector/presentation/pages/collections/collections_page.dart';
+import 'package:collector/presentation/pages/collections/collection_editor_page.dart';
 import 'package:collector/presentation/pages/collections/state_management/collection_detail_cubit.dart';
 import 'package:collector/presentation/pages/scaffold_page.dart';
-import 'package:collector/presentation/pages/shared/collection_editor.dart';
 import 'package:collector/presentation/pages/shared/item_list.dart';
 import 'package:collector/presentation/utils/collection_visibility_utils.dart';
 import 'package:collector/presentation/widgets/empty_state_widget.dart';
@@ -32,45 +31,30 @@ class CollectionDetailPageWidget extends StatelessWidget {
       create: (context) => CollectionDetailCubit(DatabaseService.instance)..loadCollection(collectionId),
       child: BlocBuilder<CollectionDetailCubit, CollectionDetailState>(
         builder: (context, state) {
-          if (state.collection == null) {
-            return ScaffoldPage(
-              title: '',
-              onNavigateBack: () => context.pop(),
-              body: const Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          } else {
-            return ScaffoldPage(
-              title: state.collection?.name ?? '...',
-              onNavigateBack: () => context.pop(),
-              body: switch (state.status) {
-                CollectionDetailStatus.initial => const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                CollectionDetailStatus.loaded => _Loaded(collection: state.collection!, items: state.items),
-                CollectionDetailStatus.newly => throw UnimplementedError(),
-                CollectionDetailStatus.edited => _Editor(collection: state.collection!),
-                CollectionDetailStatus.deleted => _handleDeletedState(context),
-                CollectionDetailStatus.failure => Text(state.errorMessage ?? 'Fehler')
-              },
-              floatingActionButton: state.status == CollectionDetailStatus.loaded
-                  ? FloatingActionButton(
-                      onPressed: () => context.read<CollectionDetailCubit>().startEditing(state.collection),
-                      child: const Icon(Icons.edit),
-                    )
-                  : null,
-            );
-          }
+          return ScaffoldPage(
+            title: state.collection?.name ?? '...',
+            onNavigateBack: () => context.pop(),
+            body: switch (state.status) {
+              CollectionDetailStatus.initial => const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              CollectionDetailStatus.loaded => _Loaded(collection: state.collection!, items: state.items),
+              CollectionDetailStatus.failure => Text(state.errorMessage ?? 'Fehler')
+            },
+            floatingActionButton: state.status == CollectionDetailStatus.loaded
+                ? FloatingActionButton(
+                    onPressed: () => context.goNamed(
+                      CollectionEditorPageWidget.routeNameEdit,
+                      pathParameters: {'id': collectionId},
+                    ),
+                    child: const Icon(Icons.edit),
+                  )
+                : null,
+          );
         },
       ),
     );
   }
-}
-
-Widget _handleDeletedState(BuildContext context) {
-  Future.microtask(() => context.go(CollectionsPageWidget.routePath));
-  return const SizedBox.shrink(); // Empty widget while navigating
 }
 
 class _Loaded extends StatelessWidget {
@@ -107,33 +91,28 @@ class _Loaded extends StatelessWidget {
             ),
             spacingBox,
             Text(
+              l10n.editor_collection_description,
+              overflow: TextOverflow.visible,
+            ),
+            Text(
               collection.description ?? '',
               overflow: TextOverflow.visible,
             ),
             spacingBox,
-            if (items != null && items!.isNotEmpty)
+            if (items != null && items!.isNotEmpty) ...[
+              Text(
+                l10n.collection_details_items,
+                overflow: TextOverflow.visible,
+              ),
               ItemsListWidget(
                 items: items!,
                 isSelectionModeActive: false,
-              )
-            else
+              ),
+            ] else
               EmptyStateWidget(message: l10n.items_page_empty_state),
           ],
         ),
       ),
-    );
-  }
-}
-
-class _Editor extends StatelessWidget {
-  const _Editor({required this.collection});
-
-  final CollectionModel collection;
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: CollectionEditorForm(collection: collection),
     );
   }
 }

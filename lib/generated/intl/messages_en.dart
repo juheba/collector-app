@@ -27,8 +27,10 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "app_name": MessageLookupByLibrary.simpleMessage("Collector-App"),
+        "collection_details_items":
+            MessageLookupByLibrary.simpleMessage("Contains items"),
         "collection_visibility_private":
-            MessageLookupByLibrary.simpleMessage("Privat"),
+            MessageLookupByLibrary.simpleMessage("Private"),
         "collection_visibility_public":
             MessageLookupByLibrary.simpleMessage("Public"),
         "collections_page_empty_state":
@@ -46,7 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter description"),
         "editor_collection_name": MessageLookupByLibrary.simpleMessage("Name"),
         "editor_collection_name_error":
-            MessageLookupByLibrary.simpleMessage("Error: Name is required"),
+            MessageLookupByLibrary.simpleMessage("Name is required"),
         "editor_collection_name_hint":
             MessageLookupByLibrary.simpleMessage("Enter name"),
         "editor_collection_visibility_label":
@@ -83,7 +85,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter description"),
         "editor_location_name": MessageLookupByLibrary.simpleMessage("Name"),
         "editor_location_name_error":
-            MessageLookupByLibrary.simpleMessage("Error: Name is required"),
+            MessageLookupByLibrary.simpleMessage("Name is required"),
         "editor_location_name_hint":
             MessageLookupByLibrary.simpleMessage("Enter name"),
         "editor_location_upload_image_label":
@@ -131,8 +133,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "new_location_page_title":
             MessageLookupByLibrary.simpleMessage("New location"),
         "no": MessageLookupByLibrary.simpleMessage("No"),
+        "notification_collection_deleted":
+            MessageLookupByLibrary.simpleMessage("Collection deleted."),
         "notification_collection_saved":
             MessageLookupByLibrary.simpleMessage("Collection saved."),
+        "notification_collection_skip_save":
+            MessageLookupByLibrary.simpleMessage("Collection has no changes."),
         "notification_item_deleted":
             MessageLookupByLibrary.simpleMessage("Item deleted."),
         "notification_item_saved":

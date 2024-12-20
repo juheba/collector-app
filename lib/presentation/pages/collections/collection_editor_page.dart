@@ -2,34 +2,38 @@ import 'dart:typed_data';
 
 import 'package:bloc_presentation/bloc_presentation.dart';
 import 'package:collector/generated/l10n.dart';
-import 'package:collector/models/location_model.dart';
-import 'package:collector/presentation/pages/location/location_detail_page.dart';
-import 'package:collector/presentation/pages/location/location_editor_form.dart';
-import 'package:collector/presentation/pages/location/locations_page.dart';
-import 'package:collector/presentation/pages/location/state_management/location_editor_cubit.dart';
+import 'package:collector/models/collection_model.dart';
+import 'package:collector/models/item_model.dart';
+import 'package:collector/presentation/pages/collections/collection_editor_form.dart';
+import 'package:collector/presentation/pages/collections/collections_page.dart';
+import 'package:collector/presentation/pages/collections/state_management/collection_editor_cubit.dart';
+import 'package:collector/presentation/pages/items/item_detail_page.dart';
+import 'package:collector/presentation/pages/items/item_editor_form.dart';
+import 'package:collector/presentation/pages/items/items_page.dart';
+import 'package:collector/presentation/pages/items/state_management/item_editor_cubit.dart';
 import 'package:collector/presentation/pages/scaffold_page.dart';
 import 'package:collector/presentation/pages/shared/editor_presentation_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class LocationEditorPageWidget extends StatelessWidget {
-  const LocationEditorPageWidget({
+class CollectionEditorPageWidget extends StatelessWidget {
+  const CollectionEditorPageWidget({
     this.id,
     super.key,
   });
 
   final String? id;
 
-  static const routeNameNew = 'location-editor-new';
-  static const routeNameEdit = 'location-editor-edit';
+  static const routeNameNew = 'collection-editor-new';
+  static const routeNameEdit = 'collection-editor-edit';
   static const routePath = '/editor';
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LocationEditorCubit()..initEditorContext(id),
-      child: BlocPresentationListener<LocationEditorCubit, EditorPresentationEvent>(
+      create: (context) => CollectionEditorCubit()..initEditorContext(id),
+      child: BlocPresentationListener<CollectionEditorCubit, EditorPresentationEvent>(
         listener: (context, event) {
           switch (event) {
             case EditorPresentationEventSaved():
@@ -44,19 +48,19 @@ class LocationEditorPageWidget extends StatelessWidget {
               _handleFailureState(context, event.errorMessage);
           }
         },
-        child: BlocBuilder<LocationEditorCubit, LocationEditorState>(
+        child: BlocBuilder<CollectionEditorCubit, CollectionEditorState>(
           builder: (context, state) {
             return ScaffoldPage(
-              title: state.status == LocationEditorStatus.initial
+              title: state.status == CollectionEditorStatus.initial
                   ? '...'
-                  : state.location?.name ?? L10n.of(context).new_location_page_title,
+                  : state.collection?.name ?? L10n.of(context).new_collection_page_title,
               onNavigateBack: () => context.pop(),
               body: switch (state.status) {
-                LocationEditorStatus.initial => const Center(
+                CollectionEditorStatus.initial => const Center(
                     child: CircularProgressIndicator(),
                   ),
-                LocationEditorStatus.loaded => _Editor(state.editLocation!, state.image),
-                LocationEditorStatus.edited => _Editor(state.editLocation!, state.image),
+                CollectionEditorStatus.loaded => _Editor(state.editCollection!),
+                CollectionEditorStatus.edited => _Editor(state.editCollection!),
               },
             );
           },
@@ -66,32 +70,23 @@ class LocationEditorPageWidget extends StatelessWidget {
   }
 
   void _handleSavedState(BuildContext context) {
-    showSnack(context, L10n.of(context).notification_location_saved);
-    context.go(LocationsPageWidget.routePath);
+    showSnack(context, L10n.of(context).notification_collection_saved);
+    context.pop();
   }
 
   void _handleSkipedState(BuildContext context) {
-    showSnack(context, L10n.of(context).notification_location_skip_save);
-    context.go(LocationsPageWidget.routePath);
+    showSnack(context, L10n.of(context).notification_collection_skip_save);
+    context.go(CollectionsPageWidget.routePath);
   }
 
   void _handleCancleState(BuildContext context, {required bool isNew, String? id}) {
-    if (isNew) {
-      context.goNamed(
-        LocationsPageWidget.routeName,
-      );
-    } else {
-      context.goNamed(
-        LocationDetailPageWidget.routeName,
-        pathParameters: {'id': id ?? ''},
-      );
-    }
+    context.pop();
   }
 
   void _handleDeletedState(BuildContext context) {
-    showSnack(context, L10n.of(context).notification_location_deleted);
+    showSnack(context, L10n.of(context).notification_collection_deleted);
 
-    context.go(LocationsPageWidget.routePath);
+    context.go(CollectionsPageWidget.routePath);
   }
 
   void _handleFailureState(BuildContext context, String errorMessage) {
@@ -108,15 +103,14 @@ class LocationEditorPageWidget extends StatelessWidget {
 }
 
 class _Editor extends StatelessWidget {
-  const _Editor(this.location, this.image);
+  const _Editor(this.collection);
 
-  final LocationModel location;
-  final Uint8List? image;
+  final CollectionModel collection;
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: LocationEditorForm(location: location, image: image),
+      child: CollectionEditorForm(collection: collection),
     );
   }
 }
