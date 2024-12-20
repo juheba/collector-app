@@ -30,6 +30,13 @@ class _LocationsListWidgetState extends State<LocationsListWidget> {
       itemBuilder: (context, index) {
         final location = widget.locations[index];
 
+        final locationImage = location.attachment?.attachmentUrl != null
+            ? Image.network(
+                location.attachment!.attachmentUrl!,
+                width: 50,
+              )
+            : null;
+
         return Card(
           margin: const EdgeInsets.all(8),
           elevation: 5,
@@ -39,6 +46,7 @@ class _LocationsListWidgetState extends State<LocationsListWidget> {
               LocationDetailPageWidget.routeName,
               pathParameters: {'id': location.id},
             ),
+            leading: locationImage,
             title: Text(
               location.name,
               style: const TextStyle(

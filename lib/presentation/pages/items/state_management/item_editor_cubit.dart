@@ -10,6 +10,7 @@ import 'package:collector/models/collection_model.dart';
 import 'package:collector/models/item_model.dart';
 import 'package:collector/models/item_ownership_status.dart';
 import 'package:collector/models/item_status.dart';
+import 'package:collector/models/item_type.dart';
 import 'package:collector/models/location_model.dart';
 import 'package:collector/presentation/pages/shared/editor_presentation_event.dart';
 import 'package:equatable/equatable.dart';
@@ -202,6 +203,7 @@ class ItemEditorCubit extends Cubit<ItemEditorState>
   Future<void> updateItem({
     String? title,
     String? description,
+    ItemType? type,
     ItemOwnershipStatus? ownershipStatus,
     ItemStatus? status,
     String? locationId,
@@ -210,6 +212,7 @@ class ItemEditorCubit extends Cubit<ItemEditorState>
     final item = state.editItem?.copyWith(
       title: title,
       description: description,
+      type: type,
       ownershipStatus: ownershipStatus,
       status: status,
       locationId: locationId,

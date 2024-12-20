@@ -26,14 +26,10 @@ abstract class ItemMapper {
   }
 
   @IgnoreMapping()
-  static ItemType mapExternalToItemType(Item external) => external.itemType == null
-      ? ItemType.undefined
-      : switch (external.itemType) {
-          'BOOK' => ItemType.book,
-          'MOVIE' => ItemType.movie,
-          'GAME' => ItemType.game,
-          _ => ItemType.undefined,
-        };
+  static ItemType mapExternalToItemType(Item external) => ItemType.values.firstWhere(
+        (e) => e.name.toUpperCase() == external.itemType?.toUpperCase(),
+        orElse: () => ItemType.undefined,
+      );
 
   @IgnoreMapping()
   ItemOwnershipStatus mapExternalToItemOwnershipStatus(ItemOwnershipStatusEnum external) => switch (external) {
@@ -68,10 +64,6 @@ abstract class ItemMapper {
       };
 
   @IgnoreMapping()
-  String mapItemTypeToExternal(ItemType internal) => switch (internal) {
-        ItemType.book => 'BOOK',
-        ItemType.movie => 'MOVIE',
-        ItemType.game => 'GAME',
-        ItemType.undefined => 'UNDEFINED',
-      };
+  String mapItemTypeToExternal(ItemType? internal) =>
+      internal?.name.toUpperCase() ?? ItemType.undefined.name.toUpperCase();
 }

@@ -29,11 +29,18 @@ class ItemListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final icon = Icon(
+    final typeIcon = Icon(
       item.type?.icon,
-      size: 50,
+      size: 35,
       color: item.type?.color,
     );
+
+    final itemImage = item.attachment?.attachmentUrl != null
+        ? Image.network(
+            item.attachment!.attachmentUrl!,
+            width: 50,
+          )
+        : null;
 
     return Card(
       margin: const EdgeInsets.all(8),
@@ -49,10 +56,10 @@ class ItemListTile extends StatelessWidget {
                     value: isSelected,
                     onChanged: (value) => selectionChanged?.call(value ?? isSelected),
                   ),
-                  icon,
+                  if (itemImage != null) itemImage,
                 ],
               )
-            : icon,
+            : itemImage,
         title: Text(
           item.title,
           style: const TextStyle(
@@ -67,9 +74,16 @@ class ItemListTile extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               )
             : null,
-        trailing: Text(
-          item.type?.displayName(context) ?? '',
-          style: const TextStyle(color: Colors.grey),
+        trailing: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            typeIcon,
+            Text(
+              item.type?.displayName(context) ?? '',
+              style: const TextStyle(color: Colors.grey),
+            ),
+          ],
         ),
       ),
     );

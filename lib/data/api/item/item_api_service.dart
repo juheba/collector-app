@@ -101,7 +101,7 @@ class ItemApiService {
     try {
       final builder = UpdateItemRequestBuilder()
         ..title = item.title
-        ..itemType = item.type?.name
+        ..itemType = ItemMapperImpl().mapItemTypeToExternal(item.type)
         ..description = item.description
         ..locationId = item.locationId
         ..isLendable = item.isLendable

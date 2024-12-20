@@ -5,10 +5,12 @@ import 'package:collector/models/collection_model.dart';
 import 'package:collector/models/item_model.dart';
 import 'package:collector/models/item_ownership_status.dart';
 import 'package:collector/models/item_status.dart';
+import 'package:collector/models/item_type.dart';
 import 'package:collector/presentation/pages/items/state_management/item_editor_cubit.dart';
 import 'package:collector/presentation/pages/shared/is_lendable_checkbox_widget.dart';
 import 'package:collector/presentation/pages/shared/item_ownership_status_segmented_button.dart';
 import 'package:collector/presentation/pages/shared/item_status_segmented_button.dart';
+import 'package:collector/presentation/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
@@ -122,6 +124,23 @@ class _ItemEditorFormState extends State<ItemEditorForm> {
             ItemStatusSingleChoiceSegmentedButton(
               selectedStatus: context.read<ItemEditorCubit>().state.item?.status ?? ItemStatus.todo,
               statusChanged: (status) => context.read<ItemEditorCubit>().updateItem(status: status),
+            ),
+            spacingBox,
+            DropdownButtonFormField<ItemType>(
+              value: context.read<ItemEditorCubit>().state.editItem?.type,
+              decoration: InputDecoration(
+                labelText: l10n.editor_item_type_title,
+                border: const OutlineInputBorder(),
+              ),
+              items: ItemType.values.map((type) {
+                return DropdownMenuItem<ItemType>(
+                  value: type,
+                  child: Text(type.displayName(context)),
+                );
+              }).toList(),
+              onChanged: (value) {
+                context.read<ItemEditorCubit>().updateItem(type: value);
+              },
             ),
             spacingBox,
             DropdownButtonFormField<String>(

@@ -20,6 +20,6 @@ extension CollectionVisibilityUtils on CollectionVisibility {
 
   Color get foregroundColor => switch (this) {
         CollectionVisibility.public => Colors.white,
-        CollectionVisibility.private => Colors.black,
+        CollectionVisibility.private => Colors.white,
       };
 }

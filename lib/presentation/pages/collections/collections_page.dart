@@ -19,23 +19,6 @@ class CollectionsPageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /*return BlocProvider(
-      create: (context) => CollectionListCubit(DatabaseService.instance)..loadCollections(),
-      child: ScaffoldPage(
-        title: L10n.of(context).collections_page_title,
-        body: BlocBuilder<CollectionListCubit, CollectionState>(
-          builder: (context, state) {
-            if (state.collections.isEmpty) {
-              return EmptyStateWidget(message: L10n.of(context).collections_page_empty_state);
-            } else {
-              return CollectionGridWidget(collections: state.collections);
-            }
-          },
-        ),
-      ),
-    );
-  }*/
-
     final l10n = L10n.of(context);
 
     return BlocProvider<CollectionListCubit>(

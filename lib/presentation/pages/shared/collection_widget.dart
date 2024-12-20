@@ -50,6 +50,10 @@ class CollectionGridElementWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Icon(
+              collection.visibility.icon,
+              color: collection.visibility.color,
+            ),
             Text(
               collection.name,
               textAlign: TextAlign.center,
@@ -58,10 +62,6 @@ class CollectionGridElementWidget extends StatelessWidget {
                 fontSize: 20,
                 color: collection.visibility.foregroundColor,
               ),
-            ),
-            Icon(
-              collection.visibility.icon,
-              color: collection.visibility.color,
             ),
           ],
         ),
